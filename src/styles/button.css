@@ -1,0 +1,20 @@
+@layer components {
+  .btn {
+    @apply px-12 py-6;
+    @apply border-0 font-bold;
+  }
+
+  .btn-primary {
+    @apply bg-primary;
+  }
+  .btn-info {
+    @apply bg-[#FFC397];
+  }
+  .btn-secondary {
+    @apply px-6 py-3 text-white font-medium;
+    @apply bg-secondary;
+  }
+  .btn-outline {
+    @apply text-base border font-bold border-primary text-primary px-[36px] py-[12px] hover:bg-secondary hover:border-secondary hover:text-white transition-all duration-300;
+  }
+}

@@ -1,0 +1,54 @@
+@import "../src/styles/button.css";
+
+/* Import Google Font Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+  background-color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tailwind Base, Components, Utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Optional custom border styles */
+@layer utilities {
+  .custom-border::before {
+    @apply absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#596ea8];
+    content: '';
+    height: 52px; /* Customize as needed */
+    width: 5px; /* Customize as needed */
+  }
+
+  .custom-border:last-child::before {
+    @apply hidden; /* Ensure last child does not have the border */
+  }
+}
+
+
+@layer components {
+  .custom-pagination-item {
+    @apply inline-block h-1 bg-primary transition-all duration-300 ease-in-out;
+    width: 23px; 
+    border-radius: 0;
+    margin-right: 16px !important;
+  }
+  .custom-pagination-item:last-child {
+    margin-right: 0; 
+  }
+  
+  .custom-pagination-item.swiper-pagination-bullet-active {
+    @apply bg-secondary; 
+    width: 58px;
+    border-radius: 0;
+  }
+}
