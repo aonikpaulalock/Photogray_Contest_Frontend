@@ -1,4 +1,4 @@
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { ReactNode } from "react";
 
 type TSelectProps = {
@@ -18,8 +18,11 @@ const FormSelect = ({
   placeholder = "Country",
   icon
 }: TSelectProps) => {
+  const { control } = useFormContext();
   return (
     <Controller
+      control={control}
+      defaultValue=""
       name={name}
       render={({ field, fieldState: { error } }) => (
         <div className="relative">
@@ -30,7 +33,6 @@ const FormSelect = ({
             <option
               value=""
               disabled
-              selected
               hidden
             >{placeholder}</option>
             {options.map((option) => (
@@ -48,9 +50,7 @@ const FormSelect = ({
               {icon}
             </span>
           )}
-          {error && (
-            <small className="text-red-500 font-bold">{error.message}</small>
-          )}
+          {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
         </div>
       )}
     />
