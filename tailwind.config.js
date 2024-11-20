@@ -11,6 +11,12 @@ export default withMT({
         poppins: ['Poppins', 'sans-serif'],
       },
       colors:{
+        lightBlue: "#F5F8FB",
+        darkBlue: "#1F2937",
+        orange: "#FFA800",
+        green: "#34C759",
+        red: "#FF3B30",
+        gray: "#9CA3AF",
         primary: '#001858',
         SecondPrimary: '#596ea8',
         secondary: '#F582AE',

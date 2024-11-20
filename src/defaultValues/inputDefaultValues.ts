@@ -5,5 +5,5 @@ export const registerDefaultValues = {
   designation: "",
   bio: "",
   country: "",
-  profileImage: null,
+  profileImage: "",
 };
