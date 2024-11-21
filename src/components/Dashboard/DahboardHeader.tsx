@@ -1,15 +1,49 @@
-
+import chatLogo from "../../assets/landingPage/SvgLogo/chat.svg"
+import notificationLogo from "../../assets/landingPage/SvgLogo/notification.svg"
+import searchIcon from "../../assets/landingPage/SvgLogo/Research.svg"
+import { useGetMeUserQuery } from "../../redux/feature/user/userApi";
 const DahboardHeader = () => {
+  const { data, isLoading } = useGetMeUserQuery(undefined)
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  console.log(data)
   return (
     <div className="flex justify-between items-center p-4 bg-transparent">
-      <input
-        type="text"
-        placeholder="Search here..."
-        className="border rounded-lg p-2 w-1/3 text-gray"
-      />
-      <div className="flex items-center gap-4">
-        <span className="text-gray text-xl">🔔</span>
-        <span className="text-darkBlue font-medium">Madison Eve</span>
+      <div className="relative w-3/12">
+        <input
+          type="text"
+          placeholder="Search Here..."
+          className="border-none rounded-xl p-4 pl-12 w-full text-SecondPrimary outline-none"
+        />
+        <img
+          src={searchIcon}
+          alt="Search Icon"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-500"
+        />
+      </div>
+
+      <div className="flex items-center gap-4 cursor-pointer">
+        <div>
+          <img src={chatLogo} alt="" />
+        </div>
+        <div>
+          <img src={notificationLogo} alt="" />
+        </div>
+        {data?.data && (
+          <div className="flex items-center gap-4 ml-2">
+            <img
+              src={data?.data?.profileImage
+                || "https://via.placeholder.com/40"}
+              alt="User Avatar"
+              className="w-[60px] h-[60px] rounded-full bg-SecondPrimary ring-2 ring-SecondPrimary"
+            />
+            <div>
+              <p className="text-SecondPrimary font-semibold text-xl">{data?.data?.username || "Anonymous"}</p>
+              <p className="text-md text-blue-gray-500 font-medium">{data?.data?.role || "User"}</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
