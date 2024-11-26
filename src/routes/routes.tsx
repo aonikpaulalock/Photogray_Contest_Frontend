@@ -3,7 +3,6 @@ import Layout from "../layout/layout";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
-import AdminDashboard from "../pages/Dashboard/admin/AdminDashboard";
 import ContestHolderDashboard from "../pages/Dashboard/contestHolder/ContestHolderDashboard";
 import UserDashboard from "../pages/Dashboard/user/UserDashboard";
 import Mainlayout from "../components/Dashboard/Mainlayout";
@@ -17,6 +16,13 @@ import AllParticipation from "../pages/Dashboard/contestHolder/AllParticipation"
 import AllSubmission from "../pages/Dashboard/contestHolder/AllSubmission";
 import CreateBlog from "../pages/Dashboard/user/CreateBlog";
 import AllBlog from "../pages/Dashboard/user/AllBlog";
+import AdminProfile from "../pages/Dashboard/admin/AdminProfile";
+import AdminChangePassword from "../pages/Dashboard/admin/ADminChangePassword";
+import ContestHolderProfile from "../pages/Dashboard/contestHolder/ContestHolderProfile";
+import ContestHolderChangePassword from "../pages/Dashboard/contestHolder/ContestHolderChangePassword";
+import UserProfile from "../pages/Dashboard/user/UserProfile";
+import UserChangePassword from "../pages/Dashboard/user/UserChangePassword";
+import AdminDashboard from "../pages/Dashboard/admin/adminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +67,14 @@ export const router = createBrowserRouter([
             path: "manage-user",
             element: <ManageUser />,
           },
+          {
+            path: "profile",
+            element: <AdminProfile />,
+          },
+          {
+            path: "change-password",
+            element: <AdminChangePassword />,
+          },
         ]
       },
       {
@@ -83,6 +97,14 @@ export const router = createBrowserRouter([
             path: "all-submission",
             element: <AllSubmission />,
           },
+          {
+            path: "profile",
+            element: <ContestHolderProfile />,
+          },
+          {
+            path: "change-password",
+            element: <ContestHolderChangePassword />,
+          },
         ]
       },
       {
@@ -99,7 +121,15 @@ export const router = createBrowserRouter([
           },
           {
             path: "all-blog",
-            element: <AllBlog/>,
+            element: <AllBlog />,
+          },
+          {
+            path: "profile",
+            element: <UserProfile />,
+          },
+          {
+            path: "change-password",
+            element: <UserChangePassword />,
           },
         ]
       },

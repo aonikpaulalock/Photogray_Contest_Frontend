@@ -25,10 +25,10 @@ const DahboardHeader = () => {
 
       <div className="flex items-center gap-4 cursor-pointer">
         <div>
-          <img src={chatLogo} alt="" />
+          <img src={chatLogo} alt="" className="w-14 h-14" />
         </div>
         <div>
-          <img src={notificationLogo} alt="" />
+          <img src={notificationLogo} alt="" className="w-14 h-14" />
         </div>
         {data?.data && (
           <div className="flex items-center gap-4 ml-2">
@@ -36,11 +36,11 @@ const DahboardHeader = () => {
               src={data?.data?.profileImage
                 || "https://via.placeholder.com/40"}
               alt="User Avatar"
-              className="w-[60px] h-[60px] rounded-full bg-SecondPrimary ring-2 ring-SecondPrimary"
+              className="w-14 h-14 rounded-full bg-SecondPrimary ring-2 ring-SecondPrimary"
             />
             <div>
-              <p className="text-SecondPrimary font-semibold text-xl">{data?.data?.username || "Anonymous"}</p>
-              <p className="text-md text-blue-gray-500 font-medium">{data?.data?.role || "User"}</p>
+              <p className="text-SecondPrimary font-semibold text-lg mb-1">{data?.data?.username || "Anonymous"}</p>
+              <p className="text-sm text-blue-gray-500 font-medium uppercase">{data?.data?.role || "User"}</p>
             </div>
           </div>
         )}

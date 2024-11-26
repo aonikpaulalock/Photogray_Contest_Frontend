@@ -1,5 +1,5 @@
 // sidebarItems.ts
-import { FaTrophy, FaUsers, FaRegEdit, FaTasks, FaUserCog, FaPen, FaBlog } from "react-icons/fa";
+import { FaTrophy, FaUsers, FaRegEdit, FaTasks, FaUserCog, FaPen, FaBlog, FaUserAlt, FaLock } from "react-icons/fa";
 
 type SidebarItem = {
   path: string;
@@ -9,6 +9,16 @@ type SidebarItem = {
 
 export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarItem[]> = {
   admin: [
+    {
+      path: "/dashboard/admin/profile",
+      label: "My Profile",
+      icon: <FaUserAlt />,
+    },
+    {
+      path: "/dashboard/admin/change-password",
+      label: "Change Password",
+      icon: <FaLock />,
+    },
     {
       path: "/dashboard/admin/create-contest",
       label: "Create Contest",
@@ -28,9 +38,19 @@ export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarIte
       path: "/dashboard/admin/manage-user",
       label: "Manage User",
       icon: <FaUserCog />
-    },
+    }
   ],
   contestHolder: [
+    {
+      path: "/dashboard/contestHolder/profile",
+      label: "My Profile",
+      icon: <FaUserAlt />,
+    },
+    {
+      path: "/dashboard/contestHolder/change-password",
+      label: "Change Password",
+      icon: <FaLock />,
+    },
     {
       path: "/dashboard/contestHolder/create-contest-contestHolder",
       label: "Create Contest",
@@ -51,6 +71,16 @@ export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarIte
     },
   ],
   user: [
+    {
+      path: "/dashboard/user/profile",
+      label: "My Profile",
+      icon: <FaUserAlt />,
+    },
+    {
+      path: "/dashboard/user/change-password",
+      label: "Change Password",
+      icon: <FaLock />,
+    },
     {
       path: "/dashboard/user/all-contests",
       label: "All Contests",

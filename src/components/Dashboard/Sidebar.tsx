@@ -1,13 +1,16 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { selectUserRole } from "../../redux/auth/authSlice";
+import { logout, selectUserRole } from "../../redux/auth/authSlice";
 import { sidebarItems } from "./SidebarItems";
 import svgLogo from "../../assets/landingPage/SvgLogo/logo.svg";
 import logo from "../../assets/landingPage/footerLogo.png";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaSignOutAlt } from "react-icons/fa";
+import { useAppDispatch } from "../../redux/hooks";
 
 const Sidebar = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false);
 
   //! Ensure userRole is one of the valid keys
@@ -19,20 +22,21 @@ const Sidebar = () => {
 
   const menuItems = userRole ? sidebarItems[userRole] : [];
 
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate("/login")
+  };
+
   return (
     <div
-      className={`${
-        collapsed ? "w-28" : "w-64 px-6"
-      } bg-white min-h-screen flex flex-col py-10 shadow-sm transition-all duration-500 ease-in-out transform ${
-        collapsed ? "translate-x-0" : "translate-x-0"
-      }`}
+      className={`${collapsed ? "w-28" : "w-64 px-6"
+        } bg-white min-h-screen flex flex-col py-10 shadow-sm transition-all duration-500 ease-in-out transform`}
     >
       {/* Toggle Button */}
       <button
         onClick={toggleSidebar}
-        className={`mb-6 text-3xl flex items-center ${
-          collapsed ? "justify-center" : "justify-start"
-        }`}
+        className={`mb-6 text-3xl flex items-center ${collapsed ? "justify-center" : "justify-start"
+          }`}
       >
         {collapsed ? (
           <span>
@@ -45,7 +49,7 @@ const Sidebar = () => {
         ) : (
           <div className="text-2xl text-orange flex items-center">
             <img src={logo} alt="" className="p-4" />
-            <FaTimes className="text-4xl text-SecondPrimary" />
+            <FaTimes className="text-4xl text-deep-orange-300" />
           </div>
         )}
       </button>
@@ -55,13 +59,10 @@ const Sidebar = () => {
         <Link
           key={index}
           to={item.path}
-          className={`my-2 text-md flex items-center ${
-            collapsed ? "justify-center" : "justify-start"
-          }`}
+          className={`my-2 text-md flex items-center ${collapsed ? "justify-center" : "justify-start"
+            }`}
         >
-          <div
-            className="mr-2 text-2xl text-SecondPrimary hover:shadow-lg hover:shadow-gray-500 hover:text-deep-orange-300 transition-shadow duration-300 p-4 rounded-xl"
-          >
+          <div className="mr-2 text-2xl text-SecondPrimary hover:shadow-lg hover:shadow-gray-500 hover:text-deep-orange-300 transition-shadow duration-300 p-4 rounded-xl">
             {item.icon}
           </div>
           {!collapsed && (
@@ -69,6 +70,20 @@ const Sidebar = () => {
           )}
         </Link>
       ))}
+
+      {/* Logout Section */}
+      <div
+        className={`mt-auto py-2 flex items-center cursor-pointer  ${collapsed ? "justify-center" : "justify-start"
+          }`}
+        onClick={handleLogout}
+      >
+        <div className="mr-2 text-2xl text-red transition-shadow duration-300 p-4 hover:shadow-lg hover:shadow-gray-500 hover:text-deep-orange-500 rounded-xl">
+          <FaSignOutAlt />
+        </div>
+        {!collapsed && (
+          <span className="text-lg text-SecondPrimary font-medium">Logout</span>
+        )}
+      </div>
     </div>
   );
 };

@@ -32,7 +32,7 @@ const Login = () => {
       })
 
       if (res?.success) {
-        navigate(`/dashboard/${user.role}`)
+        navigate(`/dashboard/${user.role}/profile`)
       }
 
     } catch (error: any) {
