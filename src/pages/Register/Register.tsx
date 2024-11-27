@@ -73,6 +73,7 @@ const Register = () => {
             <FormInput
               type="text"
               name="username"
+              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="Enter your username"
               icon={<FaUser />}
             />
@@ -80,6 +81,7 @@ const Register = () => {
             <FormInput
               type="email"
               name="email"
+              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="Enter your email"
               icon={<FaEnvelope />}
             />
@@ -87,12 +89,14 @@ const Register = () => {
             <FormInput
               type="password"
               name="password"
+              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="Enter your password"
               icon={<FaLock />}
             />
 
             <FormInput
               type="text"
+              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
               name="designation"
               placeholder="Enter your Designation"
               icon={<FaBriefcase />}

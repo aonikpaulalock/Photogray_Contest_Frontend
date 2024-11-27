@@ -59,13 +59,14 @@
 import { ChangeEvent, useState } from "react";
 import userImage from "../../../assets/landingPage/Blogs/blogs-1.png"
 
-const UserProfile = () => {
+const UserProfile = ({ role }: { role: string }) => {
+  console.log(role)
   const [formData, setFormData] = useState({
-    firstName: "Dollie",
-    lastName: "Morrison",
+    username: "Dollie",
+    designation: "Senior Photographer",
+    bio: "This is a professional photographer",
     email: "dollie-morrison@gmail.com",
     country: "U.S.A",
-    city: "Los Angeles",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -99,15 +100,15 @@ const UserProfile = () => {
               alt="User Profile"
               className="w-32 h-32 rounded-full border-4 border-SecondPrimary"
             />
-            <button className="mt-4 px-6 py-2 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-600 transition-colors">
+            <button className="mt-4 px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition-colors">
               Change Photo
             </button>
           </div>
         </div>
 
         {/* Right Section: Form */}
-        <div className="w-2/3 p-14">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+        <div className="w-2/3 p-16">
+          <h2 className="text-3xl font-semibold text-primary mb-6 uppercase">
             My Profile
           </h2>
 
@@ -115,45 +116,33 @@ const UserProfile = () => {
           <div className="space-y-6">
             <div className="flex space-x-4">
               <div className="w-1/2">
-                <label className="block text-sm text-gray-600 mb-1">
-                  First Name
+                <label className="block text-sm text-gray-600 mb-1 font-semibold">
+                  Username
                 </label>
                 <input
                   type="text"
-                  name="firstName"
-                  value={formData.firstName}
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
-                  className="w-full border-b border-gray-300 focus:border-blue-500 focus:ring-0 outline-none text-sm py-2"
+                  className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
                 />
               </div>
               <div className="w-1/2">
-                <label className="block text-sm text-gray-600 mb-1">
-                  Last Name
+                <label className="block text-sm text-gray-600 mb-1 font-semibold">
+                  Designation
                 </label>
                 <input
                   type="text"
-                  name="lastName"
-                  value={formData.lastName}
+                  name="designation"
+                  value={formData.designation}
                   onChange={handleChange}
-                  className="w-full border-b border-gray-300 focus:border-blue-500 focus:ring-0 outline-none text-sm py-2"
+                  className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
                 />
               </div>
-            </div>
-            <div>
-              <label className="block text-sm text-gray-600 mb-1">
-                E-mail Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full border-b border-gray-300 focus:border-blue-500 focus:ring-0 outline-none text-sm py-2"
-              />
             </div>
             <div className="flex space-x-4">
               <div className="w-1/2">
-                <label className="block text-sm text-gray-600 mb-1">
+                <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Country
                 </label>
                 <input
@@ -161,21 +150,34 @@ const UserProfile = () => {
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="w-full border-b border-gray-300 focus:border-blue-500 focus:ring-0 outline-none text-sm py-2"
+                  className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
                 />
               </div>
               <div className="w-1/2">
-                <label className="block text-sm text-gray-600 mb-1">
-                  City
+                <label className="block text-sm text-gray-600 mb-1 font-semibold">
+                  Email
                 </label>
                 <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  readOnly
                   onChange={handleChange}
-                  className="w-full border-b border-gray-300 focus:border-blue-500 focus:ring-0 outline-none text-sm py-2"
+                  className="w-full border-b-2 border-gray focus:border-SecondPrimary  focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
                 />
               </div>
+            </div>
+            <div>
+              <label className="block text-sm text-gray-600 mb-1 font-semibold">
+                Bio
+              </label>
+              <input
+                type="text"
+                name="bio"
+                value={formData.bio}
+                onChange={handleChange}
+                className="w-full border-b-2 border-gray focus:border-SecondPrimary  focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
+              />
             </div>
           </div>
 
@@ -183,8 +185,7 @@ const UserProfile = () => {
           <div className="mt-8 text-right">
             <button
               onClick={handleSubmit}
-              className="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-colors"
-            >
+              className="px-8 py-4 bg-primary text-white">
               Save
             </button>
           </div>

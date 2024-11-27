@@ -6,28 +6,54 @@ type TInputProps = {
   name: string;
   placeholder?: string;
   icon?: ReactNode;
+  label?: string;
+  className?: string;
 };
 
-const FormInput = ({ type, name, placeholder, icon }: TInputProps) => {
+const FormInput = ({
+  type,
+  name,
+  placeholder,
+  icon,
+  label,
+  className,
+}: TInputProps) => {
   const { control } = useFormContext();
+
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <div className="relative">
-          <input
-            className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            type={type}
-            placeholder={placeholder}
-            {...field}
-          />
-          {icon && (
-            <span className="absolute left-3 top-4 text-purple-600">
-              {icon}
-            </span>
+        <div className="mb-4">
+          {/* Render label if provided */}
+          {label && (
+            <label
+              htmlFor={name}
+              className="block text-sm text-gray-600 mb-1 font-semibold"
+            >
+              {label}
+            </label>
           )}
-          {error && <p className="text-red-400 text-sm font-medium mt-t">{error?.message}</p>}
+          <div className="relative">
+            <input
+              id={name}
+              className={className} // Use the provided className directly
+              type={type}
+              placeholder={placeholder}
+              {...field}
+            />
+            {icon && (
+              <span className="absolute left-3 top-4 text-purple-600">
+                {icon}
+              </span>
+            )}
+          </div>
+          {error && (
+            <p className="text-red-400 text-sm font-medium mt-1">
+              {error?.message}
+            </p>
+          )}
         </div>
       )}
     />

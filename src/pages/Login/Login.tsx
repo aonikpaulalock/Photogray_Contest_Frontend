@@ -57,12 +57,14 @@ const Login = () => {
             <FormInput
               type="email"
               name="email"
+              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="Enter your email"
               icon={<FaUser />}
             />
             <FormInput
               type="password"
               name="password"
+              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="Enter your password"
               icon={<FaLock />}
             />
