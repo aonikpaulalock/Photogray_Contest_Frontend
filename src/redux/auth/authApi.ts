@@ -1,4 +1,5 @@
 import { baseApi } from "../api/baseApi";
+import { tagTypes } from "../tagType";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +11,8 @@ const authApi = baseApi.injectEndpoints({
           method: "POST",
           body: data
         }
-      }
+      },
+      invalidatesTags: [tagTypes.user],
     }),
 
     //! Login User
@@ -21,7 +23,8 @@ const authApi = baseApi.injectEndpoints({
           method: "POST",
           body: data
         }
-      }
+      },
+      invalidatesTags: [tagTypes.user],
     }),
 
     //! user password-change
@@ -32,7 +35,8 @@ const authApi = baseApi.injectEndpoints({
           method: "POST",
           body: data
         }
-      }
+      },
+      invalidatesTags: [tagTypes.user],
     }),
 
     //! user forget-password
@@ -43,7 +47,8 @@ const authApi = baseApi.injectEndpoints({
           method: "POST",
           body: data
         }
-      }
+      },
+      invalidatesTags: [tagTypes.user],
     }),
 
     //! user reset-password
@@ -54,7 +59,8 @@ const authApi = baseApi.injectEndpoints({
           method: "POST",
           body: data
         }
-      }
+      },
+      invalidatesTags: [tagTypes.user],
     }),
   })
 })

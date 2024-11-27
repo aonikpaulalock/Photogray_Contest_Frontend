@@ -1,13 +1,36 @@
-import changePassword from "../../../assets/landingPage/dashboard/changePassword1.png"
+import passwordChange from "../../../assets/landingPage/dashboard/changePassword1.png"
 import FormInput from "../../../components/Form/FormInput";
 import ContainForm from "../../../components/Form/ContainForm";
 import { FieldValues } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { changePasswordSchema } from "../../../Schemas/changePassword.validation";
+import { useChangePasswordMutation } from "../../../redux/auth/authApi";
+import { toast } from "sonner";
+import { logout } from "../../../redux/auth/authSlice";
+import { useAppDispatch } from "../../../redux/hooks";
+import { useNavigate } from "react-router-dom";
 const UserChangePassword = ({ role }: { role: string }) => {
   console.log(role)
-
-  const onSubmit = async (data: FieldValues) => {
-    console.log(data)
-  }
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const [changePassword] = useChangePasswordMutation();
+  const onSubmit = async (values: FieldValues) => {
+    console.log(values)
+    try {
+      const res = await changePassword(values);
+      console.log(res)
+      if (res?.data?.success) {
+        dispatch(logout())
+        navigate("/login")
+        toast.success('Password Changed Successfully');
+      } else {
+        throw new Error('Incorrect Old Password');
+      }
+    } catch (error) {
+      toast.error('Incorrect Old Password');
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-15rem)]">
@@ -15,7 +38,7 @@ const UserChangePassword = ({ role }: { role: string }) => {
       <div className="flex items-center justify-center">
         <div className="w-3/6">
           <img
-            src={changePassword}
+            src={passwordChange}
             alt="Illustration"
             className="w-10/12 mx-auto"
           />
@@ -24,6 +47,12 @@ const UserChangePassword = ({ role }: { role: string }) => {
         {/* Right Section: Form */}
         <ContainForm
           onSubmit={onSubmit}
+          defaultValues={
+            {
+              currentPassword: '',
+              newPassword: ''
+            }}
+          resolver={zodResolver(changePasswordSchema)}
           className="w-4/12 p-6"
 
         >

@@ -1,4 +1,5 @@
 import { baseApi } from "../../api/baseApi"
+import { tagTypes } from "../../tagType"
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,7 +10,8 @@ const userApi = baseApi.injectEndpoints({
           url: "/users/me",
           method: "GET",
         }
-      }
+      },
+      providesTags: [tagTypes.user],
     }),
   })
 })

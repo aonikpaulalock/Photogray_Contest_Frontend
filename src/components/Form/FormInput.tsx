@@ -38,7 +38,7 @@ const FormInput = ({
           <div className="relative">
             <input
               id={name}
-              className={className} // Use the provided className directly
+              className={className}
               type={type}
               placeholder={placeholder}
               {...field}
@@ -50,7 +50,7 @@ const FormInput = ({
             )}
           </div>
           {error && (
-            <p className="text-red-400 text-sm font-medium mt-1">
+            <p className="text-red text-sm font-medium mt-1">
               {error?.message}
             </p>
           )}
