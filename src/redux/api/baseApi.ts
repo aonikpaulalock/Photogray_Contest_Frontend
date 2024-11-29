@@ -7,12 +7,12 @@ import { tagTypesList } from "../tagType";
 interface ErrorData {
   message?: string;
 }
+
 const mainBaseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
-    console.log("Token in state:", token);
     if (token) {
       headers.set("authorization", `${token}`);
     } else {
@@ -22,10 +22,11 @@ const mainBaseQuery = fetchBaseQuery({
 })
 
 const customBaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions): Promise<any> => {
-  let result = await mainBaseQuery(args, api, extraOptions);  // Initial request
+  let result = await mainBaseQuery(args, api, extraOptions);
+  console.log(result)
+  // Initial request
 
   if ((result?.error?.data as ErrorData)?.message && result?.error?.status === 404) {
-    console.log("first")
     toast.error((result.error.data as ErrorData).message);
   }
 
@@ -41,16 +42,17 @@ const customBaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Defi
       credentials: "include"
     })
     const data = await res.json();
-    
+
     if (data?.data?.accessToken) {
       const user = (api.getState() as RootState).auth.user;
       api.dispatch(setUser({
         user,
         token: data.data.accessToken
       }));
-      
+
       result = await mainBaseQuery(args, api, extraOptions);
-    } else {
+    }
+    else {
       api.dispatch(logout())
     }
   }
