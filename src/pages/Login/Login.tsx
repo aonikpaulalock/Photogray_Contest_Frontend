@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { useLoginUserMutation } from '../../redux/auth/authApi';
 import { verifyToken } from '../../utils/verifyToken';
 import { setUser, TUser } from '../../redux/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 const Login = () => {
   const navigate = useNavigate()
@@ -69,7 +69,9 @@ const Login = () => {
               icon={<FaLock />}
             />
             <div className="flex items-center justify-end text-purple-700 text-sm font-medium">
-              <a href="#" className="hover:underline">Forgot password?</a>
+              <Link
+                to="/forget-password"
+                className="hover:underline">Forgot password?</Link>
             </div>
 
             <button

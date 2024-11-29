@@ -25,6 +25,7 @@ const customBaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Defi
   let result = await mainBaseQuery(args, api, extraOptions);  // Initial request
 
   if ((result?.error?.data as ErrorData)?.message && result?.error?.status === 404) {
+    console.log("first")
     toast.error((result.error.data as ErrorData).message);
   }
 

@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { deleteCookie } from "../../utils/deleteCookie";
 
 export type TUser = {
   userId: string
@@ -33,7 +32,6 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-      deleteCookie(["refreshToken"]);
     }
   }
 })

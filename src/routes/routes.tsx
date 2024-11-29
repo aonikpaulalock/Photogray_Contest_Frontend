@@ -8,6 +8,8 @@ import { adminRoutes } from "./admin.routes";
 import { contestHolderRoutes } from "./contestHolder.routes";
 import { userRoutes } from "./user.routes";
 import Mainlayout from "../components/Dashboard/Mainlayout";
+import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
+import ResetPassord from "../pages/ResetPassword/ResetPassord";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ export const router = createBrowserRouter([
     >
       <Home />
     </Layout>,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassord />,
   },
   {
     path: "/register",
