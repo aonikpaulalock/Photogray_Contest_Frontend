@@ -7,7 +7,6 @@ const DahboardHeader = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(data)
   return (
     <div className="flex justify-between items-center p-4 bg-transparent">
       <div className="relative w-3/12">

@@ -122,6 +122,7 @@ const Register = () => {
             <FormSelect
               name="country"
               placeholder="Countries"
+              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
               options={countries}
               icon={<FaGlobe />}
             />
@@ -135,11 +136,10 @@ const Register = () => {
                     type="file"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      field.onChange(file);
+                      field.onChange(file); // set the file in React Hook Form
                     }}
                     className="hidden"
                     id="file-input"
-                    value={field.value ? field.value.name : ''}
                   />
                   <label
                     htmlFor="file-input"

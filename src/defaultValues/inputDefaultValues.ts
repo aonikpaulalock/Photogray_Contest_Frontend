@@ -7,3 +7,9 @@ export const registerDefaultValues = {
   country: "",
   profileImage: "",
 };
+
+export const BlogDefaultValues = {
+  title: "",
+  content: "",
+  blogPhoto: "",
+};

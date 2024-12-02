@@ -23,8 +23,6 @@ const mainBaseQuery = fetchBaseQuery({
 
 const customBaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions): Promise<any> => {
   let result = await mainBaseQuery(args, api, extraOptions);
-  console.log(result)
-  // Initial request
 
   if ((result?.error?.data as ErrorData)?.message && result?.error?.status === 404) {
     toast.error((result.error.data as ErrorData).message);
