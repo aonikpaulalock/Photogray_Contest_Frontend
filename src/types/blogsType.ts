@@ -8,3 +8,19 @@ export type TBlog = {
   authorRole: string;
   description: string;
 };
+
+export interface Blog {
+  _id: string;
+  title: string;
+  blogPhoto: string;
+  amount: number;
+  userId: {
+    _id: string;
+    username: string;
+    email: string;
+    role: string;
+    isDeleted: boolean;
+  };
+  createdAt: string;
+  updatedAt: string;
+}

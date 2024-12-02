@@ -3,7 +3,7 @@ import { tagTypes } from "../../tagType"
 
 const blogApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    //! Retrive User
+
     blogCreate: builder.mutation({
       query: (data) => {
         return {
@@ -15,15 +15,24 @@ const blogApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.blog],
     }),
 
-    getUserBlog: builder.query({
-      query: (blogId: string) => ({
-        url: `/blog/userBlog/${blogId}`,
-        method: "GET",
+    updateBlog: builder.mutation({
+      query: ({ blogId, data }) => ({
+        url: `/blog/${blogId}`,
+        method: "PUT",
+        body: data
       }),
-      providesTags: [tagTypes.blog],
+      invalidatesTags: [tagTypes.blog],
     }),
 
-    //! Retrive all blogs
+    deleteBlog: builder.mutation({
+      query: (blogId: string) => ({
+        url: `/blog/${blogId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.blog],
+    }),
+
+
     getAllBlogs: builder.query({
       query: () => {
         return {
@@ -33,11 +42,33 @@ const blogApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.blog],
     }),
+
+    getSingleBlog: builder.query({
+      query: (blogId: string) => {
+        return {
+          url: `/blog/${blogId}`,
+          method: "GET",
+        }
+      },
+      providesTags: [tagTypes.blog],
+    }),
+
+    getUserBlog: builder.query({
+      query: (blogId: string) => ({
+        url: `/blog/userBlog/${blogId}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.blog],
+    }),
+
   })
 })
 
 export const {
   useBlogCreateMutation,
+  useUpdateBlogMutation,
+  useDeleteBlogMutation,
   useGetUserBlogQuery,
-  useGetAllBlogsQuery
+  useGetAllBlogsQuery,
+  useGetSingleBlogQuery,
 } = blogApi
