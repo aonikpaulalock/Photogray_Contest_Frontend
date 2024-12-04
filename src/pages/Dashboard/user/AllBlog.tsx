@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
+import moment from "moment";
+import { FaEdit, FaTrash, FaEye, FaRegClock, FaRegHeart } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { useAppSelector } from "../../../redux/hooks";
 import { currentUser } from "../../../redux/auth/authSlice";
@@ -9,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import deleteEntity from "../../../utils/deleteEntity";
 import Modal from "../../../components/Modal/Modal";
 import BlogUpdate from "./BlogUpdate";
+import { BiBook, BiEnvelope } from "react-icons/bi";
+import { RiNumbersFill } from "react-icons/ri";
 
 const AllBlog = () => {
   const navigate = useNavigate();
@@ -19,7 +22,6 @@ const AllBlog = () => {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
-  console.log(selectedBlog)
   const toggleDropdown = (index: number) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
@@ -37,6 +39,7 @@ const AllBlog = () => {
   const openUpdateModal = (blog: Blog) => {
     setSelectedBlog(blog);
     setIsModalOpen(true);
+    setOpenDropdown(null);
   };
 
   // Function to close modal
@@ -50,28 +53,54 @@ const AllBlog = () => {
       <table className="w-full border-collapse rounded-lg shadow-lg overflow-hidden bg-white">
         <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition duration-200 border-b-[3px] border-b-blue-gray-100">
           <tr>
-            <th className="p-4">Serial</th>
-            <th className="p-4">Title</th>
-            <th className="p-4">Email</th>
-            <th className="p-4">Image</th>
-            <th className="p-4">Like</th>
-            <th className="p-4 text-center">Actions</th>
+            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Serial</th>
+            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Create Date</th>
+            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Name</th>
+            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Email</th>
+            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Image</th>
+            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Like</th>
+            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
           {blogs?.data?.map((blog: Blog, index: number) => (
             <tr key={blog._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
-              <td className="p-4 text-gray-700">{index + 1}</td>
-              <td className="p-4 text-gray-500">{blog.title}</td>
+              {/* Serial */}
+              <td className="p-4 text-blue-gray-700 font-bold">
+                <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
+              </td>
+
+              {/* Date */}
+              <td className="p-4 text-blue-gray-400 font-medium">
+                <FaRegClock className="inline mr-2 text-lg text-secondary" />
+                {blog?.createdAt && moment(blog?.createdAt).format("MMMM D, YYYY, h:mm A")}
+              </td>
+
+              {/* Blog Name */}
+              <td className="p-4 text-blue-gray-500 font-poppins font-medium ">
+                <BiBook className="inline mr-2 text-lg text-secondary" /> {blog.title}
+              </td>
+
+              {/* Email */}
               <td className="p-4">
                 <div>
-                  <span className="block text-gray-700 font-medium">{blog?.userId?.email}</span>
+                  <BiEnvelope className="inline mr-2 text-lg text-secondary " />
+                  <span className="text-blue-gray-500 font-poppins font-semibold">{blog?.userId?.email}</span>
                 </div>
               </td>
+
+              {/* Image */}
               <td className="p-4 text-gray-500">
+                {/* <FaImage className="inline mr-2 text-gray-500" />  */}
                 <img className="w-12 h-12 object-cover rounded-full" src={blog.blogPhoto} alt="" />
               </td>
-              <td className="p-4 text-orange-600 font-semibold">{blog.amount}</td>
+
+              {/* Like */}
+              <td className="p-4 text-blue-gray-500 font-poppins font-semibold">
+                <FaRegHeart className="inline mr-2 text-lg text-red " /> 10k
+              </td>
+
+              {/* Actions */}
               <td className="p-4 relative text-center">
                 <div className="relative">
                   <button onClick={() => toggleDropdown(index)} className="text-gray-400 hover:text-gray-600 focus:outline-none">
@@ -108,7 +137,7 @@ const AllBlog = () => {
         title="Update Blog"
         onClose={closeModal}
       >
-        <BlogUpdate />
+        <BlogUpdate blog={selectedBlog} closeModal={closeModal} />
       </Modal>
 
       <div className="mt-4 flex justify-center space-x-2">

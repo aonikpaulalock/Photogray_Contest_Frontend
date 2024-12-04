@@ -2,125 +2,138 @@ import { Controller, FieldValues } from "react-hook-form";
 import ContainForm from "../../../components/Form/ContainForm";
 import FormInput from "../../../components/Form/FormInput";
 import { FaUpload } from "react-icons/fa";
+import { Blog } from "../../../types";
+import { toast } from "sonner";
+import { uploadImageToDB } from "../../../utils/ImageUploader";
+import { useUpdateBlogMutation } from "../../../redux/feature/user/blogApi";
+const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 
-const BlogUpdate = () => {
-  //! just set default value of blog data then update
+
+const BlogUpdate = ({ blog, closeModal }: { blog: Blog | null, closeModal: () => void }) => {
+  const [blogUpdate] = useUpdateBlogMutation()
+  const BlogDefaultValues = {
+    title: blog?.title || "",
+    content: blog?.content || "",
+    blogPhoto: null,
+  };
   const onSubmit = async (values: FieldValues) => {
-    console.log(values)
-    // const toastId = toast.loading("Please wait...");
-    // try {
-    //   const blogPhoto = await uploadImageToDB(values.blogPhoto, imageBb_Api);
+    console.log(values);
+    const toastId = toast.loading("Please wait...");
+    try {
+      //! If a new image is uploaded, process it; otherwise, use the existing one
+      const blogPhoto = values.blogPhoto
+        ? await uploadImageToDB(values.blogPhoto, imageBb_Api)
+        : blog?.blogPhoto;
 
-    //   if (!blogPhoto) {
-    //     toast.error("Image upload failed. Please try again.", {
-    //       id: toastId,
-    //     });
-    //     return;
-    //   }
+      if (values.blogPhoto && !blogPhoto) {
+        toast.error("Image upload failed. Please try again.", {
+          id: toastId,
+        });
+        return;
+      }
 
-    //   const blogInfo = {
-    //     ...values,
-    //     blogPhoto,
-    //     userId: user?.userId
-    //   };
-    //   console.log("Form Data:", blogInfo);
-    //   const res = await blogCreate(blogInfo).unwrap();
-    //   if (res?.success) {
-    //     toast.success(res?.message, {
-    //       id: toastId,
-    //       duration: 2000,
-    //     });
-    //   } else {
-    //     toast.error(res?.error?.message, {
-    //       id: toastId,
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.log(error)
-    //   toast.error("Something went wrong!", {
-    //     id: toastId,
-    //     duration: 2000,
-    //   });
-    // }
+      const blogInfo = {
+        title: values.title,
+        content: values.content,
+        blogPhoto,
+      };
+
+
+      const res = await blogUpdate({
+        blogId: blog?._id,
+        data: blogInfo,
+      }).unwrap();
+
+
+      if (res?.success) {
+        toast.success(res?.message, {
+          id: toastId,
+          duration: 2000,
+        });
+        closeModal();
+      } else {
+        toast.error(res?.error?.message || "Update failed.", {
+          id: toastId,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!", {
+        id: toastId,
+        duration: 2000,
+      });
+    }
   };
   return (
     <ContainForm
-    onSubmit={onSubmit}
-    className="w-full p-2"
+      onSubmit={onSubmit}
+      defaultValues={BlogDefaultValues}
+      className="w-full p-2"
 
-  >
-    <div className="mb-1">
-      <FormInput
-        type="text"
-        name="title"
-        className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
-        placeholder="Enter your blog title"
+    >
+      <div className="mb-1">
+        <FormInput
+          type="text"
+          name="title"
+          className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
+          placeholder="Enter your blog title"
+        />
+      </div>
+      <Controller
+        name="content"
+        render={({ field, fieldState: { error } }) => (
+          <div className="mb-2">
+            <textarea
+              {...field}
+              className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
+              placeholder="Write your content"
+            />
+            {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
+          </div>
+        )}
       />
-    </div>
-    {/* <div className="mb-4">
-      <FormInput
-        type="password"
-        name="newPassword"
-        className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
-        placeholder="Enter your new password"
-        label="New Password"
+
+      <Controller
+        name="blogPhoto"
+        render={({ field, fieldState: { error } }) => (
+          <div className="mb-0">
+            {/* Hidden file input */}
+            <input
+              type="file"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                field.onChange(file);
+              }}
+              className="hidden"
+              id="file-input"
+            />
+            <label
+              htmlFor="file-input"
+              className="cursor-pointer mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none flex items-center justify-start bg-white relative"
+            >
+              {/* Upload icon */}
+              <FaUpload className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray" />
+
+              {/* Display file name or placeholder */}
+              <span className="pl-8 text-gray font-sm">
+                {field.value ? field.value.name : "Upload profile picture"}
+              </span>
+            </label>
+
+            {/* Error message */}
+            {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
+          </div>
+        )}
       />
-    </div> */}
-    <Controller
-      name="content"
-      render={({ field, fieldState: { error } }) => (
-        <div className="mb-2">
-          <textarea
-            {...field}
-            className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
-            placeholder="Write your content"
-          />
-          {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
-        </div>
-      )}
-    />
-
-    <Controller
-      name="blogPhoto"
-      render={({ field, fieldState: { error } }) => (
-        <div className="mb-0">
-          {/* Hidden file input */}
-          <input
-            type="file"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              field.onChange(file);
-            }}
-            className="hidden"
-            id="file-input"
-          />
-          <label
-            htmlFor="file-input"
-            className="cursor-pointer mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none flex items-center justify-start bg-white relative"
-          >
-            {/* Upload icon */}
-            <FaUpload className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray" />
-
-            {/* Display file name or placeholder */}
-            <span className="pl-8 text-gray font-sm">
-              {field.value ? field.value.name : "Upload profile picture"}
-            </span>
-          </label>
-
-          {/* Error message */}
-          {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
-        </div>
-      )}
-    />
-    <div className="flex justify-end mt-6">
-      <button
-        type="submit"
-        className="bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200 px-10"
-      >
-        Update
-      </button>
-    </div>
-  </ContainForm>
+      <div className="flex justify-end mt-6">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200 px-10"
+        >
+          Update
+        </button>
+      </div>
+    </ContainForm>
   )
 };
 

@@ -13,7 +13,7 @@ export interface Blog {
   _id: string;
   title: string;
   blogPhoto: string;
-  amount: number;
+  content: string;
   userId: {
     _id: string;
     username: string;
