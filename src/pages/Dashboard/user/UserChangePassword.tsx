@@ -15,10 +15,8 @@ const UserChangePassword = ({ role }: { role: string }) => {
   const dispatch = useAppDispatch()
   const [changePassword] = useChangePasswordMutation();
   const onSubmit = async (values: FieldValues) => {
-    console.log(values)
     try {
       const res = await changePassword(values);
-      console.log(res)
       if (res?.data?.success) {
         dispatch(logout())
         navigate("/login")

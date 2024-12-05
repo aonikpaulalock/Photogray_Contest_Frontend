@@ -54,12 +54,25 @@ const blogApi = baseApi.injectEndpoints({
     }),
 
     getUserBlog: builder.query({
-      query: (blogId: string) => ({
-        url: `/blog/userBlog/${blogId}`,
-        method: "GET",
-      }),
+      query: ({ blogId, page, limit }: { blogId: string, page: number, limit: number }) => {
+        const params: Record<string, string> = {};
+    
+        if (page) {
+          params['page'] = page.toString();
+        }
+        if (limit) {
+          params['limit'] = limit.toString();
+        }
+    
+        return {
+          url: `/blog/userBlog/${blogId}`,
+          method: "GET",
+          params,
+        };
+      },
       providesTags: [tagTypes.blog],
     }),
+    
 
   })
 })

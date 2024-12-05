@@ -13,9 +13,20 @@ const userApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.user],
     }),
+    
+    updateUser: builder.mutation({
+      query: ({ userId, data }) => ({
+        url: `/users/${userId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
+
   })
 })
 
 export const {
   useGetMeUserQuery,
+  useUpdateUserMutation
 } = userApi

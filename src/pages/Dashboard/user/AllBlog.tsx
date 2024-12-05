@@ -12,11 +12,20 @@ import Modal from "../../../components/Modal/Modal";
 import BlogUpdate from "./BlogUpdate";
 import { BiBook, BiEnvelope } from "react-icons/bi";
 import { RiNumbersFill } from "react-icons/ri";
+import Pagination from "../../../components/pagination/Pagination";
 
 const AllBlog = () => {
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
   const user = useAppSelector(currentUser);
-  const { data: blogs } = useGetUserBlogQuery((user?.userId) as string);
+  const { data: blogs,refetch } = useGetUserBlogQuery(
+    {
+      blogId: user?.userId as string,
+      page: page,
+      limit: 4,
+    }
+  );
+  const metaData = blogs?.meta;
   const [deleteBlog] = useDeleteBlogMutation();
 
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
@@ -33,6 +42,14 @@ const AllBlog = () => {
       "Your blog has been deleted.",
       "Something went wrong!"
     );
+  
+    if (blogs?.data?.length === 1 && page > 1) {
+      setPage(page - 1);
+    } else {
+      refetch();
+    }
+  
+      setOpenDropdown(null);
   };
 
   // Function to open modal and set selected blog
@@ -140,11 +157,12 @@ const AllBlog = () => {
         <BlogUpdate blog={selectedBlog} closeModal={closeModal} />
       </Modal>
 
-      <div className="mt-4 flex justify-center space-x-2">
-        <button className="px-3 py-1 rounded-md bg-blue-100 text-blue-600">1</button>
-        <button className="px-3 py-1 rounded-md bg-gray-100 text-gray-600">2</button>
-        <button className="px-3 py-1 rounded-md bg-gray-100 text-gray-600">3</button>
-      </div>
+      <Pagination
+        current={page}
+        onChange={(value) => setPage(value)}
+        pageSize={metaData?.limit} // Items per page
+        total={metaData?.total}
+      />
     </div>
   );
 };
