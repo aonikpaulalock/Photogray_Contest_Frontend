@@ -1,83 +1,107 @@
-import React, { useEffect } from "react";
-import { useFormContext, useWatch, Controller } from "react-hook-form";
-import { ReactNode } from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import { useState } from "react";
 
 type TMultiSelectProps = {
   name: string;
-  label?: string; // Optional label
   options: {
     value: string;
     label: string;
     disabled?: boolean;
   }[];
   placeholder?: string;
-  disabled?: boolean;
-  mode?: "multiple";
-  icon?: ReactNode;
   className?: string;
-  onValueChange: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-const FromMultiSelect = ({
+const FormMultiSelect = ({
   name,
-  label,
   options,
-  placeholder = "Select options",
-  disabled,
-  mode,
-  icon,
-  className,
-  onValueChange,
+  placeholder = "Select options or add your own",
+  className = "",
 }: TMultiSelectProps) => {
   const { control } = useFormContext();
-  const inputValue = useWatch({ control, name });
-
-  useEffect(() => {
-    onValueChange(inputValue || []);
-  }, [inputValue, onValueChange]);
+  const [customTags, setCustomTags] = useState<string[]>([]);
 
   return (
     <Controller
-      name={name}
       control={control}
+      defaultValue={[]}
+      name={name}
       render={({ field, fieldState: { error } }) => (
-        <div className="relative flex flex-col gap-2">
-          {label && <label className="font-medium text-gray-700">{label}</label>}
-          <div className="relative">
+        <div className="relative">
+          <div
+            className={`flex flex-wrap gap-1 items-center rounded-md py-2 ${className}`}
+          >
+            {/* Selected Tags */}
+            {field.value.length > 0 &&
+              field.value.map((selectedValue: string) => (
+                <span
+                  key={selectedValue}
+                  className="bg-purple-300 text-white px-2 py-1 rounded flex font-normal items-center gap-1"
+                >
+                  {options.find((o) => o.value === selectedValue)?.label ||
+                    customTags.find((tag) => tag === selectedValue) ||
+                    selectedValue}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      field.onChange(
+                        field.value.filter((item: string) => item !== selectedValue)
+                      )
+                    }
+                    className="text-white hover:text-gray-300"
+                  >
+                    ✖
+                  </button>
+                </span>
+              ))}
+
+            {/* Dropdown for existing options */}
             <select
-              {...field}
-              multiple={mode === "multiple"}
-              disabled={disabled}
-              className={`w-full p-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                error ? "border-red-500" : "border-gray-300"
-              } ${className}`}
+              className="outline-none bg-transparent flex-grow"
+              value=""
+              onChange={(e) =>
+                field.onChange([...field.value, e.target.value])
+              }
             >
-              {placeholder && (
-                <option value="" disabled hidden>
-                  {placeholder}
-                </option>
-              )}
+              <option value="" disabled hidden>
+                {placeholder}
+              </option>
               {options.map((option) => (
                 <option
                   key={option.value}
                   value={option.value}
-                  disabled={option.disabled}
+                  disabled={option.disabled || field.value.includes(option.value)}
                 >
                   {option.label}
                 </option>
               ))}
             </select>
-            {icon && (
-              <span className="absolute left-3 top-4 text-purple-600">
-                {icon}
-              </span>
-            )}
+
+            {/* Input for custom tags */}
+            <input
+              type="text"
+              className="outline-none bg-transparent flex-grow text-sm"
+              placeholder="Add custom tag..."
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
+                  const newTag = e.currentTarget.value.trim();
+                  if (!field.value.includes(newTag)) {
+                    field.onChange([...field.value, newTag]);
+                    setCustomTags([...customTags, newTag]);
+                  }
+                  e.currentTarget.value = "";
+                  e.preventDefault();
+                }
+              }}
+            />
           </div>
-          {error && <small className="text-red-500 font-bold">{error.message}</small>}
+
+          {/* Error message */}
+          {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
         </div>
       )}
     />
   );
 };
 
-export default FromMultiSelect;
+export default FormMultiSelect;

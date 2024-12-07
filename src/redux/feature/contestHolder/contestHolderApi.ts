@@ -1,21 +1,23 @@
 import { baseApi } from "../../api/baseApi"
+import { tagTypes } from "../../tagType"
 
 
 const contestHolderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     //! Register User
-    registerUser: builder.mutation({
+    createContest: builder.mutation({
       query: (data) => {
         return {
-          url: "/auth/register",
+          url: "/contests",
           method: "POST",
           body: data
         }
-      }
+      },
+      invalidatesTags: [tagTypes.contest],
     }),
   })
 })
 
 export const {
-  useRegisterUserMutation,
+  useCreateContestMutation,
 } = contestHolderApi
