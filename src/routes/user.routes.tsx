@@ -1,7 +1,6 @@
 import AllBlog from "../pages/Dashboard/user/AllBlog";
 import AllContest from "../pages/Dashboard/user/AllContest";
 import BlogDetails from "../pages/Dashboard/user/BlogDetails";
-import BlogUpdate from "../pages/Dashboard/user/BlogUpdate";
 import CreateBlog from "../pages/Dashboard/user/CreateBlog";
 import UserChangePassword from "../pages/Dashboard/user/UserChangePassword";
 import UserDashboard from "../pages/Dashboard/user/UserDashboard";
@@ -26,10 +25,6 @@ export const userRoutes = {
     {
       path: "blogDetails/:blogId",
       element: <BlogDetails />,
-    },
-    {
-      path: "blogUpdate/:blogId",
-      element: <BlogUpdate />,
     },
     {
       path: "profile",

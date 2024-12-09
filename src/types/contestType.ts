@@ -1,7 +1,7 @@
 type Author = {
   name: string;
   location: string;
-  avatar: string; 
+  avatar: string;
 };
 
 export type TContest = {
@@ -13,3 +13,19 @@ export type TContest = {
   author: Author;
   buttonLabel: string;
 };
+
+export interface TPhotographyContest {
+  _id: string;
+  title: string;
+  requirements: string;
+  prize: string;
+  tags: string[];
+  status: string;
+  paymentStatus: string;
+  participantsID: string[];
+  userId: string;
+  winnerId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  deadline: string;
+}

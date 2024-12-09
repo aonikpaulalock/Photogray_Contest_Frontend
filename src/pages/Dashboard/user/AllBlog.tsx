@@ -153,6 +153,7 @@ const AllBlog = () => {
         isOpen={isModalOpen}
         title="Update Blog"
         onClose={closeModal}
+        className="max-w-md"
       >
         <BlogUpdate blog={selectedBlog} closeModal={closeModal} />
       </Modal>
