@@ -17,16 +17,11 @@ const contestHolderApi = baseApi.injectEndpoints({
     }),
 
     getAllContests: builder.query({
-      query: ({ page, limit }: { page: number, limit: number }) => {
+      query: ({ page, limit }) => {
         const params: Record<string, string> = {};
-
-        if (page) {
-          params['page'] = page.toString();
-        }
-        if (limit) {
-          params['limit'] = limit.toString();
-        }
-
+        if (page) params['page'] = page.toString();
+        if (limit) params['limit'] = limit.toString();
+    
         return {
           url: "/contests",
           method: "GET",

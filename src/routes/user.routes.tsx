@@ -1,3 +1,4 @@
+import ContestDetails from "../pages/Dashboard/contestHolder/ContestDetails";
 import AllBlog from "../pages/Dashboard/user/AllBlog";
 import AllContest from "../pages/Dashboard/user/AllContest";
 import BlogDetails from "../pages/Dashboard/user/BlogDetails";
@@ -21,6 +22,10 @@ export const userRoutes = {
     {
       path: "all-blog",
       element: <AllBlog />,
+    },
+    {
+      path: "contestDetails/:id",
+      element: <ContestDetails role="user" />,
     },
     {
       path: "blogDetails/:blogId",

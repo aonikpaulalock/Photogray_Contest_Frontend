@@ -21,7 +21,7 @@ export const contestHolderRoutes = {
     },
     {
       path: "contestDetails/:id",
-      element: <ContestDetails />,
+      element: <ContestDetails role="contestHolder" />,
     },
     {
       path: "all-participation",
