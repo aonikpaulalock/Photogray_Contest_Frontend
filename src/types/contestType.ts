@@ -1,3 +1,5 @@
+import { TUser } from "./userType";
+
 type Author = {
   name: string;
   location: string;
@@ -28,4 +30,14 @@ export interface TPhotographyContest {
   createdAt: string;
   updatedAt: string;
   deadline: string;
+}
+
+export interface TSubmission {
+  _id: string;
+  contestId: TPhotographyContest;
+  userId: TUser;
+  images: string[];
+  isWinner: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -63,7 +63,7 @@ const UserProfile = ({ role }: { role: string }) => {
           window.location.reload();
         }, 500);
       } else {
-        toast.error(res?.error?.message || "Update failed.", {
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
           id: toastId,
         });
       }

@@ -5,6 +5,31 @@ import { tagTypes } from "../../tagType"
 const contestHolderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     //! Register User
+    getAllContests: builder.query({
+      query: ({ page, limit }) => {
+        const params: Record<string, string> = {};
+        if (page) params['page'] = page.toString();
+        if (limit) params['limit'] = limit.toString();
+
+        return {
+          url: "/contests",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: [tagTypes.contest],
+    }),
+
+    getSingleContest: builder.query({
+      query: (contestId: string) => {
+        return {
+          url: `/contests/${contestId}`,
+          method: "GET",
+        }
+      },
+      providesTags: [tagTypes.contest],
+    }),
+
     createContest: builder.mutation({
       query: (data) => {
         return {
@@ -14,21 +39,6 @@ const contestHolderApi = baseApi.injectEndpoints({
         }
       },
       invalidatesTags: [tagTypes.contest],
-    }),
-
-    getAllContests: builder.query({
-      query: ({ page, limit }) => {
-        const params: Record<string, string> = {};
-        if (page) params['page'] = page.toString();
-        if (limit) params['limit'] = limit.toString();
-    
-        return {
-          url: "/contests",
-          method: "GET",
-          params,
-        };
-      },
-      providesTags: [tagTypes.contest],
     }),
 
     updateContest: builder.mutation({
@@ -46,16 +56,6 @@ const contestHolderApi = baseApi.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: [tagTypes.contest],
-    }),
-
-    getSingleContest: builder.query({
-      query: (contestId: string) => {
-        return {
-          url: `/contests/${contestId}`,
-          method: "GET",
-        }
-      },
-      providesTags: [tagTypes.contest],
     }),
 
   })

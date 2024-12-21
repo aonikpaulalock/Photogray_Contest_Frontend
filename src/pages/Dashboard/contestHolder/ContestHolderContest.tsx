@@ -14,7 +14,8 @@ import { useDeleteContestMutation, useGetAllContestsQuery } from "../../../redux
 import ContestUpdate from "./ContestUpdate";
 import deleteEntity from "../../../utils/deleteEntity";
 
-const ContestHolderContest = () => {
+const ContestHolderContest = ({ role }: { role: string }) => {
+  console.log(role)
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const user = useAppSelector(currentUser);
@@ -22,6 +23,9 @@ const ContestHolderContest = () => {
     {
       page: page,
       limit: 4,
+    },
+    {
+      refetchOnMountOrArgChange: true
     }
   );
   const metaData = contests?.meta;
@@ -136,25 +140,35 @@ const ContestHolderContest = () => {
                     <BsThreeDots className="text-xl" />
                   </button>
                   {openDropdown === index && (
-                    <div className={`absolute ${index === contests?.data?.length - 1 ? "-bottom-2" : "-top-5"} right-20 bg-white shadow-md rounded-lg text-sm w-36`}
+                    <div className={`absolute ${index === contests?.data?.length - 1 ? "-bottom-4" : "-top-3"} right-14 bg-white shadow-md rounded-lg text-sm w-36`}
                     >
                       <ul>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => openUpdateModal(contest)}>
-                          <FaEdit className="mr-2 text-blue-500" /> Update
-                        </li>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => deleteByContest(contest?._id)}>
-                          <FaTrash className="mr-2 text-red" /> Delete
-                        </li>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)}>
-                          <FaEye className="mr-2 text-green" /> Details
-                        </li>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => alert("Delete")}>
-                          <FaUsers className="mr-2 text-blue-gray-700" /> Participant
-                        </li>
+                        {role === "user" && (
+                          <li className="flex items-center hover:bg-gray-100 cursor-pointer text-primary font-semibold py-2 px-2"
+                            onClick={() => navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)}>
+                            <FaUsers className="mr-2 text-blue-500" /> Participate
+                          </li>
+                        )}
+                        {(role === "contestHolder" || role === "admin") && (
+                          <>
+                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                              onClick={() => openUpdateModal(contest)}>
+                              <FaEdit className="mr-2 text-blue-500" /> Update
+                            </li>
+                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                              onClick={() => deleteByContest(contest?._id)}>
+                              <FaTrash className="mr-2 text-red" /> Delete
+                            </li>
+                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                              onClick={() => navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)}>
+                              <FaEye className="mr-2 text-green" /> Details
+                            </li>
+                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                              onClick={() => alert("Delete")}>
+                              <FaUsers className="mr-2 text-blue-gray-700" /> Participant
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   )}

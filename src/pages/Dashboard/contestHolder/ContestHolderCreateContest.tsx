@@ -17,7 +17,8 @@ const options = [
   { value: "urgent", label: "Urgent" },
   { value: "optional", label: "Optional" },
 ];
-const ContestHolderCreateContest = () => {
+const ContestHolderCreateContest = ({ role }: { role: string }) => {
+  console.log(role)
   const user = useAppSelector(currentUser);
   const [createContest] = useCreateContestMutation();
 
@@ -38,7 +39,7 @@ const ContestHolderCreateContest = () => {
           duration: 2000,
         });
       } else {
-        toast.error(res?.error?.message || "Update failed.", {
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
           id: toastId,
         });
       }

@@ -1,7 +1,7 @@
 import chatLogo from "../../assets/landingPage/SvgLogo/chat.svg"
 import notificationLogo from "../../assets/landingPage/SvgLogo/notification.svg"
-import searchIcon from "../../assets/landingPage/SvgLogo/Research.svg"
 import { useGetMeUserQuery } from "../../redux/feature/user/userApi";
+import logo from "../../assets/landingPage/LOGO.png"
 const DahboardHeader = () => {
   const { data, isLoading } = useGetMeUserQuery(undefined)
   if (isLoading) {
@@ -9,8 +9,11 @@ const DahboardHeader = () => {
   }
   return (
     <div className="flex justify-between items-center p-4 bg-transparent">
-      <div className="relative w-3/12">
-        <input
+      <div className="relative">
+        <div className="text-2xl text-orange flex items-center cursor-pointer">
+          <img src={logo} alt="" className="" />
+        </div>
+        {/* <input
           type="text"
           placeholder="Search Here..."
           className="border-none rounded-xl p-4 pl-12 w-full text-SecondPrimary outline-none"
@@ -19,7 +22,7 @@ const DahboardHeader = () => {
           src={searchIcon}
           alt="Search Icon"
           className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-500"
-        />
+        /> */}
       </div>
 
       <div className="flex items-center gap-4 cursor-pointer">

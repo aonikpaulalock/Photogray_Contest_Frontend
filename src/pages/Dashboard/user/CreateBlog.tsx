@@ -1,4 +1,4 @@
-import image from "../../../assets/landingPage/dashboard/resetPassword.png"
+import image from "../../../assets/landingPage/dashboard/blog1.png"
 import FormInput from "../../../components/Form/FormInput";
 import ContainForm from "../../../components/Form/ContainForm";
 import { Controller, FieldValues } from "react-hook-form";
@@ -40,7 +40,7 @@ const CreateBlog = () => {
           duration: 2000,
         });
       } else {
-        toast.error(res?.error?.message, {
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
           id: toastId,
         });
       }

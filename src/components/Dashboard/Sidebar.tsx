@@ -29,8 +29,10 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`${collapsed ? "w-28" : "w-64 px-6"
-        } bg-white min-h-screen flex flex-col py-10 shadow-sm transition-all duration-500 ease-in-out transform`}
+      className={`${collapsed ? "w-28" : "w-64 px-6"}
+      bg-white h-screen flex flex-col py-10 shadow-sm 
+      transition-all duration-500 ease-in-out transform 
+      overflow-y-auto scrollbar-custom`}
     >
       {/* Toggle Button */}
       <button

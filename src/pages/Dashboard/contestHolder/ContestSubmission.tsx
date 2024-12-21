@@ -1,146 +1,117 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, FieldValues } from "react-hook-form";
 import ContainForm from "../../../components/Form/ContainForm";
-import { TPhotographyContest } from "../../../types";
 import FormInput from "../../../components/Form/FormInput";
-import FormDatePicker from "../../../components/Form/FromDatePicker";
-import FormMultiSelect from "../../../components/Form/FromMultiSelect";
-const options = [
-  { value: "important", label: "Important" },
-  { value: "urgent", label: "Urgent" },
-  { value: "optional", label: "Optional" },
-];
-const ContestSubmission = ({ contest, closeModal }: { contest: TPhotographyContest | null, closeModal: () => void }) => {
-  // const user = useAppSelector(currentUser)
-  const contestDefaultValues = {
-    title: contest?.title || "",
-    prize: contest?.prize || "",
-    requirements: contest?.requirements || "",
-    tags: contest?.tags || [],
-    deadline: contest?.deadline || null,
-  }
-
-  // const [updateContest] = useUpdateContestMutation()
+import image from "../../../assets/landingPage/dashboard/contestSubmission.jpg";
+import { FaUpload } from "react-icons/fa";
+import { useAppSelector } from "../../../redux/hooks";
+import { currentUser } from "../../../redux/auth/authSlice";
+import { toast } from "sonner";
+import { uploadMultipleImagesToDB } from "../../../utils/ImageUploader";
+import { useCreateSubmissionMutation } from "../../../redux/feature/user/submissionApi";
+const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
+const ContestSubmission = ({ contest, closeModal }: { contest: any | null; closeModal: () => void }) => {
+  const user = useAppSelector(currentUser);
+  const [createSubmission] = useCreateSubmissionMutation();
 
   const onSubmit = async (values: FieldValues) => {
-    console.log(values)
-    // const data = {
-    //   ...values,
-    // }
-    // const toastId = toast.loading("Please wait...");
-    // try {
-    //   const res = await updateContest({
-    //     userId: user?.userId,
-    //     role: user?.role,
-    //     contestId: contest?._id,
-    //     data
-    //   }).unwrap();
+    const toastId = toast.loading("Uploading Submission...");
+    try {
+      const imageUrls = await uploadMultipleImagesToDB(values.images, imageBb_Api);
 
+      // Prepare final submission data
+      const data = {
+        ...values,
+        images: imageUrls,
+        contestId: contest?.data?._id,
+        userId: user?.userId,
+      };
 
-    //   if (res?.success) {
-    //     toast.success(res?.message, {
-    //       id: toastId,
-    //       duration: 2000,
-    //     });
-    //     closeModal();
-    //   } else {
-    //     toast.error(res?.error?.message || "Update failed.", {
-    //       id: toastId,
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   toast.error("Something went wrong!", {
-    //     id: toastId,
-    //     duration: 2000,
-    //   });
-    // }
+      console.log("Final submission data:", data);
+
+      // Submit the data
+      const res = await createSubmission(data).unwrap();
+      if (res?.success) {
+        toast.success(res?.message, { id: toastId, duration: 2000 });
+        closeModal();
+      } else {
+        toast.error(res?.data?.errorDetails?.message || "Submission failed.", { id: toastId });
+      }
+    } catch (error) {
+      console.error("Error during submission:", error);
+      toast.error("An error occurred during submission.", { id: toastId });
+    }
   };
+
   return (
-    <ContainForm
-    onSubmit={onSubmit}
-    defaultValues={contestDefaultValues}
-    className="w-full"
-  >
+    <div className="flex items-center justify-center relative overflow-hidden gap-4">
+      {/* Main container */}
+      <div className="relative bg-white shadow-2xl rounded-lg flex overflow-hidden">
+        {/* Left Section */}
+        <div className="flex flex-col justify-center p-4 flex-1">
+          <h2 className="text-3xl font-bold text-primary mb-3">Contest Submission</h2>
+          <p className="text-SecondPrimary text-lg mb-5 font-medium">
+            Let your creativity shine! Submit your entry today and stand out.
+          </p>
+          <ContainForm onSubmit={onSubmit} className="w-full">
+            <div className="mb-1">
+              <FormInput
+                type="text"
+                name="contestId"
+                className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none placeholder:text-blue-gray-500 placeholder:font-semibold"
+                placeholder={contest?.data?.title || "Enter contest title"}
+                readOnly
+              />
+            </div>
 
-    {/* Right Section: Form */}
-    <div className="w-full p-10">
-      <div className="space-y-6">
-        <div className="flex space-x-4">
-          <div className="w-1/2">
-            <label className="block text-sm text-gray-600 mb-1 font-semibold">
-              Contest Name
-            </label>
-            <FormInput
-              type="text"
-              name="title"
-              className="w-full text-SecondPrimary border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-medium py-2"
-              placeholder="Enter your contest title"
+            <Controller
+              name="images"
+              render={({ field, fieldState: { error } }) => (
+                <div className="mb-0">
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      const files = e.target.files;
+                      field.onChange(files ? Array.from(files) : []);
+                    }}
+                    className="hidden"
+                    id="file-input"
+                    multiple
+                  />
+                  <label
+                    htmlFor="file-input"
+                    className="cursor-pointer mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none flex items-center justify-start bg-white relative"
+                  >
+                    <FaUpload className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray" />
+                    <span className="pl-8 text-gray font-sm">
+                      {field.value && field.value.length > 0
+                        ? field.value.map((file: File) => file.name).join(", ")
+                        : "Upload up to many contest images."}
+                    </span>
+                  </label>
+                  {error && <p className="text-red text-sm font-medium mt-1">{error.message}</p>}
+                </div>
+              )}
             />
-          </div>
-          <div className="w-[50%]">
-            <label className="block text-sm text-gray-600 mb-1 font-semibold">
-              Contest deadline
-            </label>
-            <FormDatePicker
-              name="deadline"
-              placeholder="Select a date"
-              className="border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-medium text-SecondPrimary py-2"
-            />
-          </div>
-        </div>
-        <div className="flex space-x-4">
-          <div className="w-[40%]">
-            <label className="block text-sm text-gray-600 mb-1 font-semibold">
-              Contest prize
-            </label>
-            <FormInput
-              type="text"
-              className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-medium text-SecondPrimary py-2"
-              name="prize"
-              placeholder="Contest prize"
-            />
-          </div>
-          <div className="w-full">
-            <label className="block text-sm text-gray-600 mb-1 font-semibold">
-              Contest Tags
-            </label>
-            <FormMultiSelect
-              name="tags"
-              className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-medium text-SecondPrimary py-1"
-              options={options}
-              placeholder="Select tags"
-            />
-          </div>
-        </div>
-        <div>
-          <label className="block text-sm text-gray-600 mb-1 font-semibold">
-            Requirements
-          </label>
-          <Controller
-            name="requirements"
-            render={({ field, fieldState: { error } }) => (
-              <div className="relative">
-                <textarea
-                  {...field}
-                  className="w-full border-b-2 border-gray focus:border-SecondPrimary  focus:ring-0 outline-none text-sm font-medium text-SecondPrimary"
-                  placeholder="Enter your requirements"
-                />
-                {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
-              </div>
-            )}
-          />
-        </div>
-      </div>
 
-      {/* Save Button */}
-      <div className="mt-6 text-right">
-        <button type="submit" className="px-8 py-4 bg-primary text-white">
-          Submit
-        </button>
+            <div className="flex justify-start mt-6">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200 px-10"
+              >
+                Submit
+              </button>
+            </div>
+          </ContainForm>
+        </div>
+
+        {/* Right Section */}
+        <div className="relative flex justify-center items-center flex-1">
+          <img src={image} alt="Forgot Password Illustration" />
+        </div>
       </div>
     </div>
-  </ContainForm>
-  )
+  );
 };
 
 export default ContestSubmission;

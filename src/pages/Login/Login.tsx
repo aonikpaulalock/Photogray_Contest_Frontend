@@ -16,11 +16,10 @@ const Login = () => {
   const dispatch = useAppDispatch()
   const [login] = useLoginUserMutation()
   const onSubmit = async (data: FieldValues) => {
-    console.log(data)
     const toastId = toast.loading("Logged in processing")
     try {
       const res = await login(data).unwrap()
-      console.log(res)
+
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({
         user,
@@ -33,6 +32,10 @@ const Login = () => {
 
       if (res?.success) {
         navigate(`/dashboard/${user.role}/profile`)
+      } else {
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
+          id: toastId,
+        });
       }
 
     } catch (error: any) {

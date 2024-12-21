@@ -13,21 +13,23 @@ const ResetPassord = () => {
   const onSubmit = async (values: FieldValues) => {
     const token = searchParams.get("token");
     const userId = searchParams.get("userId");
-  
+
     const data = {
       newPassword: values.newPassword,
       userId,
     };
-  
+
     try {
       const res = await resetPassword({
         body: data,
-        token, 
+        token,
       });
-  
+
       if (res?.data?.success) {
         toast.success("Password reset successful!");
         navigate("/login");
+      } else {
+        toast.error(res?.data?.data?.errorDetails?.message || "Update failed.");
       }
     } catch (error) {
       toast.error("Failed to reset password!");

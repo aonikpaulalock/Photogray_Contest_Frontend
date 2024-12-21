@@ -1,8 +1,10 @@
 import ContestDetails from "../pages/Dashboard/contestHolder/ContestDetails";
+import ContestHolderContest from "../pages/Dashboard/contestHolder/ContestHolderContest";
 import AllBlog from "../pages/Dashboard/user/AllBlog";
-import AllContest from "../pages/Dashboard/user/AllContest";
 import BlogDetails from "../pages/Dashboard/user/BlogDetails";
 import CreateBlog from "../pages/Dashboard/user/CreateBlog";
+import MySubmission from "../pages/Dashboard/user/MySubmission";
+import SubmissionDetails from "../pages/Dashboard/user/SubmissionDetails";
 import UserChangePassword from "../pages/Dashboard/user/UserChangePassword";
 import UserDashboard from "../pages/Dashboard/user/UserDashboard";
 import UserProfile from "../pages/Dashboard/user/UserProfile";
@@ -13,7 +15,7 @@ export const userRoutes = {
   children: [
     {
       path: "all-contests",
-      element: <AllContest />,
+      element: <ContestHolderContest role="user"/>,
     },
     {
       path: "create-blog",
@@ -30,6 +32,14 @@ export const userRoutes = {
     {
       path: "blogDetails/:blogId",
       element: <BlogDetails />,
+    },
+    {
+      path: "submission",
+      element: <MySubmission/>,
+    },
+    {
+      path: "submissionDetails/:submissionId",
+      element: <SubmissionDetails />,
     },
     {
       path: "profile",

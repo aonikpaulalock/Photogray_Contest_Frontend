@@ -43,7 +43,7 @@ const Register = () => {
         });
         navigate("/login");
       } else {
-        toast.error("Registration failed. Please try again.", {
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
           id: toastId,
         });
       }

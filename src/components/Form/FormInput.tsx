@@ -8,6 +8,7 @@ type TInputProps = {
   icon?: ReactNode;
   label?: string;
   className?: string;
+  readOnly?: boolean;
 };
 
 const FormInput = ({
@@ -17,6 +18,7 @@ const FormInput = ({
   icon,
   label,
   className,
+  readOnly = false,
 }: TInputProps) => {
   const { control } = useFormContext();
 
@@ -41,6 +43,7 @@ const FormInput = ({
               className={className}
               type={type}
               placeholder={placeholder}
+              readOnly={readOnly}
               {...field}
             />
             {icon && (

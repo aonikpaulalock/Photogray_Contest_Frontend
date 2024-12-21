@@ -46,7 +46,7 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
         });
         closeModal();
       } else {
-        toast.error(res?.error?.message || "Update failed.", {
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
           id: toastId,
         });
       }

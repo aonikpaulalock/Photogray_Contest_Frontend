@@ -30,7 +30,7 @@ body {
   }
 
   .custom-border:last-child::before {
-    @apply hidden; /* Ensure last child does not have the border */
+    @apply hidden;
   }
 }
 
@@ -50,5 +50,25 @@ body {
     @apply bg-secondary; 
     width: 58px;
     border-radius: 0;
+  }
+
+  .scrollbar-custom {
+    scrollbar-width: thin; 
+    scrollbar-color: #596ea850 #f1f1f1; 
+  }
+
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #999999;
+    border-radius: 10px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: #f1f1f1;
   }
 }

@@ -15,14 +15,20 @@ const UserChangePassword = ({ role }: { role: string }) => {
   const dispatch = useAppDispatch()
   const [changePassword] = useChangePasswordMutation();
   const onSubmit = async (values: FieldValues) => {
+    const toastId = toast.loading("Please wait...");
     try {
       const res = await changePassword(values);
       if (res?.data?.success) {
         dispatch(logout())
         navigate("/login")
-        toast.success('Password Changed Successfully');
+        toast.success(res?.data?.message, {
+          id: toastId,
+          duration: 2000,
+        });
       } else {
-        throw new Error('Incorrect Old Password');
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
+          id: toastId,
+        });
       }
     } catch (error) {
       toast.error('Incorrect Old Password');

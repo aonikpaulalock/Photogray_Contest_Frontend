@@ -17,13 +17,11 @@ const ContestDetails = ({ role }: { role: string }) => {
     if (contest) {
       setSelectedContest(contest);
       setIsModalOpen(true);
-      console.log("Modal Opened:", isModalOpen); // Debugging
     }
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    console.log("Modal Closed:", isModalOpen); // Debugging
   };
 
   return (
@@ -101,10 +99,13 @@ const ContestDetails = ({ role }: { role: string }) => {
         isOpen={isModalOpen}
         title="Participate Contest"
         onClose={closeModal}
-        className="max-w-3xl"
+        className="max-w-4xl"
       >
         {selectedContest ? (
-          <ContestSubmission contest={selectedContest} closeModal={closeModal} />
+          <ContestSubmission
+            contest={selectedContest}
+            closeModal={closeModal}
+          />
         ) : (
           <p>Loading...</p>
         )}

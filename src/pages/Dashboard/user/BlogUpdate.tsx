@@ -52,7 +52,7 @@ const BlogUpdate = ({ blog, closeModal }: { blog: Blog | null, closeModal: () =>
         });
         closeModal();
       } else {
-        toast.error(res?.error?.message || "Update failed.", {
+        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
           id: toastId,
         });
       }
