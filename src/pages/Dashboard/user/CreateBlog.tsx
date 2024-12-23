@@ -4,17 +4,18 @@ import ContainForm from "../../../components/Form/ContainForm";
 import { Controller, FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { currentUser} from "../../../redux/auth/authSlice";
+import { currentUser } from "../../../redux/auth/authSlice";
 import { useAppSelector } from "../../../redux/hooks";
 import { FaUpload } from "react-icons/fa";
 import { useBlogCreateMutation } from "../../../redux/feature/user/blogApi";
 import { BlogDefaultValues } from "../../../defaultValues/inputDefaultValues";
 import { blogValidationSchema } from "../../../Schemas/blog.validation";
 import { uploadImageToDB } from "../../../utils/ImageUploader";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 const CreateBlog = () => {
   const user = useAppSelector(currentUser)
-  const [blogCreate] = useBlogCreateMutation();
+  const [blogCreate, { isLoading }] = useBlogCreateMutation();
   const onSubmit = async (values: FieldValues) => {
     const toastId = toast.loading("Please wait...");
     try {
@@ -144,7 +145,11 @@ const CreateBlog = () => {
               type="submit"
               className="bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200 px-10"
             >
-              Submit
+              {
+                isLoading ? <ButtonLoading
+                  title="Submitting..."
+                /> : "Submit"
+              }
             </button>
           </div>
         </ContainForm>

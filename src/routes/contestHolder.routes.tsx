@@ -1,4 +1,3 @@
-import AllParticipation from "../pages/Dashboard/contestHolder/AllParticipation";
 import ContestDetails from "../pages/Dashboard/contestHolder/ContestDetails";
 import ContestHolderContest from "../pages/Dashboard/contestHolder/ContestHolderContest";
 import ContestHolderCreateContest from "../pages/Dashboard/contestHolder/ContestHolderCreateContest";
@@ -22,10 +21,6 @@ export const contestHolderRoutes = {
     {
       path: "contestDetails/:id",
       element: <ContestDetails role="contestHolder" />,
-    },
-    {
-      path: "all-participation",
-      element: <AllParticipation />,
     },
     {
       path: "submission",

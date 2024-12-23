@@ -8,6 +8,7 @@ import { useUpdateContestMutation } from "../../../redux/feature/contestHolder/c
 import { toast } from "sonner";
 import { currentUser } from "../../../redux/auth/authSlice";
 import { useAppSelector } from "../../../redux/hooks";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 const options = [
   { value: "important", label: "Important" },
   { value: "urgent", label: "Urgent" },
@@ -23,7 +24,7 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
     deadline: contest?.deadline || null,
   }
 
-  const [updateContest] = useUpdateContestMutation()
+  const [updateContest, { isLoading }] = useUpdateContestMutation()
 
   const onSubmit = async (values: FieldValues) => {
     const data = {
@@ -138,7 +139,11 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
         {/* Save Button */}
         <div className="mt-6 text-right">
           <button type="submit" className="px-8 py-4 bg-primary text-white">
-            Submit
+            {
+              isLoading ? <ButtonLoading
+                title="Submitting.."
+              /> : "Submit"
+            }
           </button>
         </div>
       </div>

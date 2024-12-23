@@ -9,11 +9,12 @@ import { toast } from "sonner";
 import { logout } from "../../../redux/auth/authSlice";
 import { useAppDispatch } from "../../../redux/hooks";
 import { useNavigate } from "react-router-dom";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 const UserChangePassword = ({ role }: { role: string }) => {
   console.log(role)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [changePassword] = useChangePasswordMutation();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
   const onSubmit = async (values: FieldValues) => {
     const toastId = toast.loading("Please wait...");
     try {
@@ -92,7 +93,12 @@ const UserChangePassword = ({ role }: { role: string }) => {
               type="submit"
               className="flex-1 bg-blue-500 text-white py-2 rounded-md shadow hover:bg-blue-600 transition-colors duration-200"
             >
-              Submit
+              {
+                isLoading ? <ButtonLoading
+                  title="Submiting"
+                /> :
+                  "Submit"
+              }
             </button>
           </div>
         </ContainForm>

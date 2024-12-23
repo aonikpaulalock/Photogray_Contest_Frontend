@@ -13,12 +13,14 @@ import BlogUpdate from "./BlogUpdate";
 import { BiBook, BiEnvelope } from "react-icons/bi";
 import { RiNumbersFill } from "react-icons/ri";
 import Pagination from "../../../components/pagination/Pagination";
+import Loading from "../../../components/Loading/Loading";
+import NoContent from "../../../components/Loading/NoContent";
 
 const AllBlog = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const user = useAppSelector(currentUser);
-  const { data: blogs,refetch } = useGetUserBlogQuery(
+  const { data: blogs, refetch, isLoading } = useGetUserBlogQuery(
     {
       blogId: user?.userId as string,
       page: page,
@@ -42,14 +44,14 @@ const AllBlog = () => {
       "Your blog has been deleted.",
       "Something went wrong!"
     );
-  
+
     if (blogs?.data?.length === 1 && page > 1) {
       setPage(page - 1);
     } else {
       refetch();
     }
-  
-      setOpenDropdown(null);
+
+    setOpenDropdown(null);
   };
 
   // Function to open modal and set selected blog
@@ -80,72 +82,88 @@ const AllBlog = () => {
           </tr>
         </thead>
         <tbody>
-          {blogs?.data?.map((blog: Blog, index: number) => (
-            <tr key={blog._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
-              {/* Serial */}
-              <td className="p-4 text-blue-gray-700 font-bold">
-                <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
-              </td>
-
-              {/* Date */}
-              <td className="p-4 text-blue-gray-400 font-medium">
-                <FaRegClock className="inline mr-2 text-lg text-secondary" />
-                {blog?.createdAt && moment(blog?.createdAt).format("MMMM D, YYYY, h:mm A")}
-              </td>
-
-              {/* Blog Name */}
-              <td className="p-4 text-blue-gray-500 font-poppins font-medium ">
-                <BiBook className="inline mr-2 text-lg text-secondary" /> {blog.title}
-              </td>
-
-              {/* Email */}
-              <td className="p-4">
-                <div>
-                  <BiEnvelope className="inline mr-2 text-lg text-secondary " />
-                  <span className="text-blue-gray-500 font-poppins font-semibold">{blog?.userId?.email}</span>
-                </div>
-              </td>
-
-              {/* Image */}
-              <td className="p-4 text-gray-500">
-                {/* <FaImage className="inline mr-2 text-gray-500" />  */}
-                <img className="w-12 h-12 object-cover rounded-full" src={blog.blogPhoto} alt="" />
-              </td>
-
-              {/* Like */}
-              <td className="p-4 text-blue-gray-500 font-poppins font-semibold">
-                <FaRegHeart className="inline mr-2 text-lg text-red " /> 10k
-              </td>
-
-              {/* Actions */}
-              <td className="p-4 relative text-center">
-                <div className="relative">
-                  <button onClick={() => toggleDropdown(index)} className="text-gray-400 hover:text-gray-600 focus:outline-none">
-                    <BsThreeDots className="text-xl" />
-                  </button>
-                  {openDropdown === index && (
-                    <div className={`absolute ${index === blogs?.data?.length - 1 ? "-bottom-2" : "top-4"} right-20 bg-white shadow-md rounded-lg z-50 text-sm w-32`}>
-                      <ul>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => openUpdateModal(blog)}>
-                          <FaEdit className="mr-2 text-blue-500" /> Update
-                        </li>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => deleteUserBlog(blog._id)}>
-                          <FaTrash className="mr-2 text-red" /> Delete
-                        </li>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => navigate(`/dashboard/${user?.role}/blogDetails/${blog._id}`)}>
-                          <FaEye className="mr-2 text-green" /> Details
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
+          {isLoading ? (
+            <tr>
+              <td colSpan={7} className="text-center py-4">
+                <Loading />
               </td>
             </tr>
-          ))}
+          ) : blogs?.data?.length === 0 ? (
+            <tr>
+              <td colSpan={7} className="text-center py-4">
+                <NoContent
+                message="No blogs found !"
+                /> 
+              </td>
+            </tr>
+          ) : (
+            blogs?.data?.map((blog: Blog, index: number) => (
+              <tr key={blog._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
+                {/* Serial */}
+                <td className="p-4 text-blue-gray-700 font-bold">
+                  <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
+                </td>
+
+                {/* Date */}
+                <td className="p-4 text-blue-gray-400 font-medium">
+                  <FaRegClock className="inline mr-2 text-lg text-secondary" />
+                  {blog?.createdAt && moment(blog?.createdAt).format("MMMM D, YYYY, h:mm A")}
+                </td>
+
+                {/* Blog Name */}
+                <td className="p-4 text-blue-gray-500 font-poppins font-medium ">
+                  <BiBook className="inline mr-2 text-lg text-secondary" /> {blog.title}
+                </td>
+
+                {/* Email */}
+                <td className="p-4">
+                  <div>
+                    <BiEnvelope className="inline mr-2 text-lg text-secondary " />
+                    <span className="text-blue-gray-500 font-poppins font-semibold">{blog?.userId?.email}</span>
+                  </div>
+                </td>
+
+                {/* Image */}
+                <td className="p-4 text-gray-500">
+                  <img className="w-12 h-12 object-cover rounded-full" src={blog.blogPhoto} alt="" />
+                </td>
+
+                {/* Like */}
+                <td className="p-4 text-blue-gray-500 font-poppins font-semibold">
+                  <FaRegHeart className="inline mr-2 text-lg text-red " /> 10k
+                </td>
+
+                {/* Actions */}
+                <td className="p-4 relative text-center">
+                  <div className="relative">
+                    <button onClick={() => toggleDropdown(index)} className="text-gray-400 hover:text-gray-600 focus:outline-none">
+                      <BsThreeDots className="text-xl" />
+                    </button>
+                    {openDropdown === index && (
+                      <div className={`absolute ${index === blogs?.data?.length - 1 ? "-bottom-2" : "top-4"} right-20 bg-white shadow-md rounded-lg z-50 text-sm w-32`}>
+                        <ul>
+                          <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                            onClick={() => openUpdateModal(blog)}>
+                            <FaEdit className="mr-2 text-blue-500" /> Update
+                          </li>
+                          <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                            onClick={() => deleteUserBlog(blog._id)}>
+                            <FaTrash className="mr-2 text-red" /> Delete
+                          </li>
+                          <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                            onClick={() => navigate(`/dashboard/${user?.role}/blogDetails/${blog._id}`)}>
+                            <FaEye className="mr-2 text-green" /> Details
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
+
       </table>
 
       {/* Modal */}

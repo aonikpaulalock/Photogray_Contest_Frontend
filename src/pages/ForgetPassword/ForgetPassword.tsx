@@ -5,11 +5,11 @@ import FormInput from "../../components/Form/FormInput";
 import { useForgetPasswordMutation } from "../../redux/auth/authApi";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import ButtonLoading from "../../components/Loading/ButtonLoading";
 
 const ForgotPassword = () => {
-  const [forgetPassword] = useForgetPasswordMutation()
+  const [forgetPassword, { isLoading }] = useForgetPasswordMutation()
   const onSubmit = async (values: FieldValues) => {
-    console.log(values)
     try {
       const res = await forgetPassword(values);
       if (res?.data?.success) {
@@ -53,12 +53,16 @@ const ForgotPassword = () => {
               type="submit"
               className="w-full bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200"
             >
-              Reset Password
+              {
+                isLoading ? <ButtonLoading
+                  title="Submitting.."
+                /> : "Reset Password"
+              }
             </button>
           </ContainForm>
           <Link
-          to="/login"
-           className="mt-4 text-blue-500 hover:underline text-sm font-medium text-center">
+            to="/login"
+            className="mt-4 text-blue-500 hover:underline text-sm font-medium text-center">
             Back to Login
           </Link>
         </div>

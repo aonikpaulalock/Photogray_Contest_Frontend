@@ -9,10 +9,11 @@ import { currentUser } from "../../../redux/auth/authSlice";
 import { toast } from "sonner";
 import { uploadMultipleImagesToDB } from "../../../utils/ImageUploader";
 import { useCreateSubmissionMutation } from "../../../redux/feature/user/submissionApi";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 const ContestSubmission = ({ contest, closeModal }: { contest: any | null; closeModal: () => void }) => {
   const user = useAppSelector(currentUser);
-  const [createSubmission] = useCreateSubmissionMutation();
+  const [createSubmission, { isLoading }] = useCreateSubmissionMutation();
 
   const onSubmit = async (values: FieldValues) => {
     const toastId = toast.loading("Uploading Submission...");
@@ -99,7 +100,11 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
                 type="submit"
                 className="bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200 px-10"
               >
-                Submit
+                {
+                  isLoading ? <ButtonLoading
+                    title="Submitting.."
+                  /> : "Submit"
+                }
               </button>
             </div>
           </ContainForm>

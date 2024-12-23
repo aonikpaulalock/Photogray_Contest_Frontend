@@ -13,6 +13,7 @@ import { uploadImageToDB } from "../../utils/ImageUploader";
 import { registerDefaultValues } from "../../defaultValues/inputDefaultValues";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerValidationSchema } from "../../Schemas/register.validationSchema";
+import ButtonLoading from "../../components/Loading/ButtonLoading";
 const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 const Register = () => {
   const navigate = useNavigate()
@@ -159,7 +160,9 @@ const Register = () => {
               className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full mt-4"
             >
               {
-                isLoading ? "Submiting...." : "Signup"
+                isLoading ? <ButtonLoading
+                  title="Submitting.."
+                /> : "Login"
               }
             </button>
           </ContainForm>

@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { useCreateContestMutation } from "../../../redux/feature/contestHolder/contestHolderApi";
 import { useAppSelector } from "../../../redux/hooks";
 import { currentUser } from "../../../redux/auth/authSlice";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 
 // const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 
@@ -20,7 +21,7 @@ const options = [
 const ContestHolderCreateContest = ({ role }: { role: string }) => {
   console.log(role)
   const user = useAppSelector(currentUser);
-  const [createContest] = useCreateContestMutation();
+  const [createContest, { isLoading }] = useCreateContestMutation();
 
   const onSubmit = async (values: FieldValues) => {
     console.log(values);
@@ -153,7 +154,11 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
           {/* Save Button */}
           <div className="mt-6 text-right">
             <button type="submit" className="px-8 py-4 bg-primary text-white">
-              Submit
+              {
+                isLoading ? <ButtonLoading
+                  title="Submitting.."
+                /> : "Submit"
+              }
             </button>
           </div>
         </div>

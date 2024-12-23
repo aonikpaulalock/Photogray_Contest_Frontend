@@ -14,13 +14,15 @@ import SubmissionUpdate from "./SubmissionUpdate";
 import deleteEntity from "../../../utils/deleteEntity";
 import { TSubmission } from "../../../types";
 import { useGetUserSubmissionQuery, useDeleteSubmissionMutation } from "../../../redux/feature/user/submissionApi";
+import Loading from "../../../components/Loading/Loading";
+import NoContent from "../../../components/Loading/NoContent";
 
 const MySubmission = () => {
   const navigate = useNavigate();
   const user = useAppSelector(currentUser);
   const [page, setPage] = useState(1);
 
-  const { data: submissions, refetch } = useGetUserSubmissionQuery({
+  const { data: submissions, refetch, isLoading } = useGetUserSubmissionQuery({
     page: page,
     limit: 4,
   });
@@ -82,98 +84,112 @@ const MySubmission = () => {
           </tr>
         </thead>
         <tbody>
-          {submissions?.data?.map((submission: TSubmission, index: number) => (
-            <tr key={submission._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
-              {/* Serial */}
-              <td className="p-3 text-blue-gray-700 font-bold">
-                <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
-              </td>
-
-              {/* Contest Name */}
-              <td className="p-2 text-blue-gray-500 font-poppins font-medium">
-                <BiBook className="inline mr-2 text-lg text-secondary" /> {submission?.contestId?.title}
-              </td>
-
-              {/* Deadline */}
-              <td className="p-2 text-blue-gray-400 font-medium">
-                <FaRegClock className="inline mr-2 text-lg text-secondary" />
-                {submission?.contestId?.deadline && moment(submission?.contestId?.deadline).format("MMMM D, YYYY")}
-              </td>
-
-              {/* Prize */}
-              <td className="p-2">
-                <div>
-                  <FaTag className="inline mr-2 text-lg text-SecondPrimary" />
-                  <span className="text-blue-gray-500 font-poppins font-semibold">{submission?.contestId?.prize}</span>
-                </div>
-              </td>
-
-
-              {/* Images */}
-              <td className="p-2">
-                <div className="flex space-x-2">
-                  {submission?.images?.map((image: string, idx: number) => (
-                    <img
-                      key={idx}
-                      src={image}
-                      alt={`Submission ${index + 1} Image ${idx + 1}`}
-                      className="w-16 h-16 object-cover rounded-md"
-                    />
-                  ))}
-                </div>
-              </td>
-              <td className="p-2 text-blue-gray-500 font-poppins font-semibold">
-                <span className="flex items-center gap-2">
-                  {submission?.isWinner ? (
-                    <>
-                      <FaTrophy className="text-yellow-500" /> {/* Winner Icon */}
-                      <span className="text-yellow-500 font-semibold">Winner</span>
-                    </>
-                  ) : (
-                    <>
-                      <FaUser className="text-green" /> {/* Participant Icon */}
-                      <span className="text-green font-semibold">Participate</span>
-                    </>
-                  )}
-                </span>
-              </td>
-
-
-              {/* Actions */}
-              <td className="p-2 relative text-center">
-                <div className="relative">
-                  <button
-                    onClick={() => toggleDropdown(index)}
-                    className="text-gray-400 hover:text-gray-600 focus:outline-none"
-                  >
-                    <BsThreeDots className="text-xl" />
-                  </button>
-                  {openDropdown === index && (
-                    <div
-                      className={`absolute ${index === submissions?.data?.length - 1 ? "-bottom-2" : "-top-2"
-                        } right-16 bg-white shadow-md rounded-lg w-30 p-1`}
-                    >
-                      <ul>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => openUpdateModal(submission)}>
-                          <FaEdit className="mr-2 text-blue-500" /> Update
-                        </li>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => deleteSubmission(submission?._id)}>
-                          <FaTrash className="mr-2 text-red" /> Delete
-                        </li>
-                        <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                          onClick={() => navigate(`/dashboard/${user?.role}/submissionDetails/${submission._id}`)}>
-                          <FaEye className="mr-2 text-green" /> Details
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
+          {isLoading ? (
+            <tr>
+              <td colSpan={6} className="text-center py-4">
+                <Loading />
               </td>
             </tr>
-          ))}
+          ) : submissions?.data?.length === 0 ? (
+            <tr>
+              <td colSpan={6} className="text-center py-4">
+                <NoContent 
+                message="No submission found !" /> 
+              </td>
+            </tr>
+          ) : (
+            submissions?.data?.map((submission: TSubmission, index: number) => (
+              <tr key={submission._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
+                {/* Serial */}
+                <td className="p-3 text-blue-gray-700 font-bold">
+                  <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
+                </td>
+
+                {/* Contest Name */}
+                <td className="p-2 text-blue-gray-500 font-poppins font-medium">
+                  <BiBook className="inline mr-2 text-lg text-secondary" /> {submission?.contestId?.title}
+                </td>
+
+                {/* Deadline */}
+                <td className="p-2 text-blue-gray-400 font-medium">
+                  <FaRegClock className="inline mr-2 text-lg text-secondary" />
+                  {submission?.contestId?.deadline && moment(submission?.contestId?.deadline).format("MMMM D, YYYY")}
+                </td>
+
+                {/* Prize */}
+                <td className="p-2">
+                  <div>
+                    <FaTag className="inline mr-2 text-lg text-SecondPrimary" />
+                    <span className="text-blue-gray-500 font-poppins font-semibold">{submission?.contestId?.prize}</span>
+                  </div>
+                </td>
+
+                {/* Images */}
+                <td className="p-2">
+                  <div className="flex space-x-2">
+                    {submission?.images?.map((image: string, idx: number) => (
+                      <img
+                        key={idx}
+                        src={image}
+                        alt={`Submission ${index + 1} Image ${idx + 1}`}
+                        className="w-16 h-16 object-cover rounded-md"
+                      />
+                    ))}
+                  </div>
+                </td>
+                <td className="p-2 text-blue-gray-500 font-poppins font-semibold">
+                  <span className="flex items-center gap-2">
+                    {submission?.isWinner ? (
+                      <>
+                        <FaTrophy className="text-yellow-500" /> {/* Winner Icon */}
+                        <span className="text-yellow-500 font-semibold">Winner</span>
+                      </>
+                    ) : (
+                      <>
+                        <FaUser className="text-green" /> {/* Participant Icon */}
+                        <span className="text-green font-semibold">Participate</span>
+                      </>
+                    )}
+                  </span>
+                </td>
+
+                {/* Actions */}
+                <td className="p-2 relative text-center">
+                  <div className="relative">
+                    <button
+                      onClick={() => toggleDropdown(index)}
+                      className="text-gray-400 hover:text-gray-600 focus:outline-none"
+                    >
+                      <BsThreeDots className="text-xl" />
+                    </button>
+                    {openDropdown === index && (
+                      <div
+                        className={`absolute ${index === submissions?.data?.length - 1 ? "-bottom-2" : "-top-2"
+                          } right-16 bg-white shadow-md rounded-lg w-30 p-1`}
+                      >
+                        <ul>
+                          <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                            onClick={() => openUpdateModal(submission)}>
+                            <FaEdit className="mr-2 text-blue-500" /> Update
+                          </li>
+                          <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                            onClick={() => deleteSubmission(submission?._id)}>
+                            <FaTrash className="mr-2 text-red" /> Delete
+                          </li>
+                          <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                            onClick={() => navigate(`/dashboard/${user?.role}/submissionDetails/${submission._id}`)}>
+                            <FaEye className="mr-2 text-green" /> Details
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
+
       </table>
       {/* Modal */}
 

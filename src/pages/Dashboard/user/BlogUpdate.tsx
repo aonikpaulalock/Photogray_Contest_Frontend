@@ -6,11 +6,12 @@ import { Blog } from "../../../types";
 import { toast } from "sonner";
 import { uploadImageToDB } from "../../../utils/ImageUploader";
 import { useUpdateBlogMutation } from "../../../redux/feature/user/blogApi";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 
 
 const BlogUpdate = ({ blog, closeModal }: { blog: Blog | null, closeModal: () => void }) => {
-  const [blogUpdate] = useUpdateBlogMutation()
+  const [blogUpdate, { isLoading }] = useUpdateBlogMutation()
   const BlogDefaultValues = {
     title: blog?.title || "",
     content: blog?.content || "",
@@ -130,7 +131,12 @@ const BlogUpdate = ({ blog, closeModal }: { blog: Blog | null, closeModal: () =>
           type="submit"
           className="bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200 px-10"
         >
-          Update
+          {isLoading ?
+            <ButtonLoading
+              title="Updating.."
+            /> :
+            "Update"
+          }
         </button>
       </div>
     </ContainForm>

@@ -5,18 +5,15 @@ import { useGetMeUserQuery, useUpdateUserMutation } from "../../../redux/feature
 import { Controller, FieldValues } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
 import FormInput from "../../../components/Form/FormInput";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 
 const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 
 const UserProfile = ({ role }: { role: string }) => {
   console.log(role)
-  const { data: userData, isLoading } = useGetMeUserQuery(undefined);
-  const [profileUpdate] = useUpdateUserMutation();
+  const { data: userData } = useGetMeUserQuery(undefined);
+  const [profileUpdate, { isLoading }] = useUpdateUserMutation();
 
-  // Loading state
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   // Default values for the form, set dynamically from userData
   const userDefaultValues = {
@@ -226,7 +223,11 @@ const UserProfile = ({ role }: { role: string }) => {
               type="submit"
               className="px-8 py-4 bg-primary text-white"
             >
-              Save
+              {
+                isLoading ? <ButtonLoading
+                title="Updating"
+                /> : "Save"
+              }
             </button>
           </div>
         </div>

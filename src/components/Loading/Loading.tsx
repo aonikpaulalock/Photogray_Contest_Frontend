@@ -1,10 +1,15 @@
+import loadingGif from "../../assets/landingPage/Loading/loading.gif";
 
 const Loading = () => {
   return (
-    <div>
-      <h1>This is Loading component</h1>
+    <div className="flex items-center justify-center">
+      <img
+        src={loadingGif}
+        alt="Loading..."
+        className="object-cover"
+      />
     </div>
-  )
+  );
 };
 
 export default Loading;

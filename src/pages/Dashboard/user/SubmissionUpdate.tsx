@@ -6,9 +6,10 @@ import FormInput from "../../../components/Form/FormInput";
 import { useUpdateSubmissionMutation } from "../../../redux/feature/user/submissionApi";
 import { toast } from "sonner";
 import { uploadMultipleImagesToDB } from "../../../utils/ImageUploader";
+import ButtonLoading from "../../../components/Loading/ButtonLoading";
 const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission | null, closeModal: () => void }) => {
-  const [updateSubmission] = useUpdateSubmissionMutation()
+  const [updateSubmission, { isLoading }] = useUpdateSubmissionMutation()
   const onSubmit = async (values: FieldValues) => {
     console.log(values);
     const toastId = toast.loading("Updating Submission...");
@@ -16,12 +17,12 @@ const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission 
       const newImageUrls = values.images && values.images.length > 0
         ? await uploadMultipleImagesToDB(values.images, imageBb_Api)
         : [];
-  
-      
+
+
       const finalImages = newImageUrls.length > 0
         ? [...(submission?.images || []), ...newImageUrls]
-        : submission?.images || []; 
-  
+        : submission?.images || [];
+
       const data = {
         images: finalImages,
       };
@@ -30,7 +31,7 @@ const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission 
         submissionId: submission?._id,
         data,
       }).unwrap();
-  
+
       if (res?.success) {
         toast.success(res?.message, { id: toastId, duration: 2000 });
         closeModal();
@@ -42,8 +43,8 @@ const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission 
       toast.error("An error occurred during submission.", { id: toastId });
     }
   };
-  
-  
+
+
   return (
     <ContainForm onSubmit={onSubmit} className="w-full">
       <div className="mb-1">
@@ -91,7 +92,11 @@ const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission 
           type="submit"
           className="bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200 px-10"
         >
-          Submit
+          {
+            isLoading ? <ButtonLoading
+              title="Submitting.."
+            /> : "Submit"
+          }
         </button>
       </div>
     </ContainForm>

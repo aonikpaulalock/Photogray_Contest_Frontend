@@ -5,11 +5,12 @@ import FormInput from "../../components/Form/FormInput";
 import { toast } from "sonner";
 import { useResetPasswordMutation } from "../../redux/auth/authApi";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import ButtonLoading from "../../components/Loading/ButtonLoading";
 
 const ResetPassord = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [resetPassword] = useResetPasswordMutation()
+  const [resetPassword, { isLoading }] = useResetPasswordMutation()
   const onSubmit = async (values: FieldValues) => {
     const token = searchParams.get("token");
     const userId = searchParams.get("userId");
@@ -69,7 +70,11 @@ const ResetPassord = () => {
               type="submit"
               className="w-full bg-blue-500 text-white py-3 rounded-md shadow hover:bg-blue-600 transition-colors duration-200"
             >
-              Reset Password
+              {
+                isLoading ? <ButtonLoading
+                  title="Password Resetting.."
+                /> : "Reset Password"
+              }
             </button>
           </ContainForm>
         </div>

@@ -11,10 +11,11 @@ import { verifyToken } from '../../utils/verifyToken';
 import { setUser, TUser } from '../../redux/auth/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
+import ButtonLoading from '../../components/Loading/ButtonLoading';
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [login] = useLoginUserMutation()
+  const [login, { isLoading }] = useLoginUserMutation()
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logged in processing")
     try {
@@ -81,7 +82,11 @@ const Login = () => {
               type="submit"
               className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full"
             >
-              LOGIN
+              {
+                isLoading ? <ButtonLoading
+                  title="Submitting.."
+                /> : "Register"
+              }
             </button>
           </ContainForm>
         </div>

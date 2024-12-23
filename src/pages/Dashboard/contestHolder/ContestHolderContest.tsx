@@ -13,13 +13,14 @@ import Pagination from "../../../components/pagination/Pagination";
 import { useDeleteContestMutation, useGetAllContestsQuery } from "../../../redux/feature/contestHolder/contestHolderApi";
 import ContestUpdate from "./ContestUpdate";
 import deleteEntity from "../../../utils/deleteEntity";
+import Loading from "../../../components/Loading/Loading";
+import NoContent from "../../../components/Loading/NoContent";
 
 const ContestHolderContest = ({ role }: { role: string }) => {
-  console.log(role)
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const user = useAppSelector(currentUser);
-  const { data: contests, refetch } = useGetAllContestsQuery(
+  const { data: contests, refetch, isLoading } = useGetAllContestsQuery(
     {
       page: page,
       limit: 4,
@@ -28,6 +29,7 @@ const ContestHolderContest = ({ role }: { role: string }) => {
       refetchOnMountOrArgChange: true
     }
   );
+  console.log(contests)
   const metaData = contests?.meta;
   const [deleteContest] = useDeleteContestMutation();
 
@@ -87,96 +89,122 @@ const ContestHolderContest = ({ role }: { role: string }) => {
           </tr>
         </thead>
         <tbody>
-          {contests?.data?.map((contest: TPhotographyContest, index: number) => (
-            <tr key={contest._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
-              {/* Serial */}
-              <td className="p-7 text-blue-gray-700 font-bold">
-                <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
-              </td>
-
-              {/* Date */}
-              <td className="p-4 text-blue-gray-400 font-medium">
-                <FaRegClock className="inline mr-2 text-lg text-secondary" />
-                {contest?.createdAt && moment(contest?.createdAt).format("MMMM D, YYYY")}
-              </td>
-
-              {/* Contest Name */}
-              <td className="p-4 text-blue-gray-500 font-poppins font-medium ">
-                <BiBook className="inline mr-2 text-lg text-secondary" /> {contest.title}
-              </td>
-
-              {/* Email */}
-              <td className="p-4">
-                <div>
-                  <FaTag className="inline mr-2 text-lg text-SecondPrimary " />
-                  <span className="text-blue-gray-500 font-poppins font-semibold">{contest?.prize}</span>
-                </div>
-              </td>
-
-              <td className="p-4 text-blue-gray-400 font-medium">
-                <FaRegClock className="inline mr-2 text-lg text-secondary" />
-                {contest?.deadline && moment(contest?.deadline).format("MMMM D, YYYY")}
-              </td>
-
-              {/* Like */}
-              <td className="p-4 text-blue-gray-500 font-poppins font-semibold">
-                {contest?.status === "granted" ? (
-                  <FaCheckCircle className="inline mr-2 text-green" />
-                ) : (
-                  <FaTimesCircle className="inline mr-2 text-red" />
-                )}
-                <span
-                  className={`${contest?.status === "granted" ? "text-green" : "text-red"
-                    }`}
-                >
-                  {contest?.status}
-                </span>
-              </td>
-
-              {/* Actions */}
-              <td className="p-4 relative text-center">
-                <div className="relative">
-                  <button onClick={() => toggleDropdown(index)} className="text-gray-400 hover:text-gray-600 focus:outline-none">
-                    <BsThreeDots className="text-xl" />
-                  </button>
-                  {openDropdown === index && (
-                    <div className={`absolute ${index === contests?.data?.length - 1 ? "-bottom-4" : "-top-3"} right-14 bg-white shadow-md rounded-lg text-sm w-36`}
-                    >
-                      <ul>
-                        {role === "user" && (
-                          <li className="flex items-center hover:bg-gray-100 cursor-pointer text-primary font-semibold py-2 px-2"
-                            onClick={() => navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)}>
-                            <FaUsers className="mr-2 text-blue-500" /> Participate
-                          </li>
-                        )}
-                        {(role === "contestHolder" || role === "admin") && (
-                          <>
-                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                              onClick={() => openUpdateModal(contest)}>
-                              <FaEdit className="mr-2 text-blue-500" /> Update
-                            </li>
-                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                              onClick={() => deleteByContest(contest?._id)}>
-                              <FaTrash className="mr-2 text-red" /> Delete
-                            </li>
-                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                              onClick={() => navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)}>
-                              <FaEye className="mr-2 text-green" /> Details
-                            </li>
-                            <li className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                              onClick={() => alert("Delete")}>
-                              <FaUsers className="mr-2 text-blue-gray-700" /> Participant
-                            </li>
-                          </>
-                        )}
-                      </ul>
-                    </div>
-                  )}
-                </div>
+          {isLoading ? (
+            <tr>
+              <td colSpan={12} className="text-center p-6">
+                <Loading />
               </td>
             </tr>
-          ))}
+          ) : contests?.data?.length === 0 ? (
+            <tr>
+              <td colSpan={12} className="text-center p-6">
+                <NoContent
+                  message="No contests found !"
+                />
+              </td>
+            </tr>
+
+
+          ) : (
+            contests?.data?.map((contest: TPhotographyContest, index: number) => (
+              <tr
+                key={contest._id}
+                className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100"
+              >
+                <td className="p-7 text-blue-gray-700 font-bold">
+                  <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
+                </td>
+                <td className="p-4 text-blue-gray-400 font-medium">
+                  <FaRegClock className="inline mr-2 text-lg text-secondary" />
+                  {contest?.createdAt && moment(contest?.createdAt).format("MMMM D, YYYY")}
+                </td>
+                <td className="p-4 text-blue-gray-500 font-poppins font-medium">
+                  <BiBook className="inline mr-2 text-lg text-secondary" /> {contest.title}
+                </td>
+                <td className="p-4">
+                  <div>
+                    <FaTag className="inline mr-2 text-lg text-SecondPrimary " />
+                    <span className="text-blue-gray-500 font-poppins font-semibold">{contest?.prize}</span>
+                  </div>
+                </td>
+                <td className="p-4 text-blue-gray-400 font-medium">
+                  <FaRegClock className="inline mr-2 text-lg text-secondary" />
+                  {contest?.deadline && moment(contest?.deadline).format("MMMM D, YYYY")}
+                </td>
+                <td className="p-4 text-blue-gray-500 font-poppins font-semibold">
+                  {contest?.status === "granted" ? (
+                    <FaCheckCircle className="inline mr-2 text-green" />
+                  ) : (
+                    <FaTimesCircle className="inline mr-2 text-red" />
+                  )}
+                  <span className={`${contest?.status === "granted" ? "text-green" : "text-red"}`}>
+                    {contest?.status}
+                  </span>
+                </td>
+                <td className="p-4 relative text-center">
+                  <div className="relative">
+                    <button
+                      onClick={() => toggleDropdown(index)}
+                      className="text-gray-400 hover:text-gray-600 focus:outline-none"
+                    >
+                      <BsThreeDots className="text-xl" />
+                    </button>
+                    {openDropdown === index && (
+                      <div
+                        className={`absolute ${index === contests?.data?.length - 1 ? "-bottom-4" : "-top-3"
+                          } right-14 bg-white shadow-md rounded-lg text-sm w-36`}
+                      >
+                        <ul>
+                          {role === "user" && (
+                            <li
+                              className="flex items-center hover:bg-gray-100 cursor-pointer text-primary font-semibold py-2 px-2"
+                              onClick={() =>
+                                navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)
+                              }
+                            >
+                              <FaUsers className="mr-2 text-blue-500" /> Participate
+                            </li>
+                          )}
+                          {(role === "contestHolder" || role === "admin") && (
+                            <>
+                              <li
+                                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                                onClick={() => openUpdateModal(contest)}
+                              >
+                                <FaEdit className="mr-2 text-blue-500" /> Update
+                              </li>
+                              <li
+                                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                                onClick={() => deleteByContest(contest?._id)}
+                              >
+                                <FaTrash className="mr-2 text-red" /> Delete
+                              </li>
+                              <li
+                                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                                onClick={() =>
+                                  navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)
+                                }
+                              >
+                                <FaEye className="mr-2 text-green" /> Details
+                              </li>
+                              <li
+                                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                                onClick={() => alert("Delete")}
+                              >
+                                <FaUsers className="mr-2 text-blue-gray-700" /> Participant
+                              </li>
+                            </>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
+
       </table>
 
       {/* Modal */}
