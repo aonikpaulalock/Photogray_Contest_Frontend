@@ -15,13 +15,19 @@ const userApi = baseApi.injectEndpoints({
     }),
 
     getAllUser: builder.query({
-      query: ({ page, limit }: { page: number, limit: number }) => {
+      query: ({ page, limit, searchTerm, sort }) => {
         const params: Record<string, string> = {};
         if (page) {
           params['page'] = page.toString();
         }
         if (limit) {
           params['limit'] = limit.toString();
+        }
+        if (searchTerm) {
+          params['searchTerm'] = searchTerm.toString();
+        }
+        if (sort) {
+          params['sort'] = sort.toString();
         }
         return {
           url: "/users",
@@ -59,6 +65,14 @@ const userApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.user],
     }),
 
+   getSingleUser: builder.query({
+      query: (userId: string) => ({
+        url: `/users/${userId}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.user],
+    }),
+
   })
 })
 
@@ -67,6 +81,7 @@ export const {
   useUpdateUserMutation,
   useUpdateUserStausMutation,
   useDeleteUserMutation,
-  useGetAllUserQuery
+  useGetAllUserQuery,
+  useGetSingleUserQuery
 
 } = userApi

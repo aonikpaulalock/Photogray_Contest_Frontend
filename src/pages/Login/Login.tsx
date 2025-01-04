@@ -80,13 +80,13 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full flex items-center justify-center"
             >
-              {
-                isLoading ? <ButtonLoading
-                  title="Submitting.."
-                /> : "Register"
-              }
+                {
+                  isLoading ? <ButtonLoading
+                    title="Submitting.."
+                  /> : "Login"
+                }
             </button>
           </ContainForm>
         </div>

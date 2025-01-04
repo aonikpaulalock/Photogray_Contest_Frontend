@@ -189,7 +189,7 @@ const ContestHolderContest = ({ role }: { role: string }) => {
                               </li>
                               <li
                                 className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                                onClick={() => alert("Delete")}
+                                onClick={() => navigate(`/dashboard/${user?.role}/contestParticipation/${contest?._id}`)}
                               >
                                 <FaUsers className="mr-2 text-blue-gray-700" /> Participant
                               </li>

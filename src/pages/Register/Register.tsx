@@ -114,7 +114,7 @@ const Register = () => {
                   <span className="absolute left-3 top-5 text-purple-600">
                     <FaUserTie />
                   </span>
-                  {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
+                  {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
                 </div>
               )}
             />
@@ -149,7 +149,7 @@ const Register = () => {
                     <FaUpload className="absolute left-3 top-4" />
                     {field.value ? field.value.name : "Upload profile picture"}
                   </label>
-                  {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
+                  {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
                 </div>
               )}
             />
@@ -157,13 +157,13 @@ const Register = () => {
             <button
               disabled={isLoading}
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full mt-4"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full mt-4 flex items-center justify-center"
             >
-              {
-                isLoading ? <ButtonLoading
-                  title="Submitting.."
-                /> : "Login"
-              }
+                {
+                  isLoading ? <ButtonLoading
+                    title="Submitting.."
+                  /> : "Register"
+                }
             </button>
           </ContainForm>
         </div>

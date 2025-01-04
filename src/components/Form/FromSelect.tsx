@@ -52,7 +52,7 @@ const FormSelect = ({
               {icon}
             </span>
           )}
-          {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
+          {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
         </div>
       )}
     />

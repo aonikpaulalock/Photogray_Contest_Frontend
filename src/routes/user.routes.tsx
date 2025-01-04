@@ -15,7 +15,7 @@ export const userRoutes = {
   children: [
     {
       path: "all-contests",
-      element: <ContestHolderContest role="user"/>,
+      element: <ContestHolderContest role="user" />,
     },
     {
       path: "create-blog",
@@ -35,11 +35,11 @@ export const userRoutes = {
     },
     {
       path: "submission",
-      element: <MySubmission/>,
+      element: <MySubmission />,
     },
     {
       path: "submissionDetails/:submissionId",
-      element: <SubmissionDetails />,
+      element: <SubmissionDetails role="user" />,
     },
     {
       path: "profile",

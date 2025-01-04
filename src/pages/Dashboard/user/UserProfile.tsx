@@ -6,12 +6,13 @@ import { Controller, FieldValues } from "react-hook-form";
 import { FaUpload } from "react-icons/fa";
 import FormInput from "../../../components/Form/FormInput";
 import ButtonLoading from "../../../components/Loading/ButtonLoading";
+import Loading from "../../../components/Loading/Loading";
 
 const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 
 const UserProfile = ({ role }: { role: string }) => {
   console.log(role)
-  const { data: userData } = useGetMeUserQuery(undefined);
+  const { data: userData, isLoading: userLoading } = useGetMeUserQuery(undefined);
   const [profileUpdate, { isLoading }] = useUpdateUserMutation();
 
 
@@ -72,6 +73,10 @@ const UserProfile = ({ role }: { role: string }) => {
       });
     }
   };
+
+  if (userLoading) {
+    return <Loading />
+  }
 
   return (
     <div className="flex items-center justify-center bg-gray-100 min-h-[calc(100vh-15rem)]">
@@ -225,7 +230,7 @@ const UserProfile = ({ role }: { role: string }) => {
             >
               {
                 isLoading ? <ButtonLoading
-                title="Updating"
+                  title="Updating"
                 /> : "Save"
               }
             </button>

@@ -58,6 +58,32 @@ const contestHolderApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.contest],
     }),
 
+    manageAdminContests: builder.query({
+      query: ({ page, limit }) => {
+        const params: Record<string, string> = {};
+        if (page) params['page'] = page.toString();
+        if (limit) params['limit'] = limit.toString();
+
+        return {
+          url: "/contests/manage-contest",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: [tagTypes.contest],
+    }),
+
+    getContestsParticipation: builder.query({
+      query: ({ contestId, page, limit }) => {
+        return {
+          url: `/contests/${contestId}/participants`,
+          method: "GET",
+          params: { page, limit },
+        };
+      },
+      providesTags: [tagTypes.contest],
+    }),
+
   })
 })
 
@@ -66,5 +92,7 @@ export const {
   useUpdateContestMutation,
   useDeleteContestMutation,
   useGetAllContestsQuery,
-  useGetSingleContestQuery
+  useManageAdminContestsQuery,
+  useGetSingleContestQuery,
+  useGetContestsParticipationQuery,
 } = contestHolderApi

@@ -12,7 +12,7 @@ export const CountryHelper = () => {
         
         // Processing the countries data
         const countryOptions = data.map((country: any) => ({
-          value: country.cca2,
+          value: country.name.common,
           label: country.name.common,
         }));
         

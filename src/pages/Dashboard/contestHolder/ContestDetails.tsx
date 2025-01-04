@@ -1,4 +1,3 @@
-import image from "../../../assets/landingPage/user.png";
 import detailsImage from "../../../assets/landingPage/dashboard/details.png";
 import { useState } from "react";
 import { TPhotographyContest } from "../../../types";
@@ -6,6 +5,7 @@ import Modal from "../../../components/Modal/Modal";
 import ContestSubmission from "./ContestSubmission";
 import { useParams } from "react-router-dom";
 import { useGetSingleContestQuery } from "../../../redux/feature/contestHolder/contestHolderApi";
+import moment from "moment";
 
 const ContestDetails = ({ role }: { role: string }) => {
   const { id } = useParams();
@@ -34,28 +34,39 @@ const ContestDetails = ({ role }: { role: string }) => {
             <div className="">
               <div className="flex items-center justify-between mb-10">
                 <span className="bg-[#FFC397] text-white px-[14px] py-[5px] text-sm font-medium">
-                  Granted
+                  {contest?.data?.status}
                 </span>
-                <span className="text-2xl font-medium text-primary font-poppins">$500</span>
+                <span className="text-2xl font-medium text-primary font-poppins">${contest?.data?.prize}</span>
               </div>
 
               {/* Contest Details */}
               <p className="text-primary text-base leading-7 font-medium">
-                Pretium sapien, egestas tempor, placerat nibh. Egestas gravida quam vitae nulla pharetra.
+                {contest?.data?.requirements}
               </p>
 
               {/* Tags */}
-              <div className="mt-10 mb-14 flex gap-4 items-center">
-                <div>
+              <div className="mt-10 mb-14 flex justify-between">
+                {/* Tags Section */}
+                <div className="flex-1 mr-4">
                   <p className="text-xs text-[#b2b6be] font-extralight mb-[6px]">Tag</p>
-                  <span className="text-xs bg-[#d3d1d1] px-3 py-1 font-medium text-[#a3a3a3]">
-                    Product
-                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {contest?.data?.tags?.map((tag: string[], index: number) => (
+                      <span
+                        className="text-xs bg-[#d3d1d1] px-3 py-2 font-medium text-[#a3a3a3]"
+                        key={index}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div>
+
+                {/* Deadline Section */}
+                <div className="flex-none">
                   <p className="text-xs text-[#b2b6be] font-extralight mb-[6px]">Deadline</p>
-                  <span className="text-xs bg-[#d3d1d1] px-3 py-1 font-medium text-[#a3a3a3]">
-                    Product
+                  <span className="text-xs bg-[#d3d1d1] px-3 py-2 font-medium text-[#a3a3a3]">
+                    {contest?.data?.deadline &&
+                      moment(contest?.data?.deadline).format("MMMM D, YYYY")}
                   </span>
                 </div>
               </div>
@@ -63,13 +74,16 @@ const ContestDetails = ({ role }: { role: string }) => {
               {/* User Info */}
               <div className="flex justify-between items-center space-x-4 mb-4">
                 <div className="flex items-center gap-4">
-                  <img src={image} alt="User Image" />
+                  <img
+                    className="w-14 h-14 object-cover rounded-full"
+                    src={contest?.data?.userId?.profileImage} alt="User Image"
+                  />
                   <div>
-                    <p className="text-base font-medium text-primary">Arjun Kumar</p>
-                    <p className="text-xs font-extralight text-primary">United State</p>
+                    <p className="text-base font-medium text-primary">{contest?.data?.userId?.username}</p>
+                    <p className="text-xs font-extralight text-primary">{contest?.data?.userId?.country}</p>
                   </div>
                 </div>
-                <p className="text-xs font-extralight text-primary">Contest holder</p>
+                <p className="text-xs font-extralight text-primary">{contest?.data?.userId?.role}</p>
               </div>
 
               {/* Button */}

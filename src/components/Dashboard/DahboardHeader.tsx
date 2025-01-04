@@ -2,10 +2,11 @@ import chatLogo from "../../assets/landingPage/SvgLogo/chat.svg"
 import notificationLogo from "../../assets/landingPage/SvgLogo/notification.svg"
 import { useGetMeUserQuery } from "../../redux/feature/user/userApi";
 import logo from "../../assets/landingPage/LOGO.png"
+import ButtonLoading from "../Loading/ButtonLoading";
 const DahboardHeader = () => {
   const { data, isLoading } = useGetMeUserQuery(undefined)
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ButtonLoading />;
   }
   return (
     <div className="flex justify-between items-center p-4 bg-transparent">
