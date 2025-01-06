@@ -7,15 +7,15 @@ const UserDetails = ({ role }: { role: string }) => {
   console.log(role)
   return (
 
-    <div className="flex justify-center items-center mt-8">
+    <div className="flex justify-center items-center mt-10">
       <div className="bg-white mx-auto p-8 rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Section */}
         <div className="">
-          <div className="p-2 rounded-lg">
+          <div className="w-60 h-80 flex justify-center items-centerp-2 rounded-lg">
             <img
               src={user?.data?.profileImage}
               alt="Profile"
-              className="w-60 mx-auto rounded-full text-center ring-2 ring-amber-800"
+              className="mx-auto rounded-full text-center ring-2 ring-secondary"
             />
           </div>
         </div>
@@ -25,32 +25,32 @@ const UserDetails = ({ role }: { role: string }) => {
           <div>
             {/* Hello Section */}
             <div className="mb-4">
-              <span className="bg-[#ffc107] text-white text-sm font-bold py-1 px-4 rounded-md">
+              <span className="bg-secondary text-white text-sm font-bold py-2 px-5 rounded-md">
                 HELLO
               </span>
-              <h1 className="text-2xl font-bold mt-4">I'm {user?.data?.username}</h1>
-              <p className="text-gray-600 text-md">{user?.data?.designation}</p>
+              <h1 className="text-xl text-primary font-bold mt-4">I'm
+                <span className="text-2xl text-SecondPrimary ml-1">
+                  {user?.data?.username}
+                </span>
+              </h1>
+              <p className="text-secondary text-md">{user?.data?.designation}</p>
             </div>
 
 
             {/* Personal Details */}
             <div className="text-sm">
               <div>
-                <p className="font-semibold">Country</p>
-                <p>{user?.data?.country}</p>
+                <p className="font-semibold text-primary">Country</p>
+                <p className="text-SecondPrimary font-medium">{user?.data?.country}</p>
               </div>
               <div className="my-4">
-                <p className="font-semibold">Email</p>
-                <p>{user?.data?.email}</p>
+                <p className="font-semibold text-primary">Email</p>
+                <p className="text-SecondPrimary font-medium">{user?.data?.email}</p>
               </div>
             </div>
-
-            {/* Download Resume Button */}
-            <div className="text-center md:text-left">
-              <h2 className="text-lg font-semibold">Bio</h2>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                {user?.data?.bio}
-              </p>
+            <div className="my-4">
+              <p className="font-semibold text-primary">Bio</p>
+              <p className="text-SecondPrimary">{user?.data?.bio}</p>
             </div>
           </div>
         </div>

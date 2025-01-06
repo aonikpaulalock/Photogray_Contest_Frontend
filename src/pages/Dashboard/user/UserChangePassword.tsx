@@ -38,7 +38,7 @@ const UserChangePassword = ({ role }: { role: string }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-15rem)]">
+    <div className="flex items-center justify-center">
       {/* The wrapper */}
       <div className="flex items-center justify-center">
         <div className="w-3/6">

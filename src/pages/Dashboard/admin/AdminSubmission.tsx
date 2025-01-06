@@ -29,6 +29,8 @@ const AdminSubmission = () => {
     limit: 4,
   });
 
+  console.log(submissions)
+
   const metaData = submissions?.meta;
   const [paymentInit] = usePaymentInitMutation();
   const [submissionDelete] = useDeleteSubmissionMutation();
@@ -45,7 +47,7 @@ const AdminSubmission = () => {
     const toastId = toast.loading("Please wait...");
     try {
       const response = await paymentInit({ contestId, userId }).unwrap();
-      console.log(response)
+      console.log(response?.data?.paymentUrl)
       if (response?.data?.paymentUrl) {
         window.location.href = response?.data?.paymentUrl;
       }

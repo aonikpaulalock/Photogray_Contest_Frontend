@@ -10,7 +10,6 @@ import deleteEntity from "../../../utils/deleteEntity";
 import { TUser } from "../../../types";
 import { useDeleteUserMutation, useGetAllUserQuery, useUpdateUserStausMutation } from "../../../redux/feature/user/userApi";
 import { BiEnvelope } from "react-icons/bi";
-import { MdWorkOutline } from "react-icons/md";
 import { toast } from "sonner";
 import Loading from "../../../components/Loading/Loading";
 import NoContent from "../../../components/Loading/NoContent";
@@ -120,7 +119,6 @@ const ManageUser = () => {
             <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Serial</th>
             <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Username</th>
             <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Email</th>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Designation</th>
             <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Country</th>
             <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Image</th>
             <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Status</th>
@@ -157,14 +155,6 @@ const ManageUser = () => {
                 {/* Blog Name */}
                 <td className="p-4 text-blue-gray-500 font-poppins font-medium ">
                   <BiEnvelope className="inline mr-2 text-lg text-secondary" /> {user?.email}
-                </td>
-
-                {/* Email */}
-                <td className="p-4">
-                  <div>
-                    <MdWorkOutline className="inline mr-2 text-lg text-secondary " />
-                    <span className="text-blue-gray-500 font-poppins font-semibold">{user?.designation}</span>
-                  </div>
                 </td>
 
                 <td className="p-4">

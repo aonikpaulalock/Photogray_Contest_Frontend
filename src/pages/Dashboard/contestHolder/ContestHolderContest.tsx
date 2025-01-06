@@ -151,7 +151,7 @@ const ContestHolderContest = ({ role }: { role: string }) => {
                     </button>
                     {openDropdown === index && (
                       <div
-                        className={`absolute ${index === contests?.data?.length - 1 ? "-bottom-4" : "-top-3"
+                        className={`absolute ${index === contests?.data?.length - 1 ? "-bottom-6" : "-top-3"
                           } right-14 bg-white shadow-md rounded-lg text-sm w-36`}
                       >
                         <ul>

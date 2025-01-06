@@ -10,6 +10,8 @@ import { userRoutes } from "./user.routes";
 import Mainlayout from "../components/Dashboard/Mainlayout";
 import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import ResetPassord from "../pages/ResetPassword/ResetPassord";
+import PaymentSuccess from "../pages/Payment/PaymentSuccess";
+import PaymentFailed from "../pages/Payment/PaymentFailed";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/payment-success",
+    element: <PaymentSuccess />,
+  },
+  {
+    path: "/payment-failed",
+    element: <PaymentFailed />,
   },
   {
     path: "/dashboard",
