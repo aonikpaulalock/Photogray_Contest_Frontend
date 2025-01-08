@@ -57,55 +57,65 @@ const Register = () => {
   };
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-[#842cff] via-[#f358dc] to-[#ff8fab]">
-      <div className="w-[95%] md:w-[80%] lg:w-[70%] flex overflow-hidden rounded-lg shadow-xl h-auto">
+      <div className="md:w-full lg:w-9/12 flex overflow-hidden rounded-lg shadow-xl h-auto">
         <LogingLeftSide />
 
         {/* Right Side - Login Form */}
-        <div className="w-2/3 bg-white p-8 flex flex-col items-center justify-center">
-          <h2 className="text-2xl font-semibold text-purple-700 mb-6">USER Register</h2>
+        <div className="bg-white p-6 lg:p-10 md:p-4">
+          <h2 className="text-2xl font-semibold text-purple-700 mb-6 text-center">USER REGISTER</h2>
           <ContainForm
             onSubmit={onSubmit}
             defaultValues={registerDefaultValues}
             resolver={zodResolver(registerValidationSchema)}
-            className="w-full max-w-xs space-y-4"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 w-full min-w-0"
           >
+            {/* First Row */}
+            <div className="col-span-2 md:col-span-1">
+              <FormInput
+                type="text"
+                name="username"
+                className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                placeholder="Enter your username"
+                icon={<FaUser />}
+              />
+            </div>
 
-            <FormInput
-              type="text"
-              name="username"
-              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="Enter your username"
-              icon={<FaUser />}
-            />
+            <div className="col-span-2 md:col-span-1">
+              <FormInput
+                type="email"
+                name="email"
+                className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 col-span-2 md:col-span-1"
+                placeholder="Enter your email"
+                icon={<FaEnvelope />}
+              />
+            </div>
 
-            <FormInput
-              type="email"
-              name="email"
-              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="Enter your email"
-              icon={<FaEnvelope />}
-            />
+            {/* Second Row */}
+            <div className="col-span-2 md:col-span-1">
+              <FormInput
+                type="password"
+                name="password"
+                className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                placeholder="Enter your password"
+                icon={<FaLock />}
+              />
+            </div>
 
-            <FormInput
-              type="password"
-              name="password"
-              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="Enter your password"
-              icon={<FaLock />}
-            />
+            <div className="col-span-2 md:col-span-1">
+              <FormInput
+                type="text"
+                name="designation"
+                className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                placeholder="Enter your Designation"
+                icon={<FaBriefcase />}
+              />
+            </div>
 
-            <FormInput
-              type="text"
-              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              name="designation"
-              placeholder="Enter your Designation"
-              icon={<FaBriefcase />}
-            />
-
+            {/* Third Row */}
             <Controller
               name="bio"
               render={({ field, fieldState: { error } }) => (
-                <div className="relative">
+                <div className="relative col-span-2">
                   <textarea
                     {...field}
                     className="w-full px-4 py-4 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -119,20 +129,21 @@ const Register = () => {
               )}
             />
 
-
-            <FormSelect
-              name="country"
-              placeholder="Countries"
-              className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              options={countries}
-              icon={<FaGlobe />}
-            />
-
+            {/* Fourth Row */}
+            <div className="col-span-2 md:col-span-1">
+              <FormSelect
+                name="country"
+                placeholder="Countries"
+                className="w-full px-4 py-3 pl-10 rounded-md bg-purple-100 text-purple-700 placeholder-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 "
+                options={countries}
+                icon={<FaGlobe />}
+              />
+            </div>
 
             <Controller
               name="profileImage"
               render={({ field, fieldState: { error } }) => (
-                <div className="relative">
+                <div className="relative col-span-2 md:col-span-1">
                   <input
                     type="file"
                     onChange={(e) => {
@@ -154,21 +165,25 @@ const Register = () => {
               )}
             />
 
-            <button
-              disabled={isLoading}
-              type="submit"
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full mt-4 flex items-center justify-center"
-            >
-                {
-                  isLoading ? <ButtonLoading
-                    title="Submitting.."
-                  /> : "Register"
-                }
-            </button>
+            {/* Submit Button */}
+            <div className="col-span-2">
+              <button
+                disabled={isLoading}
+                type="submit"
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full mt-4 flex items-center justify-center"
+              >
+                {isLoading ? <ButtonLoading title="Submitting.." /> : "Register"}
+              </button>
+            </div>
           </ContainForm>
         </div>
       </div>
     </div>
+
+
+
+
+
   )
 };
 

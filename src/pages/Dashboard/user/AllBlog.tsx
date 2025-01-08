@@ -27,6 +27,7 @@ const AllBlog = () => {
       limit: 4,
     }
   );
+  console.log(blogs)
   const metaData = blogs?.meta;
   const [deleteBlog] = useDeleteBlogMutation();
 

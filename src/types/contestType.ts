@@ -25,7 +25,7 @@ export interface TPhotographyContest {
   status: string;
   paymentStatus: string;
   participantsID: string[];
-  userId: string;
+  userId: TUser;
   winnerId: string | null;
   createdAt: string;
   updatedAt: string;

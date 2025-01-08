@@ -101,7 +101,7 @@ const UserProfile = ({ role }: { role: string }) => {
             <img
               src={userData?.data?.profileImage || "default-profile-picture.png"}
               alt="User Profile"
-              className="w-32 h-32 rounded-full border-4 border-SecondPrimary mx-auto"
+              className="w-32 h-32 object-cover rounded-full border-4 border-SecondPrimary mx-auto"
             />
 
             {/* Hidden file input */}

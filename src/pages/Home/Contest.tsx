@@ -2,10 +2,23 @@ import Container from "../../components/Container/Container";
 import shape from "../../assets/landingPage/shape.png"
 import SearchBar from "../../components/Contest/SearchBar";
 import FilterButtons from "../../components/Contest/FilterButtons";
-import { contestData } from "../../components/Contest/ContestData";
 import ContestCard from "../../components/Contest/ContestCard";
-import ContestPagination from "../../components/Contest/ContestPagination";
+import { useManageAdminContestsQuery } from "../../redux/feature/contestHolder/contestHolderApi";
+import Pagination from "../../components/pagination/Pagination";
+import { useState } from "react";
+import { TPhotographyContest } from "../../types";
 const Contest = () => {
+  const [page, setPage] = useState(1)
+  const { data: contests } = useManageAdminContestsQuery(
+    {
+      page: page,
+      limit: 4,
+    },
+    {
+      refetchOnMountOrArgChange: true
+    }
+  );
+  const metaData = contests?.meta;
   return (
     <div className="mb-28">
       <Container>
@@ -28,11 +41,19 @@ const Contest = () => {
           {/* <!-- Contest Cards Grid --> */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {
-              contestData.map((contset) => <ContestCard key={contset.id} contest={contset} />)
+              contests?.data?.map((contest: TPhotographyContest) => <ContestCard
+                key={contest._id}
+                contest={contest}
+              />)
             }
           </div>
           {/* Pagination Components */}
-          <ContestPagination />
+          <Pagination
+            current={page}
+            onChange={(value) => setPage(value)}
+            pageSize={metaData?.limit}
+            total={metaData?.total}
+          />
 
         </div>
 

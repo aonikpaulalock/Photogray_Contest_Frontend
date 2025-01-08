@@ -48,11 +48,11 @@ const Login = () => {
   }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-[#842cff] via-[#f358dc] to-[#ff8fab]">
-      <div className="w-[90%] md:w-[80%] lg:w-[70%] flex overflow-hidden rounded-lg shadow-xl h-[600px]">
+      <div className="md:w-full lg:w-9/12 flex overflow-hidden rounded-lg shadow-xl md:h-[600px]">
         <LogingLeftSide />
 
         {/* Right Side - Login Form */}
-        <div className="w-1/2 bg-white p-8 flex flex-col items-center justify-center">
+        <div className=" w-full bg-white p-8 flex flex-col items-center justify-center">
           <h2 className="text-2xl font-semibold text-purple-700 mb-6">USER LOGIN</h2>
           <ContainForm
             onSubmit={onSubmit}

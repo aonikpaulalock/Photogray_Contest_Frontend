@@ -1,9 +1,9 @@
 
 const LoginLeftSide = () => {
   return (
-    <>
+    <div className="w-10/12 hidden md:block">
       {/* Left Side - Welcome Section */}
-      <div className="w-1/2 p-8 bg-gradient-to-br from-[#6a00ff] via-[#b5179e] to-[#ff8fab] text-white relative flex flex-col justify-center">
+      <div className="h-full p-8 bg-gradient-to-br from-[#6a00ff] via-[#b5179e] to-[#ff8fab] text-white relative flex flex-col justify-center">
         <h1 className="text-4xl font-bold mb-4">Welcome to Photography Contest</h1>
         <p className="text-lg leading-relaxed">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
@@ -16,7 +16,7 @@ const LoginLeftSide = () => {
           <div className="absolute w-20 h-20 rounded-full bg-gradient-to-r from-[#ffdfd4] to-[#b5179e] bottom-10 left-20 blur-md"></div>
         </div>
       </div>
-    </>
+    </div>
   )
 };
 
