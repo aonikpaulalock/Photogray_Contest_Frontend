@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues } from "react-hook-form";
 import image from "../../assets/landingPage/dashboard/resetPassword.png";
 import ContainForm from "../../components/Form/ContainForm";
@@ -32,9 +33,11 @@ const ResetPassord = () => {
       } else {
         toast.error(res?.data?.data?.errorDetails?.message || "Update failed.");
       }
-    } catch (error) {
-      toast.error("Failed to reset password!");
-      console.error(error);
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Something went wrong";
+      toast.error(
+        errorMessage
+      )
     }
   };
   return (

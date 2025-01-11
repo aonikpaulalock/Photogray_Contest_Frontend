@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleBlogQuery } from "../../../redux/feature/user/blogApi";
-import BlogLike from "../../../components/Blogs/BlogLike";
 import BlogComment from "../../../components/Blogs/BlogComment";
 
 const BlogDetails = () => {
@@ -12,7 +11,7 @@ const BlogDetails = () => {
         {/* Main container */}
         <div className="relative bg-white flex overflow-hidden w-full max-w-5xl z-10 shadow-lg rounded-lg">
           {/* Right Section */}
-          <div className="w-7/12 relative flex justify-center items-center">
+          <div className="w-7/12 h-fit relative flex justify-center items-center">
             <img
               src={blogs?.data?.blogPhoto}
               alt="Forgot Password Illustration"

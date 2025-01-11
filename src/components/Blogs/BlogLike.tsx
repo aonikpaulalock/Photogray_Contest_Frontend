@@ -9,12 +9,14 @@ import { useEffect, useState } from "react";
 
 
 const BlogLike = ({ blog }: any) => {
+  // console.log("blogLikeData", blog)
   const [isLiked, setIsLiked] = useState(false);
   const user = useAppSelector(currentUser);
   const navigate = useNavigate();
   const [createLike] = useCreateLikeMutation();
   const [removeLike] = useRemoveLikeMutation();
   const { data: totalLikes } = useTotalLikesQuery(blog?._id);
+  // console.log("totalLike", totalLikes)
   const { data: checkPostLiked } = useCheckBlogLikeQuery(user?.userId || "");
 
 

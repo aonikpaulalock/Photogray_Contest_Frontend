@@ -20,18 +20,16 @@ const Login = () => {
     const toastId = toast.loading("Logged in processing")
     try {
       const res = await login(data).unwrap()
-
-      const user = verifyToken(res.data.accessToken) as TUser;
-      dispatch(setUser({
-        user,
-        token: res.data.accessToken
-      }))
-      toast.success(
-        "User login successfully", {
-        id: toastId
-      })
-
       if (res?.success) {
+        const user = verifyToken(res.data.accessToken) as TUser;
+        dispatch(setUser({
+          user,
+          token: res.data.accessToken
+        }))
+        toast.success(
+          res?.message, {
+          id: toastId
+        })
         navigate(`/dashboard/${user.role}/profile`)
       } else {
         toast.error(res?.data?.errorDetails?.message || "Update failed.", {
@@ -40,8 +38,9 @@ const Login = () => {
       }
 
     } catch (error: any) {
+      const errorMessage = error?.data?.message || "Something went wrong";
       toast.error(
-        "Something went wrong",
+        errorMessage,
         { id: toastId }
       )
     }
@@ -82,11 +81,11 @@ const Login = () => {
               type="submit"
               className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 rounded-full flex items-center justify-center"
             >
-                {
-                  isLoading ? <ButtonLoading
-                    title="Submitting.."
-                  /> : "Login"
-                }
+              {
+                isLoading ? <ButtonLoading
+                  title="Submitting.."
+                /> : "Login"
+              }
             </button>
           </ContainForm>
         </div>

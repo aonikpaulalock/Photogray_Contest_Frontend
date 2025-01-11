@@ -58,8 +58,12 @@ const ManageUser = () => {
           id: toastId,
         });
       }
-    } catch (error) {
-      console.error('Failed to update user status:', error);
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Update failed.";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      );
     }
   };
 

@@ -7,6 +7,7 @@ import UserDetails from "../pages/Dashboard/admin/UserDetails";
 import ContestDetails from "../pages/Dashboard/contestHolder/ContestDetails";
 import ContestHolderContest from "../pages/Dashboard/contestHolder/ContestHolderContest";
 import ContestHolderCreateContest from "../pages/Dashboard/contestHolder/ContestHolderCreateContest";
+import AllBlog from "../pages/Dashboard/user/AllBlog";
 import SubmissionDetails from "../pages/Dashboard/user/SubmissionDetails";
 import UserChangePassword from "../pages/Dashboard/user/UserChangePassword";
 import UserProfile from "../pages/Dashboard/user/UserProfile";
@@ -58,6 +59,10 @@ export const adminRoutes = {
     {
       path: "change-password",
       element: <UserChangePassword role="admin" />,
+    },
+    {
+      path: "all-blog",
+      element: <AllBlog role="admin" />,
     },
   ],
 };

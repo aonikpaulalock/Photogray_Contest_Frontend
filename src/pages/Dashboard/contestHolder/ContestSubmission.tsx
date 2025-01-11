@@ -38,9 +38,12 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
       } else {
         toast.error(res?.data?.errorDetails?.message || "Submission failed.", { id: toastId });
       }
-    } catch (error) {
-      console.error("Error during submission:", error);
-      toast.error("An error occurred during submission.", { id: toastId });
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Submission failed.";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
 

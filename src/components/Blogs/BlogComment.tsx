@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { BsEmojiLaughing } from "react-icons/bs";
-import { FaRegCommentDots, FaShareAlt, FaTelegram } from "react-icons/fa";
+import { FaRegCalendarAlt, FaRegCommentDots, FaTelegram } from "react-icons/fa";
 import avatar from "../../assets/landingPage/user.png";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -13,8 +13,10 @@ import BlogLike from "./BlogLike";
 import { useCreateCommentMutation, useGetAllCommentQuery, useTotalCommentsQuery } from "../../redux/feature/user/blogComment";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { blogDateFormate } from "../../utils/blogDateFormate";
 
 const BlogComment = ({ blog }: any) => {
+  console.log(blog)
   const navigate = useNavigate();
   const user = useAppSelector(currentUser);
   const { data: getMe } = useGetMeUserQuery(undefined);
@@ -72,6 +74,12 @@ const BlogComment = ({ blog }: any) => {
       <div className="flex">
         <div className="w-full">
           <div className="flex items-center justify-between py-5">
+            <div className="text-center py-2 m-2">
+              <div className="flex items-center space-x-2">
+                <FaRegCalendarAlt className="text-blue-gray-300" />
+                <span className="text-blue-gray-600 text-sm font-medium">{blogDateFormate(blog?.createdAt)}</span>
+              </div>
+            </div>
             <BlogLike blog={blog} />
             <div className="text-center py-2 m-2">
               <span
@@ -80,11 +88,6 @@ const BlogComment = ({ blog }: any) => {
               >
                 <FaRegCommentDots className="text-xl me-2" />
                 <span>{totalComment?.data && totalComment?.data}</span>
-              </span>
-            </div>
-            <div className="text-center py-2 m-2">
-              <span className="flex items-center justify-evenly rounded-full text-gray hover:text-blue-300 hover:cursor-pointer">
-                <FaShareAlt className="text-xl me-2" />
               </span>
             </div>
           </div>

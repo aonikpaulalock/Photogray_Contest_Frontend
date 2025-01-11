@@ -7,16 +7,15 @@ import { useManageAdminContestsQuery } from "../../redux/feature/contestHolder/c
 import Pagination from "../../components/pagination/Pagination";
 import { useState } from "react";
 import { TPhotographyContest } from "../../types";
+import Loading from "../../components/Loading/Loading";
+import NoContent from "../../components/Loading/NoContent";
 const Contest = () => {
   const [page, setPage] = useState(1)
-  const { data: contests } = useManageAdminContestsQuery(
+  const { data: contests, isLoading } = useManageAdminContestsQuery(
     {
       page: page,
       limit: 4,
     },
-    {
-      refetchOnMountOrArgChange: true
-    }
   );
   const metaData = contests?.meta;
   return (
@@ -39,13 +38,25 @@ const Contest = () => {
           <FilterButtons />
 
           {/* <!-- Contest Cards Grid --> */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {
-              contests?.data?.map((contest: TPhotographyContest) => <ContestCard
-                key={contest._id}
-                contest={contest}
-              />)
-            }
+          <div className="flex flex-col items-center justify-center min-h-[200px]">
+            {isLoading ? (
+              // Loading Component
+              <div className="flex justify-center items-center">
+                <Loading /> {/* আপনার Loading কম্পোনেন্ট */}
+              </div>
+            ) : contests?.data?.length === 0 ? (
+              // NoContent Component
+              <div className="flex justify-center items-center">
+                <NoContent message="No contest found !!" />
+              </div>
+            ) : (
+              // Contest Cards
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {contests?.data?.map((contest: TPhotographyContest) => (
+                  <ContestCard key={contest._id} contest={contest} />
+                ))}
+              </div>
+            )}
           </div>
           {/* Pagination Components */}
           <Pagination

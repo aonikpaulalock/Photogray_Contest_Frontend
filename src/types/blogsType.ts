@@ -1,3 +1,6 @@
+import { TUser } from "./userType";
+
+
 export type TBlog = {
   id: number;
   image: string; // Assuming the images are strings (URLs or paths), adjust if they are imports.
@@ -14,13 +17,7 @@ export interface Blog {
   title: string;
   blogPhoto: string;
   content: string;
-  userId: {
-    _id: string;
-    username: string;
-    email: string;
-    role: string;
-    isDeleted: boolean;
-  };
+  userId: TUser;
   createdAt: string;
   updatedAt: string;
 }

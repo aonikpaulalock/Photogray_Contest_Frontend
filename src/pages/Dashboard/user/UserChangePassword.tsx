@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import passwordChange from "../../../assets/landingPage/dashboard/changePassword1.png"
 import FormInput from "../../../components/Form/FormInput";
 import ContainForm from "../../../components/Form/ContainForm";
@@ -27,13 +28,16 @@ const UserChangePassword = ({ role }: { role: string }) => {
           duration: 2000,
         });
       } else {
-        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
+        toast.error(res?.data?.errorDetails?.message || "Failed to change password !", {
           id: toastId,
         });
       }
-    } catch (error) {
-      toast.error('Incorrect Old Password');
-      console.log(error);
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Failed to change password !!";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
 

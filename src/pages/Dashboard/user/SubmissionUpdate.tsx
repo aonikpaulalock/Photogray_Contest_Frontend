@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, FieldValues } from "react-hook-form";
 import ContainForm from "../../../components/Form/ContainForm";
 import { TSubmission } from "../../../types";
@@ -36,11 +37,14 @@ const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission 
         toast.success(res?.message, { id: toastId, duration: 2000 });
         closeModal();
       } else {
-        toast.error(res?.data?.errorDetails?.message || "Submission update failed.", { id: toastId });
+        toast.error(res?.data?.errorDetails?.message || "Submission update failed!", { id: toastId });
       }
-    } catch (error) {
-      console.error("Error during submission:", error);
-      toast.error("An error occurred during submission.", { id: toastId });
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Submission update failed !!";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
 

@@ -28,7 +28,7 @@ const blogLikeApi = baseApi.injectEndpoints({
     }),
 
     totalLikes: builder.query({
-      query: (blogId: string) => {
+      query: (blogId) => {
         console.log(blogId)
         return {
           url: `/blog-like/total-like/${blogId}`,

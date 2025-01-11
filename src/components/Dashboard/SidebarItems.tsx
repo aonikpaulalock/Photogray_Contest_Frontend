@@ -1,5 +1,5 @@
 // sidebarItems.ts
-import { FaTrophy, FaUsers, FaRegEdit, FaTasks, FaUserCog, FaPen, FaBlog, FaUserAlt, FaLock, FaClipboard } from "react-icons/fa";
+import { FaTrophy, FaUsers, FaRegEdit, FaTasks, FaUserCog, FaPen,FaUserAlt, FaLock, FaClipboard, FaNewspaper, FaBook } from "react-icons/fa";
 
 type SidebarItem = {
   path: string;
@@ -43,7 +43,12 @@ export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarIte
       path: "/dashboard/admin/manage-user",
       label: "Manage User",
       icon: <FaUserCog />
-    }
+    },
+    {
+      path: "/dashboard/admin/all-blog",
+      label: "All Blogs",
+      icon: <FaNewspaper />
+    },
   ],
   contestHolder: [
     {
@@ -75,6 +80,11 @@ export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarIte
       label: "All Submission",
       icon: <FaRegEdit />
     },
+    {
+      path: "/dashboard/contestHolder/all-blog",
+      label: "All Blogs",
+      icon: <FaNewspaper />
+    },
   ],
   user: [
     {
@@ -103,9 +113,14 @@ export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarIte
       icon: <FaPen />
     },
     {
+      path: "/dashboard/user/my-blog",
+      label: "My Blogs",
+      icon: <FaBook />
+    },
+    {
       path: "/dashboard/user/all-blog",
       label: "All Blogs",
-      icon: <FaBlog />
+      icon: <FaNewspaper />
     },
   ],
 };

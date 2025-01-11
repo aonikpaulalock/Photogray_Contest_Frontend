@@ -4,6 +4,7 @@ import ContestHolderContest from "../pages/Dashboard/contestHolder/ContestHolder
 import ContestHolderCreateContest from "../pages/Dashboard/contestHolder/ContestHolderCreateContest";
 import ContestHolderDashboard from "../pages/Dashboard/contestHolder/ContestHolderDashboard";
 import ContestHolderSubmission from "../pages/Dashboard/contestHolder/ContestHolderSubmission";
+import AllBlog from "../pages/Dashboard/user/AllBlog";
 import SubmissionDetails from "../pages/Dashboard/user/SubmissionDetails";
 import UserChangePassword from "../pages/Dashboard/user/UserChangePassword";
 import UserProfile from "../pages/Dashboard/user/UserProfile";
@@ -43,6 +44,10 @@ export const contestHolderRoutes = {
     {
       path: "change-password",
       element: <UserChangePassword role="contestHolder" />,
+    },
+    {
+      path: "all-blog",
+      element: <AllBlog role="contestHolder" />,
     },
   ],
 };

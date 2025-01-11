@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, FieldValues } from "react-hook-form";
 import FormInput from "../../../components/Form/FormInput";
 import FormDatePicker from "../../../components/Form/FromDatePicker";
@@ -51,12 +52,12 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
           id: toastId,
         });
       }
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong!", {
-        id: toastId,
-        duration: 2000,
-      });
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Update failed !!";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
   return (

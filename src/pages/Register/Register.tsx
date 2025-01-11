@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FaBriefcase, FaEnvelope, FaGlobe, FaLock, FaUpload, FaUser, FaUserTie } from "react-icons/fa";
 import LogingLeftSide from "../Login/LoginLeftSide"
@@ -48,11 +49,12 @@ const Register = () => {
           id: toastId,
         });
       }
-    } catch (error) {
-      toast.error("Something went wrong!", {
-        id: toastId,
-        duration: 2000,
-      });
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Something went wrong";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
   return (

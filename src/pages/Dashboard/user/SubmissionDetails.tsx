@@ -1,6 +1,5 @@
-import React from "react";
-
-const SubmissionDetails = () => {
+const SubmissionDetails = ({ role }: { role: string }) => {
+  console.log(role)
   const data = {
     contestId: {
       title: "Natural Art Contest",

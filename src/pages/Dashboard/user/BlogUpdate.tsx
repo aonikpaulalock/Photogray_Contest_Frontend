@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, FieldValues } from "react-hook-form";
 import ContainForm from "../../../components/Form/ContainForm";
 import FormInput from "../../../components/Form/FormInput";
@@ -53,16 +54,16 @@ const BlogUpdate = ({ blog, closeModal }: { blog: Blog | null, closeModal: () =>
         });
         closeModal();
       } else {
-        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
+        toast.error(res?.data?.errorDetails?.message || "Update failed !", {
           id: toastId,
         });
       }
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong!", {
-        id: toastId,
-        duration: 2000,
-      });
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Update failed.";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
   return (

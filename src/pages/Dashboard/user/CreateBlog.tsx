@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import image from "../../../assets/landingPage/dashboard/blog1.png"
 import FormInput from "../../../components/Form/FormInput";
 import ContainForm from "../../../components/Form/ContainForm";
@@ -41,16 +42,16 @@ const CreateBlog = () => {
           duration: 2000,
         });
       } else {
-        toast.error(res?.data?.errorDetails?.message || "Update failed.", {
+        toast.error(res?.data?.errorDetails?.message || "Failed create blog !", {
           id: toastId,
         });
       }
-    } catch (error) {
-      console.log(error)
-      toast.error("Something went wrong!", {
-        id: toastId,
-        duration: 2000,
-      });
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Failed create blog !!";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
 

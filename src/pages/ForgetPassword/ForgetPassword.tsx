@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues } from "react-hook-form";
 import image from "../../assets/landingPage/dashboard/forgetPassword1.webp";
 import ContainForm from "../../components/Form/ContainForm";
@@ -10,14 +11,18 @@ import ButtonLoading from "../../components/Loading/ButtonLoading";
 const ForgotPassword = () => {
   const [forgetPassword, { isLoading }] = useForgetPasswordMutation()
   const onSubmit = async (values: FieldValues) => {
+    const toastId = toast.loading("Please wait...");
     try {
       const res = await forgetPassword(values);
       if (res?.data?.success) {
         toast.success('Please check your email');
       }
-    } catch (error) {
-      toast.error('Something went wrong !');
-      console.log(error);
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Something went wrong !";
+      toast.error(
+        errorMessage,
+        { id: toastId }
+      )
     }
   };
   return (

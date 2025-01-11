@@ -34,10 +34,19 @@ const blogApi = baseApi.injectEndpoints({
 
 
     getAllBlogs: builder.query({
-      query: () => {
+      query: ({ page, limit }) => {
+        const params: Record<string, string> = {};
+
+        if (page) {
+          params['page'] = page.toString();
+        }
+        if (limit) {
+          params['limit'] = limit.toString();
+        }
         return {
           url: "/blog",
           method: "GET",
+          params
         }
       },
       providesTags: [tagTypes.blog],
@@ -54,25 +63,26 @@ const blogApi = baseApi.injectEndpoints({
     }),
 
     getUserBlog: builder.query({
-      query: ({ blogId, page, limit }: { blogId: string, page: number, limit: number }) => {
+      query: (blogQuery) => {
+        console.log(blogQuery)
         const params: Record<string, string> = {};
-    
-        if (page) {
-          params['page'] = page.toString();
+
+        if (blogQuery.page) {
+          params['page'] = blogQuery.page.toString();
         }
-        if (limit) {
-          params['limit'] = limit.toString();
+        if (blogQuery.limit) {
+          params['limit'] = blogQuery.limit.toString();
         }
-    
+
         return {
-          url: `/blog/userBlog/${blogId}`,
+          url: `/blog/userBlog/${blogQuery.blogId}`,
           method: "GET",
           params,
         };
       },
       providesTags: [tagTypes.blog],
     }),
-    
+
 
   })
 })
