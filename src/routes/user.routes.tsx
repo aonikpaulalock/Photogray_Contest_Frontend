@@ -44,7 +44,7 @@ export const userRoutes = {
     },
     {
       path: "submissionDetails/:submissionId",
-      element: <SubmissionDetails role="user" />,
+      element: <SubmissionDetails />,
     },
     {
       path: "profile",

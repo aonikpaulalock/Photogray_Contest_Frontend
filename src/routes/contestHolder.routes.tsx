@@ -5,6 +5,7 @@ import ContestHolderCreateContest from "../pages/Dashboard/contestHolder/Contest
 import ContestHolderDashboard from "../pages/Dashboard/contestHolder/ContestHolderDashboard";
 import ContestHolderSubmission from "../pages/Dashboard/contestHolder/ContestHolderSubmission";
 import AllBlog from "../pages/Dashboard/user/AllBlog";
+import BlogDetails from "../pages/Dashboard/user/BlogDetails";
 import SubmissionDetails from "../pages/Dashboard/user/SubmissionDetails";
 import UserChangePassword from "../pages/Dashboard/user/UserChangePassword";
 import UserProfile from "../pages/Dashboard/user/UserProfile";
@@ -35,7 +36,7 @@ export const contestHolderRoutes = {
     },
     {
       path: "submissionDetails/:submissionId",
-      element: <SubmissionDetails role="contestHolder" />,
+      element: <SubmissionDetails/>,
     },
     {
       path: "profile",
@@ -48,6 +49,10 @@ export const contestHolderRoutes = {
     {
       path: "all-blog",
       element: <AllBlog role="contestHolder" />,
+    },
+    {
+      path: "blogDetails/:blogId",
+      element: <BlogDetails />,
     },
   ],
 };

@@ -3,6 +3,10 @@
 /* Import Google Font Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #FFFFFF;
   font-family: "Poppins", sans-serif;
@@ -25,8 +29,10 @@ body {
   .custom-border::before {
     @apply absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#596ea8];
     content: '';
-    height: 52px; /* Customize as needed */
-    width: 5px; /* Customize as needed */
+    height: 52px;
+    /* Customize as needed */
+    width: 5px;
+    /* Customize as needed */
   }
 
   .custom-border:last-child::before {
@@ -38,29 +44,30 @@ body {
 @layer components {
   .custom-pagination-item {
     @apply inline-block h-1 bg-primary transition-all duration-300 ease-in-out;
-    width: 23px; 
+    width: 23px;
     border-radius: 0;
     margin-right: 16px !important;
   }
+
   .custom-pagination-item:last-child {
-    margin-right: 0; 
+    margin-right: 0;
   }
-  
+
   .custom-pagination-item.swiper-pagination-bullet-active {
-    @apply bg-secondary; 
+    @apply bg-secondary;
     width: 58px;
     border-radius: 0;
   }
 
   .scrollbar-custom {
-    scrollbar-width: thin; 
-    scrollbar-color: #596ea850 #f1f1f1; 
+    scrollbar-width: thin;
+    scrollbar-color: #596ea850 #f1f1f1;
   }
 
 
   .scrollbar-custom::-webkit-scrollbar {
-    width: 8px;
-    height: 8px; 
+    width: 6px;
+    height: 6px;
   }
 
   .scrollbar-custom::-webkit-scrollbar-thumb {

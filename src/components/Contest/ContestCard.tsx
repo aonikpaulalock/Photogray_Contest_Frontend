@@ -1,11 +1,15 @@
 import { TPhotographyContest } from "../../types";
 import image from "../../assets/landingPage/user.png"
 import moment from "moment";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { useAppSelector } from "../../redux/hooks";
+import { currentUser } from "../../redux/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+
 const ContestCard = ({ contest }: {
   contest: TPhotographyContest
 }) => {
-  console.log(contest)
+  const navigate = useNavigate()
+  const user = useAppSelector(currentUser);
   return (
 
     <div className="p-8 bg-[#EAEAEA]">
@@ -57,7 +61,9 @@ const ContestCard = ({ contest }: {
 
       {/* <!-- Button --> */}
       <div className="text-center mt-10 mb-6">
-        <button className="btn-outline">Browse Contest</button>
+        <button
+          onClick={() => navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)}
+          className="btn-outline">Browse Contest</button>
       </div>
     </div>
   )

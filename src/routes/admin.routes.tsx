@@ -8,6 +8,7 @@ import ContestDetails from "../pages/Dashboard/contestHolder/ContestDetails";
 import ContestHolderContest from "../pages/Dashboard/contestHolder/ContestHolderContest";
 import ContestHolderCreateContest from "../pages/Dashboard/contestHolder/ContestHolderCreateContest";
 import AllBlog from "../pages/Dashboard/user/AllBlog";
+import BlogDetails from "../pages/Dashboard/user/BlogDetails";
 import SubmissionDetails from "../pages/Dashboard/user/SubmissionDetails";
 import UserChangePassword from "../pages/Dashboard/user/UserChangePassword";
 import UserProfile from "../pages/Dashboard/user/UserProfile";
@@ -34,7 +35,7 @@ export const adminRoutes = {
     },
     {
       path: "submissionDetails/:submissionId",
-      element: <SubmissionDetails role="admin" />,
+      element: <SubmissionDetails />,
     },
     {
       path: "manage-user",
@@ -63,6 +64,10 @@ export const adminRoutes = {
     {
       path: "all-blog",
       element: <AllBlog role="admin" />,
+    },
+    {
+      path: "blogDetails/:blogId",
+      element: <BlogDetails />,
     },
   ],
 };

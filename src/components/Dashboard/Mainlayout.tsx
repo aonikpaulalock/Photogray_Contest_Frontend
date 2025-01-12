@@ -8,7 +8,7 @@ const Mainlayout = () => {
       <div className="">
         <Sidebar />
       </div>
-      <div className="flex-1 bg-lightBlue p-6">
+      <div className="flex-1 bg-lightBlue">
         <DahboardHeader />
         <div className="p-6">
           <Outlet />

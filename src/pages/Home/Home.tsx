@@ -10,13 +10,21 @@ import Subscribe from "./Subscribe";
 const Home = () => {
   return (
     <>
-      <HeroSection />
+      <div id="home">
+        <HeroSection />
+      </div>
       <Achievements />
-      <Contest />
-      <HowSubmitEntry />
+      <div id="contest">
+        <Contest />
+      </div>
+      <div id="how-submit-entry">
+        <HowSubmitEntry />
+      </div>
       <Partners />
       <BuildBrightFuture />
-      <Blogs />
+      <div id="blogs">
+        <Blogs />
+      </div>
       <Subscribe />
     </>
   )

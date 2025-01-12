@@ -59,11 +59,18 @@ const contestHolderApi = baseApi.injectEndpoints({
     }),
 
     manageAdminContests: builder.query({
-      query: ({ page, limit }) => {
+      query: ({ page, limit, searchTerm, tags }) => {
+        console.log("params", { page, limit, searchTerm, tags })
         const params: Record<string, string> = {};
+        console.log("updatedParams", params)
         if (page) params['page'] = page.toString();
         if (limit) params['limit'] = limit.toString();
-
+        if (searchTerm) params['searchTerm'] = searchTerm;
+        if (tags && tags !== "All") {
+          console.log(params['tags'])
+          console.log(tags)
+          params['tags'] = tags;
+        }
         return {
           url: "/contests/manage-contest",
           method: "GET",

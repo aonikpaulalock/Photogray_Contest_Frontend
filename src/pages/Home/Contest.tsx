@@ -11,10 +11,17 @@ import Loading from "../../components/Loading/Loading";
 import NoContent from "../../components/Loading/NoContent";
 const Contest = () => {
   const [page, setPage] = useState(1)
+  const [searchTerm, setSearchTerm] = useState<string | undefined>("");
+  console.log(searchTerm)
+  const [filter, setFilter] = useState<string | undefined>("All");
+  console.log(filter)
+
   const { data: contests, isLoading } = useManageAdminContestsQuery(
     {
       page: page,
       limit: 4,
+      searchTerm,
+      tags: filter
     },
   );
   const metaData = contests?.meta;
@@ -32,25 +39,22 @@ const Contest = () => {
           </div>
 
           {/* <!-- Search Bar --> */}
-          <SearchBar />
+          <SearchBar setSearchTerm={setSearchTerm} />
 
           {/* <!-- Filter Buttons --> */}
-          <FilterButtons />
+          <FilterButtons setFilter={setFilter} />
 
           {/* <!-- Contest Cards Grid --> */}
           <div className="flex flex-col items-center justify-center min-h-[200px]">
             {isLoading ? (
-              // Loading Component
               <div className="flex justify-center items-center">
-                <Loading /> {/* আপনার Loading কম্পোনেন্ট */}
+                <Loading />
               </div>
             ) : contests?.data?.length === 0 ? (
-              // NoContent Component
               <div className="flex justify-center items-center">
                 <NoContent message="No contest found !!" />
               </div>
             ) : (
-              // Contest Cards
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {contests?.data?.map((contest: TPhotographyContest) => (
                   <ContestCard key={contest._id} contest={contest} />
@@ -58,7 +62,6 @@ const Contest = () => {
               </div>
             )}
           </div>
-          {/* Pagination Components */}
           <Pagination
             current={page}
             onChange={(value) => setPage(value)}
