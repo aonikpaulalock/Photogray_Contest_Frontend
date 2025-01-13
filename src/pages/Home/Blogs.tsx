@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { motion } from 'framer-motion';
 
 import Container from '../../components/Container/Container';
 import { Pagination } from 'swiper/modules';
@@ -11,6 +12,12 @@ import { Blog } from '../../types';
 import Loading from '../../components/Loading/Loading';
 import NoContent from '../../components/Loading/NoContent';
 
+// Animation Variants
+const textAnimation = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const Blogs = () => {
   const { data: blogs, isLoading } = useGetAllBlogsQuery({});
 
@@ -18,13 +25,25 @@ const Blogs = () => {
     <div>
       <Container>
         <section className="py-16">
-          <div className="text-center mb-12">
+          {/* Animated Header */}
+          <motion.div
+            className="text-center mb-12"
+            initial="hidden"
+            whileInView="visible" // Animation triggers when in view
+            viewport={{ once: false, amount: 0.2 }} // Custom viewport settings
+            variants={textAnimation}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
             <div className="mb-2">
               <p className="mb-1 text-base font-bold text-[#81BAE3]">Blog</p>
               <img src={shape} alt="" className="mx-auto" />
             </div>
-            <h1 className="text-4xl font-bold text-primary">Explore our latest Blog</h1>
-          </div>
+            <h1 className="text-4xl font-bold text-primary">
+              Explore our latest Blog
+            </h1>
+          </motion.div>
+
+          {/* Swiper Section */}
           <div>
             <Swiper
               spaceBetween={30}
@@ -57,11 +76,19 @@ const Blogs = () => {
                 </SwiperSlide>
               )}
 
-              {/* Blogs Data */}
+              {/* Blogs Data with Animation */}
               {!isLoading &&
                 blogs?.data?.map((blog: Blog) => (
                   <SwiperSlide key={blog._id}>
-                    <BlogsCard blog={blog} />
+                    <motion.div
+                      initial="hidden"
+                      whileInView="visible" // Trigger animation on scroll
+                      viewport={{ once: false, amount: 0.3 }} // 30% visibility triggers animation
+                      variants={textAnimation}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                    >
+                      <BlogsCard blog={blog} />
+                    </motion.div>
                   </SwiperSlide>
                 ))}
             </Swiper>
