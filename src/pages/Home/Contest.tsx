@@ -26,29 +26,32 @@ const Contest = () => {
   const metaData = contests?.meta;
 
   return (
-    <div className="mb-28">
-      <Container>
-        <div className="mx-auto p-6">
+      <Container className="mb-28">
+        <div className="mx-auto sm:p-6 p-4">
           {/* Header Section */}
           <motion.div
             className="text-center mb-8"
             initial={{ opacity: 0, y: -40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true }} // Ensures the animation plays only once
             transition={{ ease: "easeInOut", duration: 0.9 }}
           >
             <div>
-              <p className="mb-1 text-base font-bold text-[#81BAE3]">Let's something about us</p>
+              <p className="mb-1 text-base font-bold text-[#81BAE3]">
+                Let's something about us
+              </p>
               <img src={shape} alt="" className="mx-auto" />
             </div>
-            <h1 className="text-4xl font-bold text-primary mt-1">Find your favorite contest</h1>
+            <h1 className="text-4xl font-bold text-primary mt-1">
+              Find your favorite contest
+            </h1>
           </motion.div>
 
           {/* Search Bar Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true }} // Ensures the animation plays only once
             transition={{ ease: "easeInOut", duration: 1 }}
           >
             <SearchBar setSearchTerm={setSearchTerm} />
@@ -58,7 +61,7 @@ const Contest = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true }} // Ensures the animation plays only once
             transition={{ ease: "easeInOut", duration: 1, delay: 0.3 }}
           >
             <FilterButtons setFilter={setFilter} />
@@ -75,7 +78,7 @@ const Contest = () => {
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true }} // Ensures the animation plays only once
                 transition={{ ease: "easeInOut", duration: 1 }}
               >
                 {contests?.data?.map((contest: TPhotographyContest) => (
@@ -83,7 +86,7 @@ const Contest = () => {
                     key={contest._id}
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true }} // Ensures the animation plays only once
                     transition={{ ease: "easeInOut", duration: 0.7 }}
                   >
                     <ContestCard contest={contest} />
@@ -97,7 +100,7 @@ const Contest = () => {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true }} // Ensures the animation plays only once
             transition={{ ease: "easeInOut", duration: 0.9 }}
           >
             <Pagination
@@ -109,7 +112,6 @@ const Contest = () => {
           </motion.div>
         </div>
       </Container>
-    </div>
   );
 };
 

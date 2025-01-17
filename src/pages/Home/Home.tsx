@@ -1,3 +1,4 @@
+import ScrollProgressLine from "../../components/Animation/ScrollProgressLine";
 import Achievements from "./Achievements";
 import Blogs from "./Blogs";
 import BuildBrightFuture from "./BuildBrightFuture";
@@ -10,6 +11,7 @@ import Subscribe from "./Subscribe";
 const Home = () => {
   return (
     <>
+       <ScrollProgressLine />
       <div id="home">
         <HeroSection />
       </div>

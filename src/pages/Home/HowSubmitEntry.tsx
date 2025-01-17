@@ -5,9 +5,8 @@ import { motion } from "framer-motion";
 
 const HowSubmitEntry = () => {
   return (
-    <div className="mb-32">
-      <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-32 items-center p-6">
+      <Container className="mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-32 gap-x-10 items-center p-6">
           {/* Left side (Image) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -145,7 +144,6 @@ const HowSubmitEntry = () => {
           </motion.div>
         </div>
       </Container>
-    </div>
   );
 };
 

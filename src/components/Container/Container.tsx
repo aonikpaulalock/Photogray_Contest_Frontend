@@ -1,16 +1,16 @@
 import { ReactNode } from "react";
 
-const Container = ({
-  children }: {
-    children: ReactNode
-  }) => {
+interface ContainerProps {
+  children: ReactNode;
+  className?: string;
+}
+
+const Container = ({ children, className = "" }: ContainerProps) => {
   return (
-    <div className="h-full w-full max-w-[1220px] mx-auto">
-      {
-        children
-      }
+    <div className={`h-full w-full max-w-[1220px] mx-auto ${className}`}>
+      {children}
     </div>
-  )
+  );
 };
 
 export default Container;

@@ -12,7 +12,7 @@ const ContestCard = ({ contest }: {
   const user = useAppSelector(currentUser);
   return (
 
-    <div className="p-8 bg-[#EAEAEA]">
+    <div className="sm:p-8 p-6 bg-[#EAEAEA]">
       <div className="flex items-center justify-between mb-10">
         <span className=" bg-[#FFC397] text-white px-[14px] py-[5px] text-sm font-medium">{contest?.status}</span>
         <span className="text-2xl font-medium text-primary font-poppins">$ {contest?.prize}</span>

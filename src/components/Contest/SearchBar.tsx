@@ -5,7 +5,7 @@ const SearchBar = ({ setSearchTerm }: {
 }) => {
   return (
     <div className="flex justify-center mb-14">
-      <div className="relative w-1/2">
+      <div className="relative w-full sm:w-1/2">
         <input
           type="text"
           placeholder="Search your contest" className="bg-[#f5eaee] pl-12 p-6 w-full outline-0 text-base placeholder-black font-poppins "

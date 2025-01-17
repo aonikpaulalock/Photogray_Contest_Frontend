@@ -6,8 +6,7 @@ import shape from "../../assets/landingPage/shape.png";
 
 const Partners = () => {
   return (
-    <div className="mb-40">
-      <Container>
+      <Container className="mb-40 sm:p-0 p-2">
         <div className="text-center mb-9">
           <div className="mb-5">
             <p className="mb-1 text-base font-bold text-[#81BAE3]">Clients</p>
@@ -52,7 +51,6 @@ const Partners = () => {
           </Marquee>
         </div>
       </Container>
-    </div>
   );
 };
 
