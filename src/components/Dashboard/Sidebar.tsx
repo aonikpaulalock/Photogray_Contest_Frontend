@@ -13,7 +13,6 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
 
-  //! Ensure userRole is one of the valid keys
   const userRole = useSelector(selectUserRole) as "admin" | "contestHolder" | "user" | undefined;
 
   const toggleSidebar = () => {
@@ -29,25 +28,18 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`${collapsed ? "w-32" : "w-64 px-5"}
-      bg-white h-screen flex flex-col py-5 shadow-lg 
+      className={`${collapsed ? "w-24" : "w-64"
+        } bg-white h-screen flex flex-col py-5 shadow-lg 
       transition-all sticky top-0 left-0 duration-500 ease-in-out transform 
       overflow-hidden scrollbar-custom`}
     >
-      {/* Logo Section - Fixed */}
-      <div className="sticky top-0 z-10 mb-4 flex items-center justify-center">
-        <button
-          onClick={toggleSidebar}
-          className={`text-3xl flex items-center ${collapsed ? "justify-center" : "justify-start"}`}
-        >
+      {/* Logo */}
+      <div className="mb-4 flex items-center justify-center">
+        <button onClick={toggleSidebar} className="text-3xl">
           {collapsed ? (
-            <img
-              src={svgLogo}
-              alt="Logo"
-              className="mt-4 w-12 h-12 hover:scale-110 transition-transform duration-500"
-            />
+            <img src={svgLogo} alt="Logo" className="mt-4 w-12 h-12 mx-auto" />
           ) : (
-            <div className="text-2xl text-orange flex items-center">
+            <div className="flex items-center">
               <img src={logo} alt="Logo" className="p-4" />
               <FaTimes className="text-4xl text-deep-orange-300" />
             </div>
@@ -55,38 +47,33 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Sidebar Items Section - Scrollable */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Menu Items */}
+      <div className="flex-1 overflow-y-auto mx-auto">
         {menuItems.map((item, index) => (
           <Link
             key={index}
             to={item.path}
-            className={`my-3 text-md flex items-center ${collapsed ? "justify-center" : "justify-start"}`}
+            className="my-3 text-md flex items-center"
           >
-            <div className={`
-            text-2xl text-SecondPrimary hover:shadow-lg hover:shadow-gray-500 hover:text-deep-orange-300 transition-shadow duration-300 p-4 rounded-xl
-            ${collapsed ? "mr-0" : "mr-2"}
-            
-              `}>
+            <div className={`text-2xl text-SecondPrimary hover:shadow-lg hover:shadow-gray-500 hover:text-deep-orange-300 transition-shadow duration-300 p-4 rounded-xl`}>
               {item.icon}
             </div>
             {!collapsed && (
-              <span className="text-lg text-SecondPrimary font-medium">{item.label}</span>
+              <span className="text-lg text-SecondPrimary font-medium">
+                {item.label}
+              </span>
             )}
           </Link>
         ))}
       </div>
 
-      {/* Logout Section */}
-      <div
-        className={`py-2 flex items-center cursor-pointer ${collapsed ? "justify-center" : "justify-start"}`}
-        onClick={handleLogout}
-      >
-        <div className="mr-2 text-2xl text-red transition-shadow duration-300 p-4 hover:shadow-lg hover:shadow-gray-500 hover:text-deep-orange-500 rounded-xl">
+      {/* Logout */}
+      <div className="ml-4 py-2 flex items-center cursor-pointer" onClick={handleLogout}>
+        <div className="text-2xl text-red p-4 rounded-xl ">
           <FaSignOutAlt />
         </div>
         {!collapsed && (
-          <span className="text-lg text-SecondPrimary font-medium">Logout</span>
+          <span className="text-lg text-SecondPrimary font-medium text-center">Logout</span>
         )}
       </div>
     </div>

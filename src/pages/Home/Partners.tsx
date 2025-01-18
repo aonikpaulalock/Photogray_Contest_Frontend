@@ -17,7 +17,7 @@ const Partners = () => {
               initial={{ opacity: 0, y: -50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ ease: "easeOut", duration: 1 }}
-              viewport={{ once: false }} 
+              viewport={{ once: true }} 
             />
           </div>
           <motion.h1
@@ -25,7 +25,7 @@ const Partners = () => {
             initial={{ opacity: 0, y: -50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ ease: "easeOut", duration: 1 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
           >
             Meet our trusted partners
           </motion.h1>
