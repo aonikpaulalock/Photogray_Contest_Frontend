@@ -24,7 +24,7 @@ const Mainlayout = () => {
       {/* Main Content */}
       <div className="flex-1 bg-lightBlue">
         <DahboardHeader onToggleSidebar={toggleSidebar} />
-        <div className="p-6">
+        <div className="sm:p-6 p-3">
           <Outlet />
         </div>
       </div>
@@ -33,7 +33,7 @@ const Mainlayout = () => {
       {isSidebarVisible && (
         <div
           onClick={toggleSidebar}
-          className="fixed inset-0 z-20 bg-black bg-opacity-50 md:hidden"
+          className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"
         ></div>
       )}
     </div>

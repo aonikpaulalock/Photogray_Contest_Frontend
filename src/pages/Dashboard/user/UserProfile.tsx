@@ -85,13 +85,13 @@ const UserProfile = ({ role }: { role: string }) => {
       <ContainForm
         onSubmit={onSubmit}
         defaultValues={userDefaultValues}
-        className="bg-white shadow-lg rounded-lg flex overflow-hidden w-full"
+        className="bg-white shadow-lg rounded-lg lg:flex block overflow-hidden w-full"
       >
         {/* Left Section: Background Image with Overlay */}
         <div
-          className="w-2/3 relative bg-cover bg-center"
+          className="w-full lg:flex-1 lg:w-2/3  relative bg-cover bg-center min-h-[300px] md:min-h-[400px]"
           style={{
-            backgroundImage: `url(${userData?.data?.profileImage})`,
+            backgroundImage: `url(${userData?.data?.profileImage || "default-profile-picture.png"})`,
           }}
         >
           {/* Overlay */}
@@ -148,15 +148,15 @@ const UserProfile = ({ role }: { role: string }) => {
         </div>
 
         {/* Right Section: Form */}
-        <div className="w-2/3 p-10">
+        <div className="lg:flex-1 w-full lg:w-1/3 md:p-10 p-4">
           <h2 className="text-3xl font-semibold text-primary mb-6 uppercase">
             My Profile
           </h2>
 
           {/* Input Fields */}
           <div className="space-y-6">
-            <div className="flex space-x-4">
-              <div className="w-1/2">
+            <div className="md:flex md:space-x-4">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Username
                 </label>
@@ -167,7 +167,7 @@ const UserProfile = ({ role }: { role: string }) => {
                   placeholder="Enter your username"
                 />
               </div>
-              <div className="w-1/2">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Designation
                 </label>
@@ -179,8 +179,8 @@ const UserProfile = ({ role }: { role: string }) => {
                 />
               </div>
             </div>
-            <div className="flex space-x-4">
-              <div className="w-1/2">
+            <div className="md:flex md:space-x-4">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Country
                 </label>
@@ -188,10 +188,10 @@ const UserProfile = ({ role }: { role: string }) => {
                   type="text"
                   className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
                   name="country"
-                  placeholder="Enter your Designation"
+                  placeholder="Enter your Country"
                 />
               </div>
-              <div className="w-1/2">
+              <div className="w-full md:w-1/2">
                 <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Email
                 </label>
@@ -199,7 +199,7 @@ const UserProfile = ({ role }: { role: string }) => {
                   type="email"
                   value={userData?.data?.email}
                   readOnly
-                  className="w-full border-b-2 border-gray focus:border-SecondPrimary  focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
+                  className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-2"
                 />
               </div>
             </div>
@@ -213,7 +213,7 @@ const UserProfile = ({ role }: { role: string }) => {
                   <div className="relative">
                     <textarea
                       {...field}
-                      className="w-full border-b-2 border-gray focus:border-SecondPrimary  focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-1"
+                      className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-semibold text-SecondPrimary py-1"
                       placeholder="Bio"
                     />
                     {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
@@ -229,16 +229,13 @@ const UserProfile = ({ role }: { role: string }) => {
               type="submit"
               className="px-8 py-4 bg-primary text-white"
             >
-              {
-                isLoading ? <ButtonLoading
-                  title="Updating"
-                /> : "Save"
-              }
+              {isLoading ? <ButtonLoading title="Updating" /> : "Save"}
             </button>
           </div>
         </div>
       </ContainForm>
     </div>
+
   );
 };
 

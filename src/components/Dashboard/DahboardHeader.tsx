@@ -15,7 +15,7 @@ const DahboardHeader = ({ onToggleSidebar }: { onToggleSidebar: () => void }) =>
   }
 
   return (
-    <div className="sticky top-0 left-0 z-20 bg-lightBlue p-8 flex justify-between items-center transition-all duration-300">
+    <div className="sticky top-0 left-0 z-20 bg-lightBlue sm:p-8 p-4 flex justify-between items-center transition-all duration-300">
       {/* Logo */}
       <div
         className="text-2xl text-orange flex items-center cursor-pointer"
@@ -27,10 +27,10 @@ const DahboardHeader = ({ onToggleSidebar }: { onToggleSidebar: () => void }) =>
       {/* Right Section */}
       <div className="flex items-center gap-4">
 
-        <div className="md:block hidden">
+        <div className="lg:block hidden">
           <img src={chatLogo} alt="Chat" className="w-14 h-14" />
         </div>
-        <div className="md:block hidden">
+        <div className="lg:block hidden">
           <img src={notificationLogo} alt="Notifications" className="w-14 h-14" />
         </div>
         {data?.data && (
@@ -38,7 +38,7 @@ const DahboardHeader = ({ onToggleSidebar }: { onToggleSidebar: () => void }) =>
             <img
               src={data?.data?.profileImage || "https://via.placeholder.com/40"}
               alt="User Avatar"
-              className="w-14 h-14 object-cover rounded-full bg-SecondPrimary ring-2 ring-SecondPrimary"
+              className="w-14 h-14 md:object-cover rounded-full bg-SecondPrimary ring-2 ring-SecondPrimary"
             />
             <div className="md:block hidden">
               <p className="text-SecondPrimary font-semibold text-lg mb-1">
@@ -50,10 +50,10 @@ const DahboardHeader = ({ onToggleSidebar }: { onToggleSidebar: () => void }) =>
             </div>
           </div>
         )}
-        <div className="md:ml-0 ml-4 block md:hidden">
+        <div className="md:ml-0 ml-4 block lg:hidden">
           <button
             onClick={onToggleSidebar}
-            className="text-4xl text-deep-orange-500 p-2"
+            className="text-4xl text-deep-orange-500 sm:p-2 p-0"
           >
             <FaBars />
           </button>

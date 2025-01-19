@@ -9,9 +9,9 @@ const BlogDetails = () => {
     <div>
       <div className="flex items-center justify-center relative">
         {/* Main container */}
-        <div className="relative bg-white flex overflow-hidden w-full max-w-5xl z-10 shadow-lg rounded-lg">
+        <div className="relative bg-white md:flex overflow-hidden w-full max-w-5xl z-10 shadow-lg rounded-lg">
           {/* Right Section */}
-          <div className="w-7/12 h-fit relative flex justify-center items-center">
+          <div className=" w-full md:w-7/12 h-fit relative flex justify-center items-center">
             <img
               src={blogs?.data?.blogPhoto}
               alt="Forgot Password Illustration"
@@ -20,7 +20,7 @@ const BlogDetails = () => {
           </div>
 
           {/* Left Section */}
-          <div className="w-1/2 flex flex-col justify-center px-8">
+          <div className="w-full md:w-1/2 flex flex-col justify-center sm:px-8 px-3">
             {/* User Info */}
             <div className="flex justify-between items-center space-x-4 my-8">
               <div className="flex items-center gap-4">
@@ -33,7 +33,7 @@ const BlogDetails = () => {
                   <p className="text-xs font-extralight text-primary">{blogs?.data?.userId?.country}</p>
                 </div>
               </div>
-              <p className="text-xs font-extralight text-primary">{blogs?.data?.userId?.role}</p>
+              <p className="text-xs font-extralight text-primary sm:block hidden">{blogs?.data?.userId?.role}</p>
             </div>
             <div className="">
               <div className="flex items-center justify-between mb-10">

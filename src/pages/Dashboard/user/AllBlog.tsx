@@ -31,98 +31,100 @@ const AllBlog = ({ role }: { role: string }) => {
   };
 
   return (
-    <div className="p-6">
-      <table className="w-full border-collapse rounded-lg shadow-lg overflow-hidden bg-white">
-        <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition duration-200 border-b-[3px] border-b-blue-gray-100">
-          <tr>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Serial</th>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Created user</th>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Email</th>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Created Date</th>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Name</th>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Image</th>
-            <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {isLoading ? (
+    <div className="sm:p-6 p-2">
+      <div className="overflow-x-auto sm:min-w-full w-[330px]">
+        <table className="w-full border-collapse rounded-lg shadow-lg overflow-hidden bg-white">
+          <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition duration-200 border-b-[3px] border-b-blue-gray-100">
             <tr>
-              <td colSpan={7} className="text-center py-4">
-                <Loading />
-              </td>
+              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Serial</th>
+              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Created user</th>
+              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Email</th>
+              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Created Date</th>
+              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Name</th>
+              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Image</th>
+              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins text-center">Actions</th>
             </tr>
-          ) : blogs?.data?.length === 0 ? (
-            <tr>
-              <td colSpan={7} className="text-center py-4">
-                <NoContent message="No blogs found !" />
-              </td>
-            </tr>
-          ) : (
-            blogs?.data?.map((blog: Blog, index: number) => {
-              return (
-                <tr key={blog._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
-                  {/* Serial */}
-                  <td className="p-4 text-blue-gray-700 font-bold">
-                    <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
-                  </td>
+          </thead>
+          <tbody>
+            {isLoading ? (
+              <tr>
+                <td colSpan={7} className="text-center py-4">
+                  <Loading />
+                </td>
+              </tr>
+            ) : blogs?.data?.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="text-center py-4">
+                  <NoContent message="No blogs found !" />
+                </td>
+              </tr>
+            ) : (
+              blogs?.data?.map((blog: Blog, index: number) => {
+                return (
+                  <tr key={blog._id} className="hover:bg-gray-50 transition duration-200 text-sm border-b-[3px] border-b-blue-gray-100">
+                    {/* Serial */}
+                    <td className="p-4 text-blue-gray-700 font-bold">
+                      <RiNumbersFill className="inline mr-2 text-lg text-secondary" /> {index + 1}
+                    </td>
 
-                  {/* UserName */}
-                  <td className="p-4">
-                    <div>
-                      <BiEnvelope className="inline mr-2 text-lg text-secondary " />
-                      <span className="text-blue-gray-500 font-poppins font-semibold">{blog?.userId?.username}</span>
-                    </div>
-                  </td>
-                  {/* Email */}
-                  <td className="p-2">
-                    <div>
-                      <BiEnvelope className="inline mr-2 text-lg text-secondary " />
-                      <span className="text-blue-gray-500 font-poppins font-semibold">{blog?.userId?.email}</span>
-                    </div>
-                  </td>
+                    {/* UserName */}
+                    <td className="p-4">
+                      <div>
+                        <BiEnvelope className="inline mr-2 text-lg text-secondary " />
+                        <span className="text-blue-gray-500 font-poppins font-semibold">{blog?.userId?.username}</span>
+                      </div>
+                    </td>
+                    {/* Email */}
+                    <td className="p-2">
+                      <div>
+                        <BiEnvelope className="inline mr-2 text-lg text-secondary " />
+                        <span className="text-blue-gray-500 font-poppins font-semibold">{blog?.userId?.email}</span>
+                      </div>
+                    </td>
 
-                  {/* Date */}
-                  <td className="p-4 text-blue-gray-400 font-medium">
-                    <FaRegClock className="inline mr-2 text-lg text-secondary" />
-                    {blog?.createdAt && moment(blog?.createdAt).format("MMMM D, YYYY, h:mm A")}
-                  </td>
+                    {/* Date */}
+                    <td className="p-4 text-blue-gray-400 font-medium">
+                      <FaRegClock className="inline mr-2 text-lg text-secondary" />
+                      {blog?.createdAt && moment(blog?.createdAt).format("MMMM D, YYYY, h:mm A")}
+                    </td>
 
-                  {/* Blog Name */}
-                  <td className="p-4 text-blue-gray-500 font-poppins font-medium ">
-                    <BiBook className="inline mr-2 text-lg text-secondary" /> {blog.title}
-                  </td>
+                    {/* Blog Name */}
+                    <td className="p-4 text-blue-gray-500 font-poppins font-medium ">
+                      <BiBook className="inline mr-2 text-lg text-secondary" /> {blog.title}
+                    </td>
 
-                  {/* Image */}
-                  <td className="p-4 text-gray-500">
-                    <img className="w-12 h-12 object-cover rounded-full" src={blog.blogPhoto} alt="" />
-                  </td>
+                    {/* Image */}
+                    <td className="p-4 text-gray-500">
+                      <img className="w-12 h-12 object-cover rounded-full" src={blog.blogPhoto} alt="" />
+                    </td>
 
-                  {/* Actions */}
-                  <td className="p-4 relative text-center">
-                    <div className="relative">
-                      <button onClick={() => toggleDropdown(index)} className="text-gray-400 hover:text-gray-600 focus:outline-none">
-                        <BsThreeDots className="text-xl" />
-                      </button>
-                      {openDropdown === index && (
-                        <div className={`absolute ${index === blogs?.data?.length - 1 ? "-bottom-2" : "top-0"} right-12 bg-white shadow-md rounded-lg z-50 text-sm w-32`}>
-                          <ul>
-                            <li
-                              className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
-                              onClick={() => navigate(`/dashboard/${user?.role}/blogDetails/${blog._id}`)}
-                            >
-                              <FaEye className="mr-2 text-green" /> Details
-                            </li>
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              );
-            })
-          )}
-        </tbody>
-      </table>
+                    {/* Actions */}
+                    <td className="p-4 relative text-center">
+                      <div className="relative">
+                        <button onClick={() => toggleDropdown(index)} className="text-gray-400 hover:text-gray-600 focus:outline-none">
+                          <BsThreeDots className="text-xl" />
+                        </button>
+                        {openDropdown === index && (
+                          <div className={`absolute ${index === blogs?.data?.length - 1 ? "-bottom-2" : "top-0"} right-12 bg-white shadow-md rounded-lg z-50 text-sm w-32`}>
+                            <ul>
+                              <li
+                                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                                onClick={() => navigate(`/dashboard/${user?.role}/blogDetails/${blog._id}`)}
+                              >
+                                <FaEye className="mr-2 text-green" /> Details
+                              </li>
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <Pagination
         current={page}

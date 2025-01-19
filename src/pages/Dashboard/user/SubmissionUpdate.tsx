@@ -50,7 +50,7 @@ const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission 
 
 
   return (
-    <ContainForm onSubmit={onSubmit} className="w-full">
+    <ContainForm onSubmit={onSubmit} className="w-full p-2">
       <div className="mb-1">
         <FormInput
           type="text"

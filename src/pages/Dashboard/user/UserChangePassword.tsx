@@ -42,14 +42,14 @@ const UserChangePassword = ({ role }: { role: string }) => {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="bg-white shadow-xl rounded-lg flex items-center justify-center">
       {/* The wrapper */}
-      <div className="flex items-center justify-center">
-        <div className="w-3/6">
+      <div className="md:flex md:items-center md:justify-center">
+        <div className="w-full md:w-4/6 lg:w-3/6">
           <img
             src={passwordChange}
             alt="Illustration"
-            className="w-10/12 mx-auto"
+            className=" w-full md:w-9/12 lg:w-10/12 md:mx-auto"
           />
         </div>
 
@@ -62,17 +62,17 @@ const UserChangePassword = ({ role }: { role: string }) => {
               newPassword: ''
             }}
           resolver={zodResolver(changePasswordSchema)}
-          className="w-4/12 p-6"
+          className="w-full md:w-6/12 lg:w-4/12 md:p-6 p-4"
 
         >
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+          <h2 className="text-2xl font-semibold text-primary uppercase mb-6">
             Change Password
           </h2>
           <div className="mb-4">
             <FormInput
               type="password"
               name="currentPassword"
-              className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
+              className="mt-1 w-full border-[3px] border-SecondPrimary px-4 py-3 rounded-md shadow-sm outline-none"
               placeholder="Enter your old password"
               label="Current Password"
             />
@@ -81,18 +81,12 @@ const UserChangePassword = ({ role }: { role: string }) => {
             <FormInput
               type="password"
               name="newPassword"
-              className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
+              className="mt-1 w-full border-[3px] border-SecondPrimary px-4 py-3 rounded-md shadow-sm outline-none"
               placeholder="Enter your new password"
               label="New Password"
             />
           </div>
-          {/* {error && <p className="text-sm text-red-500 mb-4">{error}</p>} */}
-          <div className="flex space-x-4 mt-8">
-            <button
-              className="flex-1 py-2 rounded-md border-2 border-blue-gray-100 hover:bg-blue-gray-50 transition-colors duration-200"
-            >
-              Close
-            </button>
+          <div className="flex justify-end mt-6">
             <button
               type="submit"
               className="flex-1 bg-blue-500 text-white py-2 rounded-md shadow hover:bg-blue-600 transition-colors duration-200"

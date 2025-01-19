@@ -56,14 +56,14 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-14rem)]">
+    <div className="bg-white shadow-xl rounded-lg flex items-center justify-center">
       {/* The wrapper */}
-      <div className="flex items-center justify-center">
-        <div className="w-3/6">
+      <div className="md:flex md:items-center md:justify-center">
+        <div className="w-full md:w-4/6 lg:w-3/6">
           <img
             src={image}
             alt="Illustration"
-            className="w-9/12 mx-auto"
+            className="w-full md:w-9/12 lg:w-10/12 md:mx-auto"
           />
         </div>
 
@@ -72,17 +72,17 @@ const CreateBlog = () => {
           onSubmit={onSubmit}
           defaultValues={BlogDefaultValues}
           resolver={zodResolver(blogValidationSchema)}
-          className="w-4/12 p-2"
+          className="w-full md:w-6/12 lg:w-4/12  p-2"
 
         >
-          <h2 className="text-2xl font-semibold text-SecondPrimary mb-6 uppercase">
+          <h2 className="text-2xl font-semibold text-primary uppercase mb-6">
             Create Blog
           </h2>
           <div className="mb-1">
             <FormInput
               type="text"
               name="title"
-              className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
+              className="mt-1 w-full border-[3px] border-SecondPrimary px-4 py-3 rounded-lg shadow-sm outline-none"
               placeholder="Enter your blog title"
             />
           </div>
@@ -101,7 +101,7 @@ const CreateBlog = () => {
               <div className="mb-2">
                 <textarea
                   {...field}
-                  className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
+                  className="mt-1 w-full border-[3px] border-SecondPrimary px-4 py-3 rounded-lg shadow-sm outline-none"
                   placeholder="Write your content"
                 />
                 {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
@@ -125,7 +125,7 @@ const CreateBlog = () => {
                 />
                 <label
                   htmlFor="file-input"
-                  className="cursor-pointer mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none flex items-center justify-start bg-white relative"
+                  className="cursor-pointer mt-1 w-full border-[3px] border-SecondPrimary px-4 py-3 rounded-lg shadow-sm outline-none flex items-center justify-start bg-white relative"
                 >
                   {/* Upload icon */}
                   <FaUpload className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray" />
