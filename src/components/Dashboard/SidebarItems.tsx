@@ -1,5 +1,5 @@
 // sidebarItems.ts
-import { FaTrophy, FaUsers, FaRegEdit, FaTasks, FaUserCog, FaPen,FaUserAlt, FaLock, FaClipboard, FaNewspaper, FaBook } from "react-icons/fa";
+import { FaTrophy, FaRegEdit, FaTasks, FaUserCog, FaPen,FaUserAlt, FaLock, FaClipboard, FaNewspaper, FaBook } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import { GiPodiumWinner } from "react-icons/gi";
 
@@ -73,10 +73,10 @@ export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarIte
       label: "My Contest",
       icon: <FaTasks />
     },
-    {
-      path: "/dashboard/contestHolder/all-participation", label: "All Participation",
-      icon: <FaUsers />
-    },
+    // {
+    //   path: "/dashboard/contestHolder/all-participation", label: "All Participation",
+    //   icon: <FaUsers />
+    // },
     {
       path: "/dashboard/contestHolder/submission",
       label: "All Submission",

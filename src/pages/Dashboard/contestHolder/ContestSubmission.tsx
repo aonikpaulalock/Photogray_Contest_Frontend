@@ -48,13 +48,13 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
   };
 
   return (
-    <div className="flex items-center justify-center relative overflow-hidden gap-4">
+    <div className="flex items-center justify-center relative overflow-hidden md:gap-4">
       {/* Main container */}
-      <div className="relative bg-white shadow-2xl rounded-lg flex overflow-hidden">
+      <div className="relative bg-white shadow-2xl rounded-lg md:flex overflow-hidden">
         {/* Left Section */}
-        <div className="flex flex-col justify-center p-4 flex-1">
-          <h2 className="text-3xl font-bold text-primary mb-3">Contest Submission</h2>
-          <p className="text-SecondPrimary text-lg mb-5 font-medium">
+        <div className="flex flex-col justify-center md:p-4 flex-1">
+          <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">Contest Submission</h2>
+          <p className="text-SecondPrimary text-md md:text-lg mb-5 font-medium">
             Let your creativity shine! Submit your entry today and stand out.
           </p>
           <ContainForm onSubmit={onSubmit} className="w-full">
@@ -114,7 +114,7 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
         </div>
 
         {/* Right Section */}
-        <div className="relative flex justify-center items-center flex-1">
+        <div className="relative justify-center items-center flex-1 md:flex hidden">
           <img src={image} alt="Forgot Password Illustration" />
         </div>
       </div>

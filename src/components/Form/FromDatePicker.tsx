@@ -26,14 +26,13 @@ const FormDatePicker = ({
         control={control}
         defaultValue={null}
         render={({ field, fieldState: { error } }) => (
-          <div className="relative w-full">
-            {/* Position the calendar icon */}
-            <FaCalendarAlt className="absolute left-2 top-[45%] transform -translate-y-1/2 text-md text-gray z-20" />
+          <div className="relative w-full custom-datepicker">
+            <FaCalendarAlt className="absolute left-0 top-[45%] transform -translate-y-1/2 text-md text-gray z-20" />
             <DatePicker
               {...field}
               selected={field.value}
               onChange={(date) => field.onChange(date)}
-              className={`w-full pl-10 pr-3 py-2 ${className}`} 
+              className={`w-full pl-6 ${className}`} 
               placeholderText={placeholder}
               dateFormat="MM/dd/yyyy"
             />

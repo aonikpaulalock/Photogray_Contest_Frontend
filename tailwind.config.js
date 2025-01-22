@@ -7,6 +7,13 @@ export default withMT({
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "320px",
+        sm: "550px",
+        md: "800px",
+        lg: "1024px",
+        xl: "1280px",
+      },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
       },

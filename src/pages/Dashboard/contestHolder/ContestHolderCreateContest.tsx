@@ -45,7 +45,7 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
           id: toastId,
         });
       }
-    } catch (error:any) {
+    } catch (error: any) {
       const errorMessage = error?.data?.message || "Failed to create contest !!";
       toast.error(
         errorMessage,
@@ -55,7 +55,7 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-100 min-h-[calc(100vh-14rem)]">
+    <div className="flex items-center justify-center">
       <ContainForm
         onSubmit={onSubmit}
         defaultValues={
@@ -67,11 +67,11 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
             deadline: null,
           }
         }
-        className="bg-white shadow-xl rounded-lg flex overflow-hidden w-full"
+        className="bg-white shadow-xl rounded-lg md:flex flex-col md:flex-row overflow-hidden w-full"
       >
         {/* Left Section: Background Image with Overlay */}
         <div
-          className="w-2/3 relative bg-contain bg-center bg-no-repeat"
+          className="w-full lg:w-2/3 relative bg-contain bg-center bg-no-repeat h-96 md:h-auto"
           style={{
             backgroundImage: `url(${image})`,
           }}
@@ -80,13 +80,13 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
         </div>
 
         {/* Right Section: Form */}
-        <div className="w-2/3 p-10">
+        <div className="w-full lg:w-2/3 p-6 lg:p-10">
           <h2 className="text-3xl font-semibold text-primary mb-6 uppercase">
             Create Contest
           </h2>
           <div className="space-y-6">
-            <div className="flex space-x-4">
-              <div className="w-1/2">
+            <div className="lg:flex lg:space-x-4">
+              <div className="lg:w-1/2 w-full">
                 <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Contest Name
                 </label>
@@ -97,7 +97,7 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
                   placeholder="Enter your contest title"
                 />
               </div>
-              <div className="w-[50%]">
+              <div className="w-full lg:w-[50%]">
                 <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Contest deadline
                 </label>
@@ -108,8 +108,8 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
                 />
               </div>
             </div>
-            <div className="flex space-x-4">
-              <div className="w-[40%]">
+            <div className="lg:flex lg:space-x-4">
+              <div className="w-full lg:w-[40%]">
                 <label className="block text-sm text-gray-600 mb-1 font-semibold">
                   Contest prize
                 </label>

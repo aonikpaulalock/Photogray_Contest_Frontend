@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const ContestHolderDashboard = () => {
   return (
-    <div className="">
+    <div>
       <Outlet />
     </div>
   )

@@ -30,9 +30,7 @@ body {
     @apply absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#596ea8];
     content: '';
     height: 52px;
-    /* Customize as needed */
     width: 5px;
-    /* Customize as needed */
   }
 
   .custom-border:last-child::before {
@@ -61,21 +59,28 @@ body {
 
   .scrollbar-custom {
     scrollbar-width: thin;
-    scrollbar-color: #596ea850 #f1f1f1;
+    scrollbar-color: #596ea850 #f9f9f9;
   }
-
-
+  
   .scrollbar-custom::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px; 
   }
-
+  
   .scrollbar-custom::-webkit-scrollbar-thumb {
-    background-color: #999999;
-    border-radius: 10px;
+    background-color: #888888;
+    border-radius: 6px;
   }
-
+  
   .scrollbar-custom::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #f9f9f9; 
   }
+  .custom-datepicker .react-datepicker-wrapper {
+    width: 100% !important;
+  }
+  
+  .custom-datepicker .react-datepicker__input-container input {
+    width: 100% !important;
+  }
+  
 }

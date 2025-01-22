@@ -72,7 +72,7 @@ const CreateBlog = () => {
           onSubmit={onSubmit}
           defaultValues={BlogDefaultValues}
           resolver={zodResolver(blogValidationSchema)}
-          className="w-full md:w-6/12 lg:w-4/12  p-2"
+          className="w-full md:w-6/12 lg:w-4/12  md:p-2 p-4"
 
         >
           <h2 className="text-2xl font-semibold text-primary uppercase mb-6">

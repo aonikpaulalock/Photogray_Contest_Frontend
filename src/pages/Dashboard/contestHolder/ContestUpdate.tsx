@@ -68,10 +68,10 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
     >
 
       {/* Right Section: Form */}
-      <div className="w-full p-10">
+      <div className="w-full sm:p-10 p-0">
         <div className="space-y-6">
-          <div className="flex space-x-4">
-            <div className="w-1/2">
+          <div className="sm:flex sm:space-x-4">
+            <div className="w-full sm:w-1/2">
               <label className="block text-sm text-gray-600 mb-1 font-semibold">
                 Contest Name
               </label>
@@ -82,7 +82,7 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
                 placeholder="Enter your contest title"
               />
             </div>
-            <div className="w-[50%]">
+            <div className="w-full sm:w-[50%]">
               <label className="block text-sm text-gray-600 mb-1 font-semibold">
                 Contest deadline
               </label>
@@ -93,8 +93,8 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
               />
             </div>
           </div>
-          <div className="flex space-x-4">
-            <div className="w-[40%]">
+          <div className="sm:flex sm:space-x-4">
+            <div className="w-full sm:w-[40%]">
               <label className="block text-sm text-gray-600 mb-1 font-semibold">
                 Contest prize
               </label>

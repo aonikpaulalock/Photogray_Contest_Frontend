@@ -71,7 +71,7 @@ const MySubmission = () => {
 
   return (
     <div className="sm:p-6 p-1">
-      <div className="overflow-x-auto sm:min-w-full w-[330px]">
+      <div className="overflow-x-auto xs:min-w-full w-[280px]">
         <table className="w-full border-collapse rounded-lg shadow-lg overflow-hidden bg-white">
           <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition duration-200 border-b-[3px] border-b-blue-gray-100">
             <tr>

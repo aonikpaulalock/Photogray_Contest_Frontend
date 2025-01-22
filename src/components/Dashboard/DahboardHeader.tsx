@@ -15,7 +15,7 @@ const DahboardHeader = ({ onToggleSidebar }: { onToggleSidebar: () => void }) =>
   }
 
   return (
-    <div className="sticky top-0 left-0 z-20 bg-lightBlue sm:p-8 p-4 flex justify-between items-center transition-all duration-300">
+    <div className="sticky top-0 left-0 z-20 bg-transparent sm:p-8 p-4 flex justify-between items-center transition-all duration-300">
       {/* Logo */}
       <div
         className="text-2xl text-orange flex items-center cursor-pointer"
@@ -50,7 +50,7 @@ const DahboardHeader = ({ onToggleSidebar }: { onToggleSidebar: () => void }) =>
             </div>
           </div>
         )}
-        <div className="md:ml-0 ml-4 block lg:hidden">
+        <div className="md:ml-0 ml-4 block md:hidden">
           <button
             onClick={onToggleSidebar}
             className="text-4xl text-deep-orange-500 sm:p-2 p-0"

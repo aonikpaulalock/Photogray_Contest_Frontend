@@ -13,9 +13,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, title, onClose, children,classNam
 
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-60">
-      <div className={`bg-white rounded-lg shadow-lg p-6 ${className} w-full`}>
+      <div className={`bg-white rounded-lg shadow-lg sm:p-6 p-5 ${className} w-full`}>
         <div className="flex justify-between items-center">
-          <h3 className="text-2xl font-semibold text-SecondPrimary uppercase">{title}</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold text-SecondPrimary uppercase">{title}</h3>
           <button
             onClick={onClose}
             className="text-primary focus:outline-none text-4xl"

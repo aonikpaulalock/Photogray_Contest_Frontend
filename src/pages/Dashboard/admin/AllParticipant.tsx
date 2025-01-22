@@ -28,7 +28,8 @@ const AllParticipant = ({ role }: { role: string }) => {
   const totalPages = Math.ceil((data?.meta?.totalParticipants || 0) / limit);
 
   return (
-    <div className="p-4">
+    <div className="sm:p-4 p-2">
+      <div className="overflow-x-auto xs:min-w-full w-[280px]">
       <table className="w-full border-collapse rounded-lg shadow-lg overflow-hidden bg-white">
         <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition duration-200 border-b-[3px] border-b-blue-gray-100">
           <tr>
@@ -114,6 +115,7 @@ const AllParticipant = ({ role }: { role: string }) => {
         </tbody>
 
       </table>
+      </div>
       {/* Modal */}
 
       <Pagination

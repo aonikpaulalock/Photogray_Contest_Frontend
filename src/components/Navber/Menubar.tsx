@@ -11,7 +11,7 @@ const Menubar = ({
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 font-bold"
+        className="h-7 w-7 font-bold"
         fill="#F582AE"
         viewBox="0 0 24 24"
         stroke="#F582AE"
