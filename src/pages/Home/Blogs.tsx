@@ -1,3 +1,4 @@
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -50,6 +51,7 @@ const Blogs = () => {
               el: '.custom-pagination',
               clickable: true,
               renderBullet: (index, className) => {
+                void index;
                 return `<span class="${className} custom-pagination-item"></span>`;
               },
             }}

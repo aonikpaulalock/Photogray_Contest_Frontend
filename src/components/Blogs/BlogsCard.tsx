@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { blogDateFormate } from '../../utils/blogDateFormate';
 import { useTotalLikesQuery } from '../../redux/feature/user/blogLike';
 import { useTotalCommentsQuery } from '../../redux/feature/user/blogComment';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { currentUser } from '../../redux/auth/authSlice';
 import { useAppSelector } from '../../redux/hooks';
 import Swal from 'sweetalert2';
@@ -17,7 +17,7 @@ const BlogsCard = ({ blog }: {
   const { data: totalLikes } = useTotalLikesQuery(blog?._id);
   const { data: totalComments } = useTotalCommentsQuery(blog?._id);
 
-  const [showFullContent, setShowFullContent] = useState(false);
+  const [showFullContent] = useState(false);
 
   const user = useAppSelector(currentUser);
   const handleReadMoreClick = () => {

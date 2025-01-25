@@ -12,6 +12,7 @@ import ForgetPassword from "../pages/ForgetPassword/ForgetPassword";
 import ResetPassord from "../pages/ResetPassword/ResetPassord";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import PaymentFailed from "../pages/Payment/PaymentFailed";
+import NotFound from "../pages/NotFound/Notfound";
 
 export const router = createBrowserRouter([
   {
@@ -55,4 +56,9 @@ export const router = createBrowserRouter([
       userRoutes,
     ],
   },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+
 ]);

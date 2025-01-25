@@ -18,7 +18,7 @@ import Loading from "../../../components/Loading/Loading";
 import NoContent from "../../../components/Loading/NoContent";
 
 const MyBlog = () => {
-  const [showFullContent, setShowFullContent] = useState(false);
+  const [showFullContent] = useState(false);
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const user = useAppSelector(currentUser);
