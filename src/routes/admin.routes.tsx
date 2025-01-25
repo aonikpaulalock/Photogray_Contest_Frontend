@@ -1,3 +1,4 @@
+import ProtectedRoute from "../layout/ProtectedRoute";
 import AdminDashboard from "../pages/Dashboard/admin/AdminDashboard";
 import AdminSubmission from "../pages/Dashboard/admin/AdminSubmission";
 import AllParticipant from "../pages/Dashboard/admin/AllParticipant";
@@ -15,59 +16,85 @@ import UserProfile from "../pages/Dashboard/user/UserProfile";
 
 export const adminRoutes = {
   path: "admin",
-  element: <AdminDashboard />,
+  element: <ProtectedRoute role="admin"><AdminDashboard /></ProtectedRoute>,
   children: [
     {
       path: "create-contest",
-      element: <ContestHolderCreateContest role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <ContestHolderCreateContest role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "all-contest",
-      element: <ContestHolderContest role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <ContestHolderContest role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "manage-contest",
-      element: <ManageContest />,
+      element: <ProtectedRoute role="admin">
+        <ManageContest />
+      </ProtectedRoute>,
     },
     {
       path: "submission",
-      element: <AdminSubmission />,
+      element: <ProtectedRoute role="admin">
+        <AdminSubmission />
+      </ProtectedRoute>,
     },
     {
       path: "submissionDetails/:submissionId",
-      element: <SubmissionDetails />,
+      element: <ProtectedRoute role="admin">
+        <SubmissionDetails />
+      </ProtectedRoute>,
     },
     {
       path: "manage-user",
-      element: <ManageUser />,
+      element: <ProtectedRoute role="admin">
+        <ManageUser />
+      </ProtectedRoute>,
     },
     {
       path: "userDetails/:userId",
-      element: <UserDetails role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <UserDetails role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "contestDetails/:id",
-      element: <ContestDetails role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <ContestDetails role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "contestParticipation/:contestId",
-      element: <AllParticipant role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <AllParticipant role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "profile",
-      element: <UserProfile role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <UserProfile role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "change-password",
-      element: <UserChangePassword role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <UserChangePassword role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "all-blog",
-      element: <AllBlog role="admin" />,
+      element: <ProtectedRoute role="admin">
+        <AllBlog role="admin" />
+      </ProtectedRoute>,
     },
     {
       path: "blogDetails/:blogId",
-      element: <BlogDetails />,
+      element: <ProtectedRoute role="admin">
+        <BlogDetails />
+      </ProtectedRoute>,
     },
   ],
 };

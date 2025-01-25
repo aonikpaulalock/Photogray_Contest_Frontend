@@ -9,12 +9,13 @@ import { toast } from 'sonner';
 import { useLoginUserMutation } from '../../redux/auth/authApi';
 import { verifyToken } from '../../utils/verifyToken';
 import { setUser, TUser } from '../../redux/auth/authSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import ButtonLoading from '../../components/Loading/ButtonLoading';
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const location = useLocation();
   const [login, { isLoading }] = useLoginUserMutation()
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logged in processing")
@@ -30,7 +31,9 @@ const Login = () => {
           res?.message, {
           id: toastId
         })
-        navigate(`/dashboard/${user.role}/profile`)
+        // navigate(`/dashboard/${user.role}/profile`)
+        const redirectTo = location.state?.from?.pathname || `/dashboard/${user.role}/profile`;
+        navigate(redirectTo, { replace: true });
       } else {
         toast.error(res?.data?.errorDetails?.message || "Update failed.", {
           id: toastId,

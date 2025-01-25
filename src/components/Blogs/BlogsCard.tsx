@@ -6,15 +6,36 @@ import { useState } from 'react';
 import { blogDateFormate } from '../../utils/blogDateFormate';
 import { useTotalLikesQuery } from '../../redux/feature/user/blogLike';
 import { useTotalCommentsQuery } from '../../redux/feature/user/blogComment';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { currentUser } from '../../redux/auth/authSlice';
+import { useAppSelector } from '../../redux/hooks';
+import Swal from 'sweetalert2';
 const BlogsCard = ({ blog }: {
   blog: Blog
 }) => {
-
+  const navigate = useNavigate();
   const { data: totalLikes } = useTotalLikesQuery(blog?._id);
   const { data: totalComments } = useTotalCommentsQuery(blog?._id);
 
   const [showFullContent, setShowFullContent] = useState(false);
+
+  const user = useAppSelector(currentUser);
+  const handleReadMoreClick = () => {
+    if (user) {
+      navigate(`/dashboard/${blog?.userId?.role}/blogDetails/${blog?._id}`);
+    } else {
+      Swal.fire({
+        title: "Please Login First!",
+        text: "You need to log in to read the blog details.",
+        icon: "warning",
+        confirmButtonText: "Okay",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
     <div className="bg-[#F9F9F9] overflow-hidden p-5">
@@ -56,9 +77,11 @@ const BlogsCard = ({ blog }: {
         </div>
         <hr className='border border-[#f1efef] mb-5' />
         <div className='text-center mb-4'>
-          <Link to={`/dashboard/${blog?.userId?.role}/blogDetails/${blog?._id}`} className="text-primary font-bold hover:text-secondary hover:underline transition duration-300 ease-in-out">
+          <button
+            onClick={handleReadMoreClick}
+            className="text-primary font-bold hover:text-secondary hover:underline transition duration-300 ease-in-out">
             Read more
-          </Link>
+          </button>
         </div>
       </div>
     </div>

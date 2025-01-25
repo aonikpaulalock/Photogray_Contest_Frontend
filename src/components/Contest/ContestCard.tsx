@@ -4,12 +4,30 @@ import moment from "moment";
 import { useAppSelector } from "../../redux/hooks";
 import { currentUser } from "../../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ContestCard = ({ contest }: {
   contest: TPhotographyContest
 }) => {
   const navigate = useNavigate()
   const user = useAppSelector(currentUser);
+  const handleNavigate = () => {
+    if (user) {
+      navigate(`/dashboard/${user.role}/contestDetails/${contest?._id}`);
+    } else {
+      Swal.fire({
+        title: "Please Login First!",
+        text: "You need to log in to browse the contest details",
+        icon: "warning",
+        confirmButtonText: "Okay",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
   return (
 
     <div className="sm:p-8 p-6 bg-[#EAEAEA]">
@@ -62,7 +80,7 @@ const ContestCard = ({ contest }: {
       {/* <!-- Button --> */}
       <div className="text-center mt-10 mb-6">
         <button
-          onClick={() => navigate(`/dashboard/${user?.role}/contestDetails/${contest?._id}`)}
+          onClick={handleNavigate}
           className="btn-outline">Browse Contest</button>
       </div>
     </div>

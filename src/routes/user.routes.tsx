@@ -1,3 +1,4 @@
+import ProtectedRoute from "../layout/ProtectedRoute";
 import ContestDetails from "../pages/Dashboard/contestHolder/ContestDetails";
 import ContestHolderContest from "../pages/Dashboard/contestHolder/ContestHolderContest";
 import AllBlog from "../pages/Dashboard/user/AllBlog";
@@ -12,47 +13,69 @@ import UserProfile from "../pages/Dashboard/user/UserProfile";
 
 export const userRoutes = {
   path: "user",
-  element: <UserDashboard />,
+  element: <ProtectedRoute role="user">
+    <UserDashboard />
+  </ProtectedRoute>,
   children: [
     {
       path: "all-contests",
-      element: <ContestHolderContest role="user" />,
+      element: <ProtectedRoute role="user">
+        <ContestHolderContest role="user" />
+      </ProtectedRoute>,
     },
     {
       path: "create-blog",
-      element: <CreateBlog />,
+      element: <ProtectedRoute role="user">
+        <CreateBlog />
+      </ProtectedRoute>,
     },
     {
       path: "all-blog",
-      element: <AllBlog role="user" />,
+      element: <ProtectedRoute role="user">
+        <AllBlog role="user" />
+      </ProtectedRoute>,
     },
     {
       path: "my-blog",
-      element: <MyBlog />,
+      element: <ProtectedRoute role="user">
+        <MyBlog />
+      </ProtectedRoute>,
     },
     {
       path: "contestDetails/:id",
-      element: <ContestDetails role="user" />,
+      element: <ProtectedRoute role="user">
+        <ContestDetails role="user" />
+      </ProtectedRoute>,
     },
     {
       path: "blogDetails/:blogId",
-      element: <BlogDetails />,
+      element: <ProtectedRoute role="user">
+        <BlogDetails />
+      </ProtectedRoute>,
     },
     {
       path: "submission",
-      element: <MySubmission />,
+      element: <ProtectedRoute role="user">
+        <MySubmission />
+      </ProtectedRoute>,
     },
     {
       path: "submissionDetails/:submissionId",
-      element: <SubmissionDetails />,
+      element: <ProtectedRoute role="user">
+        <SubmissionDetails />
+      </ProtectedRoute>,
     },
     {
       path: "profile",
-      element: <UserProfile role="user" />,
+      element: <ProtectedRoute role="user">
+        <UserProfile role="user" />
+      </ProtectedRoute>,
     },
     {
       path: "change-password",
-      element: <UserChangePassword role="user" />,
+      element: <ProtectedRoute role="user">
+        <UserChangePassword role="user" />
+      </ProtectedRoute>,
     },
   ],
 };
