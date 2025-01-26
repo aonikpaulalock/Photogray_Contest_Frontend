@@ -43,7 +43,7 @@ const UserChangePassword = ({ role }: { role: string }) => {
 
   return (
     <div className="bg-white shadow-xl rounded-lg flex items-center justify-center">
-      {/* The wrapper */}
+
       <div className="md:flex md:items-center md:justify-center">
         <div className="w-full md:w-4/6 lg:w-3/6">
           <img
@@ -53,7 +53,7 @@ const UserChangePassword = ({ role }: { role: string }) => {
           />
         </div>
 
-        {/* Right Section: Form */}
+
         <ContainForm
           onSubmit={onSubmit}
           defaultValues={

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Swal from "sweetalert2";
 
-// Reusable function to show delete confirmation
 const deleteEntity = async (
   entityId: string, 
   deleteApiCall: (id: string) => Promise<any>,

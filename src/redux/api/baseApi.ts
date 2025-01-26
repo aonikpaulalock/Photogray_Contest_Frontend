@@ -9,7 +9,9 @@ interface ErrorData {
 }
 
 const mainBaseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  // baseUrl: "http://localhost:5000/api",
+  // "http://localhost:5000/api/auth/refresh-token" === Refrsh token local server,
+  baseUrl: "https://photography-backend-psi.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -35,7 +37,7 @@ const customBaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Defi
   // Token refresh logic
   if (result?.error?.status === 401) {
     const res = await fetch(
-      "http://localhost:5000/api/auth/refresh-token", {
+      "https://photography-backend-psi.vercel.app/api/auth/refresh-token", {
       method: "POST",
       credentials: "include"
     })

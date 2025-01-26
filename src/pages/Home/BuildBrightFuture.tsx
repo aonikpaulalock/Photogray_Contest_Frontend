@@ -13,13 +13,13 @@ const BuildBrightFuture = () => {
         className="bg-primary relative"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }} // Animation triggers only once
+        viewport={{ once: true, amount: 0.3 }}
         variants={{
           hidden: { opacity: 0, y: 50 },
           visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeInOut" } },
         }}
       >
-        {/* Flex Container */}
+
         <motion.div
           className="flex flex-col md:flex-row items-center"
           initial="hidden"
@@ -30,7 +30,7 @@ const BuildBrightFuture = () => {
             hidden: {},
           }}
         >
-          {/* Left Section - Text */}
+ 
           <motion.div
             className="w-full md:w-1/2 px-6 md:px-12"
             variants={{
@@ -53,7 +53,6 @@ const BuildBrightFuture = () => {
             </motion.button>
           </motion.div>
 
-          {/* Right Section - Image */}
           <motion.div
             className="relative w-full md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0"
             variants={{
@@ -75,7 +74,6 @@ const BuildBrightFuture = () => {
           </motion.div>
         </motion.div>
 
-        {/* Decorative Elements */}
         <motion.img
           src={threeDot}
           alt=""

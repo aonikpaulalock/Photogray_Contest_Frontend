@@ -9,14 +9,11 @@ export const CountryHelper = () => {
       try {
         const response = await fetch("https://restcountries.com/v3.1/all");
         const data = await response.json();
-        
-        // Processing the countries data
         const countryOptions = data.map((country: any) => ({
           value: country.name.common,
           label: country.name.common,
         }));
-        
-        // Set countries to state
+
         setCountries(countryOptions);
         setLoading(false);
       } catch (error) {

@@ -7,22 +7,27 @@ import FormMultiSelect from "../../../components/Form/FromMultiSelect";
 import FormDatePicker from "../../../components/Form/FromDatePicker";
 import { formatDate } from "../../../utils/dateFormat";
 import { toast } from "sonner";
-import { useCreateContestMutation } from "../../../redux/feature/contestHolder/contestHolderApi";
+import { useCreateContestMutation, useManageAdminContestsQuery } from "../../../redux/feature/contestHolder/contestHolderApi";
 import { useAppSelector } from "../../../redux/hooks";
 import { currentUser } from "../../../redux/auth/authSlice";
 import ButtonLoading from "../../../components/Loading/ButtonLoading";
-
-// const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
-
-const options = [
-  { value: "important", label: "Important" },
-  { value: "urgent", label: "Urgent" },
-  { value: "optional", label: "Optional" },
-];
 const ContestHolderCreateContest = ({ role }: { role: string }) => {
   console.log(role)
   const user = useAppSelector(currentUser);
   const [createContest, { isLoading }] = useCreateContestMutation();
+
+  const { data: contestsTags } = useManageAdminContestsQuery({});
+
+  console.log(contestsTags)
+  const uniqueTags: string[] = contestsTags?.data
+    ? Array.from(
+      new Set(
+        contestsTags.data
+          .map((contest: any) => contest.tags)
+          .flat()
+      )
+    )
+    : [];
 
   const onSubmit = async (values: FieldValues) => {
     console.log(values);
@@ -69,7 +74,6 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
         }
         className="bg-white shadow-xl rounded-lg md:flex flex-col md:flex-row overflow-hidden w-full"
       >
-        {/* Left Section: Background Image with Overlay */}
         <div
           className="w-full lg:w-2/3 relative bg-contain bg-center bg-no-repeat h-96 md:h-auto"
           style={{
@@ -78,8 +82,6 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
         >
           <div className="absolute inset-3 bg-black opacity-15"></div>
         </div>
-
-        {/* Right Section: Form */}
         <div className="w-full lg:w-2/3 p-6 lg:p-10">
           <h2 className="text-3xl font-semibold text-primary mb-6 uppercase">
             Create Contest
@@ -127,7 +129,7 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
                 <FormMultiSelect
                   name="tags"
                   className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-medium text-SecondPrimary py-1"
-                  options={options}
+                  options={uniqueTags.map((tag: string) => ({ value: tag, label: tag }))}
                   placeholder="Select tags"
                 />
               </div>
@@ -152,7 +154,6 @@ const ContestHolderCreateContest = ({ role }: { role: string }) => {
             </div>
           </div>
 
-          {/* Save Button */}
           <div className="mt-6 text-right">
             <button type="submit" className="px-8 py-4 bg-primary text-white">
               {

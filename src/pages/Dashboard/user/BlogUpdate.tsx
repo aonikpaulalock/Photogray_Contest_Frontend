@@ -99,7 +99,6 @@ const BlogUpdate = ({ blog, closeModal }: { blog: Blog | null, closeModal: () =>
         name="blogPhoto"
         render={({ field, fieldState: { error } }) => (
           <div className="mb-0">
-            {/* Hidden file input */}
             <input
               type="file"
               onChange={(e) => {
@@ -113,16 +112,14 @@ const BlogUpdate = ({ blog, closeModal }: { blog: Blog | null, closeModal: () =>
               htmlFor="file-input"
               className="cursor-pointer mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none flex items-center justify-start bg-white relative"
             >
-              {/* Upload icon */}
+
               <FaUpload className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray" />
 
-              {/* Display file name or placeholder */}
               <span className="pl-8 text-gray font-sm">
                 {field.value ? field.value.name : "Upload profile picture"}
               </span>
             </label>
 
-            {/* Error message */}
             {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
           </div>
         )}

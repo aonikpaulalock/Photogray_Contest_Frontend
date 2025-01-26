@@ -27,9 +27,7 @@ const ContestDetails = ({ role }: { role: string }) => {
   return (
     <div>
 <div className="flex items-center justify-center relative">
-  {/* Main container */}
   <div className="relative bg-white flex flex-col-reverse md:flex-row overflow-hidden w-full z-10 sm:p-5 p-3 shadow-lg rounded-lg">
-    {/* Left Section */}
     <div className="w-full md:w-1/2 flex flex-col justify-center sm:p-6 p-3">
       <div>
         <div className="flex items-center justify-between mb-10">
@@ -39,14 +37,12 @@ const ContestDetails = ({ role }: { role: string }) => {
           <span className="text-2xl font-medium text-primary font-poppins">${contest?.data?.prize}</span>
         </div>
 
-        {/* Contest Details */}
         <p className="text-primary text-base leading-7 font-medium">
           {contest?.data?.requirements}
         </p>
 
-        {/* Tags */}
         <div className="mt-10 mb-14 flex justify-between">
-          {/* Tags Section */}
+
           <div className="flex-1 mr-4">
             <p className="text-xs text-[#b2b6be] font-extralight mb-[6px]">Tag</p>
             <div className="flex flex-wrap gap-2">
@@ -61,7 +57,6 @@ const ContestDetails = ({ role }: { role: string }) => {
             </div>
           </div>
 
-          {/* Deadline Section */}
           <div className="flex-none">
             <p className="text-xs text-[#b2b6be] font-extralight mb-[6px]">Deadline</p>
             <span className="text-xs bg-[#d3d1d1] px-3 py-2 font-medium text-[#a3a3a3]">
@@ -71,7 +66,6 @@ const ContestDetails = ({ role }: { role: string }) => {
           </div>
         </div>
 
-        {/* User Info */}
         <div className="flex justify-between items-center space-x-4 mb-4">
           <div className="flex items-center gap-4">
             <img
@@ -87,7 +81,6 @@ const ContestDetails = ({ role }: { role: string }) => {
           <p className="text-xs font-extralight text-primary">{contest?.data?.userId?.role}</p>
         </div>
 
-        {/* Button */}
         {role === "user" && (
           <div className="mt-10 mb-6">
             <button className="btn-outline" onClick={openUpdateModal}>
@@ -98,7 +91,6 @@ const ContestDetails = ({ role }: { role: string }) => {
       </div>
     </div>
 
-    {/* Right Section */}
     <div className="w-full md:w-7/12 flex justify-center items-center">
       <img
         src={detailsImage}

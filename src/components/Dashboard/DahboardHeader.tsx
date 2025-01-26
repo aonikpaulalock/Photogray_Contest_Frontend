@@ -1,4 +1,4 @@
-import { FaBars } from "react-icons/fa"; // Icon for sidebar toggle
+import { FaBars } from "react-icons/fa";
 import chatLogo from "../../assets/landingPage/SvgLogo/chat.svg";
 import notificationLogo from "../../assets/landingPage/SvgLogo/notification.svg";
 import { useGetMeUserQuery } from "../../redux/feature/user/userApi";

@@ -12,7 +12,6 @@ const imageBb_Api = "ab44083a680f1ff8d7a143435888c291";
 const SubmissionUpdate = ({ submission, closeModal }: { submission: TSubmission | null, closeModal: () => void }) => {
   const [updateSubmission, { isLoading }] = useUpdateSubmissionMutation()
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
     const toastId = toast.loading("Updating Submission...");
     try {
       const newImageUrls = values.images && values.images.length > 0

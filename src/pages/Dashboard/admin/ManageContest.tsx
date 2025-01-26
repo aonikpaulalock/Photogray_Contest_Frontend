@@ -34,7 +34,7 @@ const ManageContest = () => {
   const [deleteContest] = useDeleteContestMutation();
 
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedContest, setSelectedContest] = useState<TPhotographyContest | null>(null);
   const toggleDropdown = (index: number) => {
     if (openDropdown === index) {
@@ -61,14 +61,12 @@ const ManageContest = () => {
     setOpenDropdown(null);
   };
 
-  // Function to open modal and set selected blog
   const openUpdateModal = (contest: TPhotographyContest) => {
     setSelectedContest(contest);
     setIsModalOpen(true);
     setOpenDropdown(null);
   };
 
-  // Function to close modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedContest(null);
@@ -189,7 +187,6 @@ const ManageContest = () => {
         </table>
       </div>
 
-      {/* Modal */}
       <Modal
         isOpen={isModalOpen}
         title="Update Contest"

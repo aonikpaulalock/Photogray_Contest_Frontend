@@ -20,7 +20,6 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
     try {
       const imageUrls = await uploadMultipleImagesToDB(values.images, imageBb_Api);
 
-      // Prepare final submission data
       const data = {
         ...values,
         images: imageUrls,
@@ -28,9 +27,7 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
         userId: user?.userId,
       };
 
-      console.log("Final submission data:", data);
 
-      // Submit the data
       const res = await createSubmission(data).unwrap();
       if (res?.success) {
         toast.success(res?.message, { id: toastId, duration: 2000 });
@@ -49,9 +46,7 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
 
   return (
     <div className="flex items-center justify-center relative overflow-hidden md:gap-4">
-      {/* Main container */}
       <div className="relative bg-white shadow-2xl rounded-lg md:flex overflow-hidden">
-        {/* Left Section */}
         <div className="flex flex-col justify-center md:p-4 flex-1">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-3">Contest Submission</h2>
           <p className="text-SecondPrimary text-md md:text-lg mb-5 font-medium">
@@ -113,7 +108,6 @@ const ContestSubmission = ({ contest, closeModal }: { contest: any | null; close
           </ContainForm>
         </div>
 
-        {/* Right Section */}
         <div className="relative justify-center items-center flex-1 md:flex hidden">
           <img src={image} alt="Forgot Password Illustration" />
         </div>

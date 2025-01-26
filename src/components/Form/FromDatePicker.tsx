@@ -1,7 +1,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // Import default styles
-import { FaCalendarAlt } from "react-icons/fa"; // Import the calendar icon
+import "react-datepicker/dist/react-datepicker.css"; 
+import { FaCalendarAlt } from "react-icons/fa";
 
 type TDatePickerProps = {
   name: string;

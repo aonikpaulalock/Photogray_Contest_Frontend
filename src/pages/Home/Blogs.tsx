@@ -1,9 +1,7 @@
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { motion } from 'framer-motion';
-
 import Container from '../../components/Container/Container';
 import { Pagination } from 'swiper/modules';
 import BlogsCard from '../../components/Blogs/BlogsCard';
@@ -13,7 +11,6 @@ import { Blog } from '../../types';
 import Loading from '../../components/Loading/Loading';
 import NoContent from '../../components/Loading/NoContent';
 
-// Animation Variants
 const textAnimation = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0 },
@@ -25,11 +22,11 @@ const Blogs = () => {
   return (
     <Container>
       <section className="py-16">
-        {/* Animated Header */}
+
         <motion.div
           className="text-center mb-12"
           initial="hidden"
-          animate="visible" // Trigger animation only once
+          animate="visible"
           variants={textAnimation}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
@@ -42,7 +39,6 @@ const Blogs = () => {
           </h1>
         </motion.div>
 
-        {/* Swiper Section */}
         <div>
           <Swiper
             spaceBetween={30}
@@ -64,7 +60,7 @@ const Blogs = () => {
             }}
             className="mySwiper"
           >
-            {/* Loading State */}
+
             {isLoading && (
               <SwiperSlide>
                 <div className="flex justify-center items-center min-h-[300px]">
@@ -73,7 +69,6 @@ const Blogs = () => {
               </SwiperSlide>
             )}
 
-            {/* No Content State */}
             {!isLoading && (!blogs?.data || blogs.data.length === 0) && (
               <SwiperSlide>
                 <div className="flex justify-center items-center min-h-[300px]">
@@ -82,13 +77,12 @@ const Blogs = () => {
               </SwiperSlide>
             )}
 
-            {/* Blogs Data with Animation */}
             {!isLoading &&
               blogs?.data?.map((blog: Blog) => (
                 <SwiperSlide key={blog._id}>
                   <motion.div
                     initial="hidden"
-                    animate="visible" // Trigger animation only once
+                    animate="visible"
                     variants={textAnimation}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
@@ -98,7 +92,6 @@ const Blogs = () => {
               ))}
           </Swiper>
 
-          {/* Custom Pagination */}
           <div className="custom-pagination flex justify-center mt-14 cursor-pointer p-1"></div>
         </div>
       </section>

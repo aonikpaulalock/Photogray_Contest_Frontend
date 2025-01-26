@@ -16,8 +16,6 @@ const UserProfile = ({ role }: { role: string }) => {
   const { data: userData, isLoading: userLoading } = useGetMeUserQuery(undefined);
   const [profileUpdate, { isLoading }] = useUpdateUserMutation();
 
-
-  // Default values for the form, set dynamically from userData
   const userDefaultValues = {
     username: userData?.data?.username,
     designation: userData?.data?.designation,
@@ -57,7 +55,7 @@ const UserProfile = ({ role }: { role: string }) => {
           id: toastId,
           duration: 2000,
         });
-        // Add this to reload the page
+ 
         setTimeout(() => {
           window.location.reload();
         }, 500);
@@ -81,7 +79,7 @@ const UserProfile = ({ role }: { role: string }) => {
 
   return (
     <div className="flex items-center justify-center bg-gray-100 min-h-[calc(100vh-15rem)]">
-      {/* Outer container */}
+
       <ContainForm
         onSubmit={onSubmit}
         defaultValues={userDefaultValues}

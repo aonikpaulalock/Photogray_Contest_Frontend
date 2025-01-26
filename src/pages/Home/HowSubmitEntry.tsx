@@ -7,28 +7,27 @@ const HowSubmitEntry = () => {
   return (
     <Container className="mb-32">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-32 gap-x-10 items-center p-6">
-        {/* Left side (Image) */}
+
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }} // কমিয়ে দেওয়া হয়েছে
+          transition={{ duration: 0.6 }}
         >
           <img src={HowSubmit} alt="Camera Image" />
         </motion.div>
 
-        {/* Right side (Text Content) */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }} // কমিয়ে দেওয়া হয়েছে
+          transition={{ duration: 0.6 }}
         >
           <motion.h4
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }} // delay বাদ
+            transition={{ duration: 0.5 }}
             className="text-2xl font-bold text-[#81BAE3] mb-4"
           >
             Learn how you can apply
@@ -37,7 +36,7 @@ const HowSubmitEntry = () => {
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }} // delay বাদ
+            transition={{ duration: 0.5 }}
             className="text-4xl font-bold mb-6 text-primary"
           >
             Easily to submit your entry
@@ -46,20 +45,18 @@ const HowSubmitEntry = () => {
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }} // delay বাদ
+            transition={{ duration: 0.5 }}
             className="text-base font-light text-[#383885] mb-12"
           >
             Leo mi faucibus elit socios vitae nisi sed neque. Tortor diam arcu in facilisi vestibulum.
           </motion.p>
 
-          {/* Grid List for the Steps */}
           <ul className="grid grid-cols-1 gap-4">
-            {/* Step 1 */}
             <motion.li
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6 }} // কমিয়ে দেওয়া হয়েছে
+              transition={{ duration: 0.6 }}
               className="flex items-start space-x-8 mb-8"
             >
               <span className="h-16 w-16 bg-[#f5eaee] flex justify-center items-center text-secondary">
@@ -73,12 +70,11 @@ const HowSubmitEntry = () => {
               </div>
             </motion.li>
 
-            {/* Step 2 */}
             <motion.li
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6 }} // কমিয়ে দেওয়া হয়েছে
+              transition={{ duration: 0.6 }}
               className="flex items-start space-x-8 mb-8"
             >
               <span className="h-16 w-16 bg-[#f5eaee] flex justify-center items-center text-secondary">
@@ -92,12 +88,11 @@ const HowSubmitEntry = () => {
               </div>
             </motion.li>
 
-            {/* Step 3 */}
             <motion.li
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6 }} // কমিয়ে দেওয়া হয়েছে
+              transition={{ duration: 0.6 }}
               className="flex items-start space-x-8 mb-8"
             >
               <span className="h-16 w-16 bg-[#f5eaee] flex justify-center items-center text-secondary">
@@ -111,12 +106,11 @@ const HowSubmitEntry = () => {
               </div>
             </motion.li>
 
-            {/* Step 4 */}
             <motion.li
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6 }} // কমিয়ে দেওয়া হয়েছে
+              transition={{ duration: 0.6 }} 
               className="flex items-start space-x-8 mb-8"
             >
               <span className="h-16 w-16 bg-[#f5eaee] flex justify-center items-center text-secondary">
@@ -131,12 +125,11 @@ const HowSubmitEntry = () => {
             </motion.li>
           </ul>
 
-          {/* Load More Button */}
           <motion.button
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }} // কমিয়ে দেওয়া হয়েছে
+            transition={{ duration: 0.6 }}
             className="mt-16 px-8 py-4 bg-primary text-white"
           >
             Load more

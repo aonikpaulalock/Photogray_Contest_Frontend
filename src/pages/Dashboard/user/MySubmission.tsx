@@ -26,7 +26,6 @@ const MySubmission = () => {
     page: page,
     limit: 4,
   });
-  console.log(submissions)
 
   const metaData = submissions?.meta;
   const [submissionDelete] = useDeleteSubmissionMutation();
@@ -56,14 +55,12 @@ const MySubmission = () => {
     setOpenDropdown(null);
   };
 
-  // Function to open modal and set selected blog
   const openUpdateModal = (submission: TSubmission) => {
     setSelectedSubmission(submission);
     setIsModalOpen(true);
     setOpenDropdown(null);
   };
 
-  // Function to close modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedSubmission(null);
@@ -193,7 +190,6 @@ const MySubmission = () => {
 
         </table>
       </div>
-      {/* Modal */}
 
       <Modal
         isOpen={isModalOpen}

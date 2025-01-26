@@ -15,6 +15,8 @@ import { useDeleteSubmissionMutation, useGetAdminAndContestHolderSubmissionQuery
 import SubmissionUpdate from "../user/SubmissionUpdate";
 import NoContent from "../../../components/Loading/NoContent";
 import Loading from "../../../components/Loading/Loading";
+import { usePaymentInitMutation } from "../../../redux/feature/admin/paymentApi";
+import { toast } from "sonner";
 
 const ContestHolderSubmission = () => {
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ const ContestHolderSubmission = () => {
   console.log(submissions)
 
   const metaData = submissions?.meta;
+  const [paymentInit] = usePaymentInitMutation();
   const [submissionDelete] = useDeleteSubmissionMutation();
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
@@ -37,6 +40,22 @@ const ContestHolderSubmission = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSubmission, setSelectedSubmission] = useState<any | null>(null);
+
+  const handlePayment = async (contestId: string, userId: string) => {
+    const toastId = toast.loading("Please wait...");
+    try {
+      const response = await paymentInit({ contestId, userId }).unwrap();
+      console.log(response?.data?.paymentUrl)
+      if (response?.data?.paymentUrl) {
+        window.location.href = response?.data?.paymentUrl;
+      }
+      else {
+        toast.error("Unable to process payment. Try again.", { id: toastId })
+      }
+    } catch (error) {
+      console.error("Error initializing payment:", error);
+    }
+  };
 
   const deleteSubmission = async (submissionId: string) => {
     await deleteEntity(
@@ -55,14 +74,14 @@ const ContestHolderSubmission = () => {
     setOpenDropdown(null);
   };
 
-  // Function to open modal and set selected blog
+
   const openUpdateModal = (submission: TSubmission) => {
     setSelectedSubmission(submission);
     setIsModalOpen(true);
     setOpenDropdown(null);
   };
 
-  // Function to close modal
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedSubmission(null);
@@ -179,7 +198,7 @@ const ContestHolderSubmission = () => {
                       </button>
                       {openDropdown === index && (
                         <div
-                          className={`absolute ${index === submissions?.data?.length - 1 ? "-bottom-2" : "-top-2"} right-16 bg-white shadow-md rounded-lg w-30 p-1`}
+                          className={`absolute ${index === submissions?.data?.length - 1 ? "-bottom-9" : "-top-2"} right-16 bg-white shadow-md rounded-lg w-30 p-1`}
                         >
                           <ul>
                             <li
@@ -199,6 +218,18 @@ const ContestHolderSubmission = () => {
                               onClick={() => navigate(`/dashboard/${user?.role}/submissionDetails/${submission._id}`)}
                             >
                               <FaEye className="mr-2 text-green" /> Details
+                            </li>
+                            <li
+                              className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+                              onClick={() =>
+                                handlePayment(
+                                  submission?.contestId?._id,
+                                  submission?.userId?._id
+                                )
+                              }
+                            >
+                              <FaEye className="mr-2 text-green" />
+                              Payment
                             </li>
                           </ul>
                         </div>

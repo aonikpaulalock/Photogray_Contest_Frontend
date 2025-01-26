@@ -9,25 +9,21 @@ import { useEffect, useState } from "react";
 
 
 const BlogLike = ({ blog }: any) => {
-  // console.log("blogLikeData", blog)
   const [isLiked, setIsLiked] = useState(false);
   const user = useAppSelector(currentUser);
   const navigate = useNavigate();
   const [createLike] = useCreateLikeMutation();
   const [removeLike] = useRemoveLikeMutation();
   const { data: totalLikes } = useTotalLikesQuery(blog?._id);
-  // console.log("totalLike", totalLikes)
   const { data: checkPostLiked } = useCheckBlogLikeQuery(user?.userId || "");
 
 
-  //  check current logged user liked witch posts
   useEffect(() => {
     const likedPosts = checkPostLiked?.data?.map((like: any) => like);
     const checkLike = likedPosts?.includes(blog?._id);
     setIsLiked(checkLike);
   }, [checkPostLiked, blog?._id]);
 
-  // handle liked and remove liked
   const handleLikeButton = async (blogId: string) => {
     if (!user) {
       Swal.fire({

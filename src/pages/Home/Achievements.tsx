@@ -6,7 +6,7 @@ const Achievements = () => {
   return (
     <Container className="my-[120px]">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-4">
-        {/* Heading Section */}
+
         <div className="text-center lg:text-left lg:my-6 lg:col-span-1 flex flex-col justify-center items-center lg:items-start">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
@@ -38,7 +38,6 @@ const Achievements = () => {
           </motion.button>
         </div>
 
-        {/* Counters Section */}
         <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 bg-primary text-[#fef6e4] py-[60px] lg:py-[94px] px-6 lg:px-10">
           {[
             { value: "200+", label: "Running contest" },

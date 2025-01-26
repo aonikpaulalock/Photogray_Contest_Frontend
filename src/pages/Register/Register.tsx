@@ -9,7 +9,7 @@ import FormSelect from "../../components/Form/FromSelect";
 import { CountryHelper } from "../../utils/CountryHelper";
 import { useRegisterUserMutation } from "../../redux/auth/authApi";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { uploadImageToDB } from "../../utils/ImageUploader";
 import { registerDefaultValues } from "../../defaultValues/inputDefaultValues";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -62,7 +62,6 @@ const Register = () => {
       <div className="md:w-full lg:w-9/12 flex overflow-hidden rounded-lg shadow-xl h-auto">
         <LogingLeftSide />
 
-        {/* Right Side - Login Form */}
         <div className="bg-white p-6 lg:p-10 md:p-4">
           <h2 className="text-2xl font-semibold text-purple-700 mb-6 text-center">USER REGISTER</h2>
           <ContainForm
@@ -71,7 +70,7 @@ const Register = () => {
             resolver={zodResolver(registerValidationSchema)}
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 w-full min-w-0"
           >
-            {/* First Row */}
+
             <div className="col-span-2 md:col-span-1">
               <FormInput
                 type="text"
@@ -92,7 +91,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Second Row */}
             <div className="col-span-2 md:col-span-1">
               <FormInput
                 type="password"
@@ -113,7 +111,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Third Row */}
             <Controller
               name="bio"
               render={({ field, fieldState: { error } }) => (
@@ -131,7 +128,6 @@ const Register = () => {
               )}
             />
 
-            {/* Fourth Row */}
             <div className="col-span-2 md:col-span-1">
               <FormSelect
                 name="country"
@@ -150,7 +146,7 @@ const Register = () => {
                     type="file"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      field.onChange(file); // set the file in React Hook Form
+                      field.onChange(file);
                     }}
                     className="hidden"
                     id="file-input"
@@ -166,8 +162,14 @@ const Register = () => {
                 </div>
               )}
             />
-
-            {/* Submit Button */}
+            <div className="col-span-2 flex items-center justify-end  text-sm font-medium">
+              <h2 className="text-primary">
+                Already have an account ? 
+                <Link
+                  to="/login"
+                  className="text-purple-700 hover:underline"> Please Login</Link>
+              </h2>
+            </div>
             <div className="col-span-2">
               <button
                 disabled={isLoading}

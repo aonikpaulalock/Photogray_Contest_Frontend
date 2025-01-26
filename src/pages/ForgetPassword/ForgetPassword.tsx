@@ -27,16 +27,15 @@ const ForgotPassword = () => {
   };
   return (
 <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-  {/* Background Gradient Overlay */}
+
   <div className="absolute inset-0">
     <div className="absolute -top-10 -left-5 w-96 h-96 bg-purple-300 rounded-full filter blur-3xl opacity-30"></div>
     <div className="absolute -bottom-10 -right-5 w-96 h-96 bg-purple-200 rounded-full filter blur-3xl opacity-30"></div>
     <div className="absolute -top-10 -right-5 w-96 h-96 bg-purple-200 rounded-full filter blur-3xl opacity-30"></div>
   </div>
 
-  {/* Main container */}
   <div className="relative bg-white shadow-2xl rounded-lg grid grid-cols-1 md:grid-cols-2 md:grid-rows-1 overflow-hidden w-full max-w-5xl h-auto z-10 sm:p-10 p-4 gap-6">
-    {/* Left Section */}
+
     <div className="order-2 md:order-1 flex flex-col justify-center p-6">
       <h2 className="text-3xl font-bold text-primary mb-4">Forgot Password</h2>
       <p className="text-SecondPrimary text-lg mb-6 font-medium">
@@ -67,7 +66,6 @@ const ForgotPassword = () => {
       </Link>
     </div>
 
-    {/* Right Section */}
     <div className="order-1 md:order-2 flex justify-center items-center">
       <img
         src={image}

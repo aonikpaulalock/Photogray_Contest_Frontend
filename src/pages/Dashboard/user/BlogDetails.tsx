@@ -8,9 +8,9 @@ const BlogDetails = () => {
   return (
     <div>
       <div className="flex items-center justify-center relative">
-        {/* Main container */}
+
         <div className="relative bg-white md:flex overflow-hidden w-full max-w-5xl z-10 shadow-lg rounded-lg">
-          {/* Right Section */}
+
           <div className=" w-full md:w-7/12 h-fit relative flex justify-center items-center">
             <img
               src={blogs?.data?.blogPhoto}
@@ -19,7 +19,6 @@ const BlogDetails = () => {
             />
           </div>
 
-          {/* Left Section */}
           <div className="w-full md:w-1/2 flex flex-col justify-center sm:px-8 px-3">
             {/* User Info */}
             <div className="flex justify-between items-center space-x-4 my-8">
@@ -48,7 +47,6 @@ const BlogDetails = () => {
               </p>
             </div>
             <div>
-              {/* <BlogLike blog={blogs?.data} /> */}
               <BlogComment blog={blogs?.data} />
             </div>
           </div>

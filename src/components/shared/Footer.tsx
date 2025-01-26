@@ -6,12 +6,11 @@ const Footer = () => {
     <footer className="bg-[#F9F9F9]">
       <Container>
         <div className="mx-auto grid md:grid-cols-4 grid-cols-2 sm:gap-8 gap-6 px-4 md:px-0 sm:py-20 py-10 ">
-          {/* First Column (Logo) */}
+
           <div className="flex items-center justify-center">
             <img src={FooterLogo} alt="" />
           </div>
 
-          {/* Second Column */}
           <div className="flex justify-start">
             <ul className="space-y-4">
               <li><a href="#" className="text-base text-primary font-medium font-poppins">Home</a></li>
@@ -22,7 +21,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Third Column */}
           <div className="flex justify-start">
             <ul className="space-y-4">
               <li><a href="#" className="text-base text-SecondPrimary font-normal font-poppins">Privacy</a></li>
@@ -33,7 +31,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Fourth Column */}
           <div className="flex justify-start">
             <ul className="space-y-4">
               <li><a href="#" className="text-base text-SecondPrimary font-normal font-poppins">Team</a></li>
@@ -44,7 +41,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Section for Social Icons */}
         <div className="sm:pb-16 pb-6 sm:px-0 px-3 flex sm:justify-end justify-center items-center">
           <p className="text-[12px] sm:text-base sm:leading-[45px] text-primary sm:font-bold me-[30px]">Follow us on</p>
           <div className="flex justify-center space-x-8 text-gray-600 text-lg">

@@ -21,7 +21,6 @@ import NoContent from "../../../components/Loading/NoContent";
 const AdminSubmission = () => {
   const navigate = useNavigate();
   const user = useAppSelector(currentUser);
-  console.log(user)
   const [page, setPage] = useState(1);
 
   const { data: submissions, refetch, isLoading } = useGetAdminAndContestHolderSubmissionQuery({
@@ -29,7 +28,6 @@ const AdminSubmission = () => {
     limit: 4,
   });
 
-  console.log(submissions)
 
   const metaData = submissions?.meta;
   const [paymentInit] = usePaymentInitMutation();
@@ -76,14 +74,13 @@ const AdminSubmission = () => {
     setOpenDropdown(null);
   };
 
-  // Function to open modal and set selected blog
+
   const openUpdateModal = (submission: TSubmission) => {
     setSelectedSubmission(submission);
     setIsModalOpen(true);
     setOpenDropdown(null);
   };
 
-  // Function to close modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedSubmission(null);
@@ -261,7 +258,6 @@ const AdminSubmission = () => {
           </tbody>
         </table>
       </div>
-      {/* Modal */}
 
       <Modal
         isOpen={isModalOpen}

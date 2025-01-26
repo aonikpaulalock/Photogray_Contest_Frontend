@@ -241,7 +241,6 @@ const ManageUser = () => {
 
         </table>
       </div>
-      {/* Modal */}
 
       <Pagination
         current={page}

@@ -9,7 +9,6 @@ const UserDetails = ({ role }: { role: string }) => {
 
 <div className="flex justify-center items-center mt-10 sm:px-4 px-2">
   <div className="bg-white w-full max-w-4xl sm:p-8 p-4 rounded-lg shadow-lg grid grid-cols-1 sm:grid-cols-2 gap-8">
-    {/* Left Section */}
     <div className="flex justify-center items-center">
       <div className="w-80 h-80 md:w-[380px] md:h-[380px] flex justify-center items-center p-2 rounded-full overflow-hidden ring-4 ring-secondary">
         <img
@@ -20,9 +19,7 @@ const UserDetails = ({ role }: { role: string }) => {
       </div>
     </div>
 
-    {/* Right Section */}
     <div className="flex flex-col justify-center">
-      {/* Hello Section */}
       <div className="mb-6">
         <span className="bg-secondary text-white text-sm font-bold py-2 px-5 rounded-md">
           HELLO
@@ -38,7 +35,6 @@ const UserDetails = ({ role }: { role: string }) => {
         </p>
       </div>
 
-      {/* Personal Details */}
       <div className="text-sm">
         <div className="mb-4">
           <p className="font-semibold text-primary">Country</p>

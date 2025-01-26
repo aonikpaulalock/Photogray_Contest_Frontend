@@ -28,7 +28,6 @@ const FormInput = ({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <div className="mb-4">
-          {/* Render label if provided */}
           {label && (
             <label
               htmlFor={name}

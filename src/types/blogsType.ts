@@ -3,7 +3,7 @@ import { TUser } from "./userType";
 
 export type TBlog = {
   id: number;
-  image: string; // Assuming the images are strings (URLs or paths), adjust if they are imports.
+  image: string;
   date: string;
   views: string;
   comments: string;

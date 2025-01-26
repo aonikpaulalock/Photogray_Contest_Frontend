@@ -5,16 +5,16 @@ import FormDatePicker from "../../../components/Form/FromDatePicker";
 import FormMultiSelect from "../../../components/Form/FromMultiSelect";
 import ContainForm from "../../../components/Form/ContainForm";
 import { TPhotographyContest } from "../../../types";
-import { useUpdateContestMutation } from "../../../redux/feature/contestHolder/contestHolderApi";
+import { useManageAdminContestsQuery, useUpdateContestMutation } from "../../../redux/feature/contestHolder/contestHolderApi";
 import { toast } from "sonner";
 import { currentUser } from "../../../redux/auth/authSlice";
 import { useAppSelector } from "../../../redux/hooks";
 import ButtonLoading from "../../../components/Loading/ButtonLoading";
-const options = [
-  { value: "important", label: "Important" },
-  { value: "urgent", label: "Urgent" },
-  { value: "optional", label: "Optional" },
-];
+// const options = [
+//   { value: "important", label: "Important" },
+//   { value: "urgent", label: "Urgent" },
+//   { value: "optional", label: "Optional" },
+// ];
 const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest | null, closeModal: () => void }) => {
   const user = useAppSelector(currentUser)
   const contestDefaultValues = {
@@ -24,6 +24,19 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
     tags: contest?.tags || [],
     deadline: contest?.deadline || null,
   }
+
+  const { data: contestsTags } = useManageAdminContestsQuery({});
+
+  console.log(contestsTags)
+  const uniqueTags: string[] = contestsTags?.data
+    ? Array.from(
+      new Set(
+        contestsTags.data
+          .map((contest: any) => contest.tags)
+          .flat()
+      )
+    )
+    : [];
 
   const [updateContest, { isLoading }] = useUpdateContestMutation()
 
@@ -67,7 +80,6 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
       className="w-full"
     >
 
-      {/* Right Section: Form */}
       <div className="w-full sm:p-10 p-0">
         <div className="space-y-6">
           <div className="sm:flex sm:space-x-4">
@@ -112,7 +124,7 @@ const ContestUpdate = ({ contest, closeModal }: { contest: TPhotographyContest |
               <FormMultiSelect
                 name="tags"
                 className="w-full border-b-2 border-gray focus:border-SecondPrimary focus:ring-0 outline-none text-sm font-medium text-SecondPrimary py-1"
-                options={options}
+                options={uniqueTags.map((tag: string) => ({ value: tag, label: tag }))}
                 placeholder="Select tags"
               />
             </div>

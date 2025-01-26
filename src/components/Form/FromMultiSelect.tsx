@@ -31,7 +31,7 @@ const FormMultiSelect = ({
           <div
             className={`flex flex-wrap gap-1 items-center rounded-md py-2 ${className}`}
           >
-            {/* Selected Tags */}
+          
             {field.value.length > 0 &&
               field.value.map((selectedValue: string) => (
                 <span
@@ -55,7 +55,6 @@ const FormMultiSelect = ({
                 </span>
               ))}
 
-            {/* Dropdown for existing options */}
             <select
               className="outline-none bg-transparent flex-grow"
               value=""
@@ -77,7 +76,6 @@ const FormMultiSelect = ({
               ))}
             </select>
 
-            {/* Input for custom tags */}
             <input
               type="text"
               className="outline-none bg-transparent flex-grow text-sm"
@@ -95,8 +93,6 @@ const FormMultiSelect = ({
               }}
             />
           </div>
-
-          {/* Error message */}
           {error && <p className="text-red-400 text-sm font-medium mt-1">{error?.message}</p>}
         </div>
       )}

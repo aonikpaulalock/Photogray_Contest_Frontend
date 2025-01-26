@@ -2,9 +2,9 @@ import React from "react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 interface PaginationProps {
-  current: number; // বর্তমান পেজ নম্বর
-  pageSize: number; // প্রতি পেজে আইটেম সংখ্যা
-  total: number; // মোট আইটেম সংখ্যা
+  current: number;
+  pageSize: number;
+  total: number;
   onChange: (page: number) => void;
 }
 
@@ -14,7 +14,7 @@ const Pagination: React.FC<PaginationProps> = ({
   total,
   onChange,
 }) => {
-  const totalPages = Math.ceil(total / pageSize); // মোট পেজ সংখ্যা
+  const totalPages = Math.ceil(total / pageSize);
 
   const handlePageClick = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -24,7 +24,6 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div className="flex justify-end items-center mt-8">
-      {/* Previous Button */}
       <button
         onClick={() => handlePageClick(currentPage - 1)}
         disabled={currentPage === 1}
@@ -37,7 +36,6 @@ const Pagination: React.FC<PaginationProps> = ({
         <FaChevronLeft />
       </button>
 
-      {/* Dynamic Page Numbers */}
       {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
         <button
           key={page}
@@ -52,7 +50,6 @@ const Pagination: React.FC<PaginationProps> = ({
         </button>
       ))}
 
-      {/* Next Button */}
       <button
         onClick={() => handlePageClick(currentPage + 1)}
         disabled={currentPage === totalPages}

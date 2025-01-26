@@ -73,10 +73,6 @@ export const sidebarItems: Record<"admin" | "contestHolder" | "user", SidebarIte
       label: "My Contest",
       icon: <FaTasks />
     },
-    // {
-    //   path: "/dashboard/contestHolder/all-participation", label: "All Participation",
-    //   icon: <FaUsers />
-    // },
     {
       path: "/dashboard/contestHolder/submission",
       label: "All Submission",

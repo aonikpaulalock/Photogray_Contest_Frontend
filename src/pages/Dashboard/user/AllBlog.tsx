@@ -1,6 +1,5 @@
 import { useState } from "react";
-import moment from "moment";
-import { FaEye, FaRegClock } from "react-icons/fa";
+import { FaEye} from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { useAppSelector } from "../../../redux/hooks";
 import { currentUser } from "../../../redux/auth/authSlice";
@@ -23,8 +22,6 @@ const AllBlog = ({ role }: { role: string }) => {
     limit: 4,
   });
   const metaData = blogs?.meta;
-  // const { data: totalLikes } = useTotalLikesQuery(blogs?._id);
-  // console.log(totalLikes)
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const toggleDropdown = (index: number) => {
     setOpenDropdown(openDropdown === index ? null : index);
@@ -39,7 +36,7 @@ const AllBlog = ({ role }: { role: string }) => {
               <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Serial</th>
               <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Created user</th>
               <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Email</th>
-              <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Created Date</th>
+              {/* <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Created Date</th> */}
               <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Blog Name</th>
               <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins">Image</th>
               <th className="p-4 text-md text-SecondPrimary font-semibold font-poppins text-center">Actions</th>
@@ -83,10 +80,10 @@ const AllBlog = ({ role }: { role: string }) => {
                     </td>
 
                     {/* Date */}
-                    <td className="p-4 text-blue-gray-400 font-medium">
+                    {/* <td className="p-4 text-blue-gray-400 font-medium">
                       <FaRegClock className="inline mr-2 text-lg text-secondary" />
                       {blog?.createdAt && moment(blog?.createdAt).format("MMMM D, YYYY, h:mm A")}
-                    </td>
+                    </td> */}
 
                     {/* Blog Name */}
                     <td className="p-4 text-blue-gray-500 font-poppins font-medium ">

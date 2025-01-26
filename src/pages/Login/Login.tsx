@@ -31,7 +31,6 @@ const Login = () => {
           res?.message, {
           id: toastId
         })
-        // navigate(`/dashboard/${user.role}/profile`)
         const redirectTo = location.state?.from?.pathname || `/dashboard/${user.role}/profile`;
         navigate(redirectTo, { replace: true });
       } else {
@@ -53,8 +52,7 @@ const Login = () => {
       <div className="md:w-full lg:w-9/12 flex overflow-hidden rounded-lg shadow-xl md:h-[600px]">
         <LogingLeftSide />
 
-        {/* Right Side - Login Form */}
-        <div className=" w-full bg-white p-8 flex flex-col items-center justify-center">
+        <div className="w-full bg-white sm:p-8 p-6 flex flex-col items-center justify-center">
           <h2 className="text-2xl font-semibold text-purple-700 mb-6">USER LOGIN</h2>
           <ContainForm
             onSubmit={onSubmit}
@@ -74,10 +72,18 @@ const Login = () => {
               placeholder="Enter your password"
               icon={<FaLock />}
             />
-            <div className="flex items-center justify-end text-purple-700 text-sm font-medium">
-              <Link
-                to="/forget-password"
-                className="hover:underline">Forgot password?</Link>
+            <div className='flex-row md:flex md:justify-between md:items-center md:space-y-0 space-y-2'>
+              <div className="flex items-center justify-end text-purple-700 text-sm font-medium">
+                <Link
+                  to="/forget-password"
+                  className="hover:underline">Forgot password?</Link>
+              </div>
+              <div className="flex items-center justify-end text-purple-700 text-sm font-medium">
+                <Link
+                  to="/register"
+                  className="hover:underline">Create an account !</Link>
+              </div>
+
             </div>
 
             <button

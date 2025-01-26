@@ -34,7 +34,6 @@ const CreateBlog = () => {
         blogPhoto,
         userId: user?.userId
       };
-      console.log("Form Data:", blogInfo);
       const res = await blogCreate(blogInfo).unwrap();
       if (res?.success) {
         toast.success(res?.message, {
@@ -57,7 +56,6 @@ const CreateBlog = () => {
 
   return (
     <div className="bg-white shadow-xl rounded-lg flex items-center justify-center">
-      {/* The wrapper */}
       <div className="md:flex md:items-center md:justify-center">
         <div className="w-full md:w-4/6 lg:w-3/6">
           <img
@@ -67,7 +65,6 @@ const CreateBlog = () => {
           />
         </div>
 
-        {/* Right Section: Form */}
         <ContainForm
           onSubmit={onSubmit}
           defaultValues={BlogDefaultValues}
@@ -86,15 +83,6 @@ const CreateBlog = () => {
               placeholder="Enter your blog title"
             />
           </div>
-          {/* <div className="mb-4">
-            <FormInput
-              type="password"
-              name="newPassword"
-              className="mt-1 w-full border-[3px] border-blue-gray-200 px-4 py-3 rounded-lg shadow-sm outline-none"
-              placeholder="Enter your new password"
-              label="New Password"
-            />
-          </div> */}
           <Controller
             name="content"
             render={({ field, fieldState: { error } }) => (
@@ -113,7 +101,6 @@ const CreateBlog = () => {
             name="blogPhoto"
             render={({ field, fieldState: { error } }) => (
               <div className="mb-0">
-                {/* Hidden file input */}
                 <input
                   type="file"
                   onChange={(e) => {
@@ -127,16 +114,13 @@ const CreateBlog = () => {
                   htmlFor="file-input"
                   className="cursor-pointer mt-1 w-full border-[3px] border-SecondPrimary px-4 py-3 rounded-lg shadow-sm outline-none flex items-center justify-start bg-white relative"
                 >
-                  {/* Upload icon */}
                   <FaUpload className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray" />
 
-                  {/* Display file name or placeholder */}
                   <span className="pl-8 text-gray font-sm">
                     {field.value ? field.value.name : "Upload profile picture"}
                   </span>
                 </label>
 
-                {/* Error message */}
                 {error && <p className="text-red text-sm font-medium mt-1">{error?.message}</p>}
               </div>
             )}

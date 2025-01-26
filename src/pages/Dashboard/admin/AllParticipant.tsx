@@ -116,7 +116,6 @@ const AllParticipant = ({ role }: { role: string }) => {
 
       </table>
       </div>
-      {/* Modal */}
 
       <Pagination
         current={page}

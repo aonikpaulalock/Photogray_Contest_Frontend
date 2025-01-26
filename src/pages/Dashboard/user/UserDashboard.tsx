@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const UserDashboard = () => {
   return (
-    <div className="h-screen">
+    <div>
       <Outlet />
     </div>
   )

@@ -18,7 +18,7 @@ const SubmissionDetails = () => {
   return (
 <div className="flex justify-center items-center">
   <div className="shadow-lg rounded-lg p-4 sm:p-9 w-full md:w-5/6 bg-white">
-    {/* Header Section */}
+
     <div className="text-center mb-5">
       <h1 className="text-sm sm:text-md font-semibold">
         Contest Name:
@@ -34,7 +34,6 @@ const SubmissionDetails = () => {
       </p>
     </div>
 
-    {/* Images Section */}
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
       {submissionData?.data?.images?.map((image: any, index: any) => (
         <div
@@ -53,7 +52,6 @@ const SubmissionDetails = () => {
       ))}
     </div>
 
-    {/* Prize and Payment Section */}
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
       <div className="p-2">
         <h2 className="text-xs sm:text-sm font-semibold text-primary">Prize</h2>
@@ -72,7 +70,6 @@ const SubmissionDetails = () => {
       </div>
     </div>
 
-    {/* User Profile Section */}
     <div className="flex items-center gap-4">
       <img
         src={submissionData?.data?.userId?.profileImage}

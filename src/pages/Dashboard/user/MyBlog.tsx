@@ -34,7 +34,7 @@ const MyBlog = () => {
   const [deleteBlog] = useDeleteBlogMutation();
 
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
   const toggleDropdown = (index: number) => {
     setOpenDropdown(openDropdown === index ? null : index);
@@ -57,14 +57,13 @@ const MyBlog = () => {
     setOpenDropdown(null);
   };
 
-  // Function to open modal and set selected blog
+
   const openUpdateModal = (blog: Blog) => {
     setSelectedBlog(blog);
     setIsModalOpen(true);
     setOpenDropdown(null);
   };
 
-  // Function to close modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedBlog(null);

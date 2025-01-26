@@ -14,21 +14,17 @@ const NavIcon = () => {
   const user = useAppSelector(currentUser);
   const handleLogout = () => {
     dispatch(logout())
-    navigate("/login")
+    navigate("/")
   };
   if (isLoading) {
     return <ButtonLoading />;
   }
   return (
     <div className="">
-      {/* Notification Icon */}
       {
         user ?
           <div className="relative flex items-center space-x-7">
-            {/* Notification Bell */}
             <FaBell color="#F582AE" className="cursor-pointer hidden sm:block w-5 h-5" />
-
-            {/* User Avatar */}
             <div>
               <img
                 src={data?.data?.profileImage || Avatar}
@@ -38,7 +34,6 @@ const NavIcon = () => {
               />
             </div>
 
-            {/* Dropdown Menu */}
             {dropdownOpen && (
               <div className="absolute top-10 left-0 mt-3 w-30 bg-white border border-secondary rounded-xl shadow-lg">
                 <ul className="py-1">
@@ -75,8 +70,6 @@ const NavIcon = () => {
             </svg>
             <span className="absolute top-0 left-0 w-[100px] h-full bg-gradient-to-r from-transparent via-white/80 to-transparent opacity-60 -translate-x-full transition-transform duration-1000 ease-out group-hover:translate-x-full"></span>
           </button>
-
-
       }
     </div>
   )

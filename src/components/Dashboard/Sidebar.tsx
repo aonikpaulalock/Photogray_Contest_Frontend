@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -37,7 +37,8 @@ const Sidebar = () => {
             <img src={svgLogo} alt="Logo" className="mt-4 w-12 h-12" />
           ) : (
             <div className="flex items-center gap-x-4">
-              <img src={logo} alt="Logo" className="p-5" />
+              <img src={logo} alt="Logo" className="p-5" onClick={() => navigate("/")}
+              />
               <FaTimes className="text-4xl text-deep-orange-300" />
             </div>
           )}
