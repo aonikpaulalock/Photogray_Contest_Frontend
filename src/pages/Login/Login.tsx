@@ -12,6 +12,9 @@ import { setUser, TUser } from '../../redux/auth/authSlice';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import ButtonLoading from '../../components/Loading/ButtonLoading';
+import { loginDefaultValues } from '../../defaultValues/inputDefaultValues';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginValidationSchema } from '../../Schemas/register.validationSchema';
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -56,6 +59,8 @@ const Login = () => {
           <h2 className="text-2xl font-semibold text-purple-700 mb-6">USER LOGIN</h2>
           <ContainForm
             onSubmit={onSubmit}
+            defaultValues={loginDefaultValues}
+            resolver={zodResolver(loginValidationSchema)}
             className="w-full max-w-xs space-y-4"
           >
             <FormInput

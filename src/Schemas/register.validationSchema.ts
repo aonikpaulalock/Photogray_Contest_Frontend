@@ -47,3 +47,20 @@ export const registerValidationSchema = z.object({
     .refine((file) => file === undefined || (file && file.size > 0), "Profile image is too large or not selected")
     .refine((file) => !file || (file && ['image/jpeg', 'image/png'].includes(file.type)), "Only JPEG and PNG images are allowed"),
 });
+
+
+export const loginValidationSchema = z.object({
+
+  email: z
+    .string({
+      required_error: "Email is required",
+    })
+    .email("Please enter a valid email address"),
+
+  password: z
+    .string({
+      required_error: "Password is required",
+    })
+    .min(8, "Password at least 8 characters")
+    .max(20, "Password at most 20 characters"),
+});

@@ -8,6 +8,11 @@ export const registerDefaultValues = {
   profileImage: "",
 };
 
+export const loginDefaultValues = {
+  email: "",
+  password: "",
+};
+
 export const BlogDefaultValues = {
   title: "",
   content: "",
